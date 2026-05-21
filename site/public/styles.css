@@ -273,6 +273,7 @@ h3,
 h4,
 p {
   text-wrap: pretty;
+  overflow-wrap: anywhere;
 }
 
 h1 {
@@ -2057,15 +2058,18 @@ td small {
   }
 
   h1 {
-    font-size: 41px;
+    max-width: 330px;
+    font-size: 34px;
   }
 
   h2 {
-    font-size: 28px;
+    max-width: 330px;
+    font-size: 24px;
   }
 
   .lead {
-    font-size: 18px;
+    max-width: 330px;
+    font-size: 16px;
   }
 
   .section {

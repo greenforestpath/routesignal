@@ -690,6 +690,24 @@ function initAnalysisPage({ routes, routesDb, insights }) {
   `).join("");
 }
 
+function initBetaInsightsPage({ routes, routesDb }) {
+  const rows = routesDb.apis || [];
+  const activeRows = rows.filter((row) => row.activity_signal !== "no_observed_activity_in_local_scrape");
+  const routeFarmRows = rows.filter((row) => (row.risk_flags || []).includes("large_route_farm"));
+  const pricedRows = rows.filter((row) => typeof row.amount_usd === "number");
+  renderMetrics(document.querySelector("#pageMetrics"), [
+    { value: compact(rows.length), label: "route rows analyzed" },
+    { value: compact(activeRows.length), label: "activity-backed rows" },
+    { value: compact(new Set(activeRows.map((row) => row.provider)).size), label: "active providers" },
+    { value: compact(routeFarmRows.length), label: "route-farm rows" },
+    { value: compact(pricedRows.length), label: "normalized prices" },
+  ]);
+  document.querySelector("#factBoard").innerHTML = renderFactBoard(rows);
+  document.querySelector("#hotTakes").innerHTML = renderHotTakes(rows);
+  document.querySelector("#displayModel").innerHTML = renderDisplayModel();
+  document.querySelector("#routeFamilies").innerHTML = renderRouteFamilies(rows);
+}
+
 function densityBars(entries) {
   const max = Math.max(1, ...entries.map((entry) => entry.count));
   return entries.map((entry) => `
@@ -909,6 +927,7 @@ loadArtifactData().then((data) => {
   const page = document.body.dataset.page;
   if (page === "routes") initRoutesPage(data);
   if (page === "analyzer") initAnalysisPage(data);
+  if (page === "beta-insights") initBetaInsightsPage(data);
   if (page === "wizard") initRecipesPage(data);
 }).catch((error) => {
   document.body.append(Object.assign(document.createElement("pre"), { textContent: `Failed to load artifact data: ${error.message}` }));

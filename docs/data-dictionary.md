@@ -35,12 +35,21 @@ The canonical route-level dataset is `site/public/data/routesdb.json`.
 | `metadata_total_count` | Total metadata checks. |
 | `signal_score` | Sort score based on activity, metadata completeness, price clarity, and freshness. |
 | `default_sort_rank` | Provider-diversified display rank for the RoutesDB UI. |
+| `evidence_stage` | Conservative evidence ladder stage: `listed`, `priced`, `metadata_complete`, `activity_observed`, or `probe_candidate`. |
+| `evidence_stage_rank` | Numeric ladder rank from 1 to 5. |
+| `evidence_stage_label` | Human-readable label for the evidence stage. |
+| `market_signal` | Short analyst label for the strongest visible signal, such as `probe-worthy active route`, `activity observed`, or `catalog inflation`. |
 | `category_id` | Local capability cluster ID. |
 | `category_label` | Human-readable capability cluster. |
+| `cluster_id` | Higher-level Analyzer market cluster. |
+| `cluster_label` | Human-readable Analyzer cluster label. |
+| `provider_shape_type` | Provider-level shape such as `active anchor`, `route farm`, `broad catalog`, `focused provider`, or `long tail`. |
+| `provider_route_count` | Number of route rows listed for the provider in the current capture. |
+| `provider_distinct_routes` | Distinct route URLs listed for the provider in the current capture. |
+| `provider_share_pct` | Provider row share of the current route capture. |
 | `risk_flags` | Observable flags such as `accept_unverified`, `identity_sensitive`, `large_route_farm`, or `non_usdc_or_unknown_price`. |
 | `tags` | Searchable local tags for filtering and downstream processing. |
 
 ## Legacy/Secondary Fields
 
 `verdict` and `recommended_next_action` exist for wizard experiments, but they are not the primary RoutesDB truth layer.
-

@@ -19,14 +19,22 @@
     </header>
     <main>
       <section class="section wizard-board wizard-tool">
-        <div class="tool-header">
-          <div>
-            <p class="eyebrow">Wizard</p>
-            <h1>Compose long-tail paid API routes into agent recipes.</h1>
-            <p class="section-copy">When agents can buy one tiny route at a time, the hard problem is knowing which weird capability to call next, when to stop, and what evidence to keep.</p>
-          </div>
-          <div id="pageMetrics" class="artifact-metrics compact-metrics"></div>
+        <div class="tool-header compact-tool-header">
+          <p class="eyebrow">Wizard</p>
+          <h1>Weird route recipes</h1>
+          <p class="section-copy">Pick a weird job. See the route chain. Every step should point back to an actual listed route when RouteSignal has one.</p>
         </div>
+
+        <div class="wizard-controls" aria-label="Wizard controls">
+          <label><span>Angle</span><select id="wizardStyle"></select></label>
+          <label><span>Budget</span><select id="wizardBudget"></select></label>
+          <label><span>Risk tolerance</span><select id="wizardRisk"></select></label>
+          <label><span>Search</span><input id="wizardSearch" type="search" placeholder="supplier, hotel, token, package, meme"></label>
+          <label class="hidden-control"><span>Task</span><select id="wizardTask"></select></label>
+        </div>
+        <p id="wizardReadout" class="artifact-readout"></p>
+        <div id="recipeGridLite" class="recipe-grid weird-recipe-grid"></div>
+        <div id="wizardWorkbench" class="wizard-workbench" aria-live="polite"></div>
 
         <div class="recipe-composer">
           <div class="composer-input-panel">
@@ -53,32 +61,6 @@
         </div>
 
         <div id="capabilityMatrix" class="capability-matrix"></div>
-
-        <div class="section-heading compact-heading">
-          <p class="eyebrow">Possible recipes</p>
-          <h2>Browse route compositions</h2>
-          <p>Each recipe turns existing route capabilities into a use case, flags gaps, and keeps the caveat explicit: listed payable route is not endpoint-quality proof.</p>
-        </div>
-
-        <div class="wizard-controls" aria-label="Wizard controls">
-          <label><span>Task</span><select id="wizardTask"></select></label>
-          <label><span>Budget</span><select id="wizardBudget"></select></label>
-          <label><span>Risk tolerance</span><select id="wizardRisk"></select></label>
-          <label><span>Angle</span><select id="wizardStyle"></select></label>
-          <label><span>Search</span><input id="wizardSearch" type="search" placeholder="provider, route, failure, receipt"></label>
-        </div>
-        <p id="wizardReadout" class="artifact-readout"></p>
-        <div id="wizardWorkbench" class="wizard-workbench" aria-live="polite"></div>
-        <div id="recipeGridLite" class="recipe-grid"></div>
-      </section>
-
-      <section class="section supporting-bundles">
-        <div class="section-heading">
-          <p class="eyebrow">Route-derived bundles</p>
-          <h2>Composable route sequences</h2>
-          <p>Supporting examples from RoutesDB plus Analyzer. Use these as ingredient pools, not claims that live endpoint quality has been proven.</p>
-        </div>
-        <div id="bundleGrid" class="bundle-grid"></div>
       </section>
     </main>
     <script src="./artifact.js" type="module"></script>

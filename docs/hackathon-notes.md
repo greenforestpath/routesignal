@@ -2,9 +2,7 @@
 
 ## Thesis
 
-x402scan shows what is listed. RouteSignal shows what has signal.
-
-The useful hackathon artifact is not another generic dashboard. It is a route intelligence layer that compresses thousands of paid API listings into observable signals: activity, metadata completeness, price clarity, freshness, and evidence.
+The useful hackathon artifact is not another generic dashboard. It is a route intelligence layer for the long tail of paid API routes: what exists, what has observable evidence, where weird niches are forming, and what small paid capabilities could be composed into larger agent workflows.
 
 ## Demo Walkthrough
 
@@ -16,4 +14,3 @@ The useful hackathon artifact is not another generic dashboard. It is a route in
 ## Submission Framing
 
 RouteSignal is a reporting artifact and static analysis tool for the emerging paid API route market. It does not pretend every listed endpoint is good. It makes the market inspectable.
-

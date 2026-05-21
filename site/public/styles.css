@@ -1335,6 +1335,51 @@ td small {
   border-top: 1px solid var(--line);
 }
 
+.wizard-tool {
+  padding-top: 34px;
+}
+
+.tool-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(460px, 0.8fr);
+  gap: 22px;
+  align-items: start;
+  margin-bottom: 18px;
+}
+
+.tool-header > * {
+  min-width: 0;
+}
+
+.wizard-tool h1 {
+  font-size: 42px;
+  line-height: 1.05;
+}
+
+.wizard-tool .section-copy {
+  max-width: 700px;
+  margin: 12px 0 0;
+  color: var(--muted);
+}
+
+.wizard-tool .compact-metrics {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 0;
+}
+
+.wizard-tool .artifact-metric {
+  min-height: 82px;
+  padding: 12px;
+}
+
+.wizard-tool .artifact-metric strong {
+  font-size: 25px;
+}
+
+.supporting-bundles {
+  border-top: 1px solid var(--line);
+}
+
 .wizard-controls {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -1515,6 +1560,10 @@ td small {
   font: inherit;
   text-align: left;
   cursor: pointer;
+}
+
+.compact-recipe {
+  min-height: 345px;
 }
 
 .recipe-card:nth-child(2n) {
@@ -1995,6 +2044,7 @@ td small {
   .signal-hero,
   .analysis-grid,
   .signal-map-panel,
+  .tool-header,
   .bundle-grid,
   .wizard-workbench,
   .recipe-grid,
@@ -2038,6 +2088,10 @@ td small {
   .compact-metrics {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .wizard-tool .compact-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 720px) {
@@ -2070,6 +2124,25 @@ td small {
   .lead {
     max-width: 330px;
     font-size: 16px;
+  }
+
+  .wizard-tool h1 {
+    max-width: 330px;
+    font-size: 30px;
+  }
+
+  .wizard-tool .compact-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .section-heading p,
+  .section-copy,
+  .bundle-card p,
+  .bundle-card li,
+  .recipe-card p,
+  .wizard-workbench p,
+  .wizard-workbench li {
+    max-width: 330px;
   }
 
   .section {

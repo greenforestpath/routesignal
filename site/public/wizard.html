@@ -17,29 +17,14 @@
       </nav>
     </header>
     <main>
-      <section class="artifact-hero">
-        <div>
-          <p class="eyebrow">Wizard</p>
-          <h1>Generate long-tail spend plans from routes with signal.</h1>
-          <p class="lead">The wizard uses RouteSignal evidence: activity, metadata completeness, price band, category, risk flags, route samples, and stop rules.</p>
-        </div>
-        <div id="pageMetrics" class="artifact-metrics"></div>
-      </section>
-
-      <section class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Route-derived bundles</p>
-          <h2>Composable sequences from RoutesDB plus Analyzer</h2>
-          <p>These are the strongest demo units: each bundle spends across different kinds of paid routes and stops when enough evidence is gathered.</p>
-        </div>
-        <div id="bundleGrid" class="bundle-grid"></div>
-      </section>
-
-      <section class="section wizard-board">
-        <div>
-          <p class="eyebrow">Idea board</p>
-          <h2>Generated long-tail hypotheses</h2>
-          <p class="section-copy">Each card should be read as a testable hypothesis: route ingredients, why per-call payment matters, budget shape, and stop rule.</p>
+      <section class="section wizard-board wizard-tool">
+        <div class="tool-header">
+          <div>
+            <p class="eyebrow">Wizard</p>
+            <h1>Spend-plan workbench</h1>
+            <p class="section-copy">Filter route-grounded hypotheses, inspect the chain, and decide what the first paid or simulated call should be.</p>
+          </div>
+          <div id="pageMetrics" class="artifact-metrics compact-metrics"></div>
         </div>
         <div class="wizard-controls" aria-label="Wizard controls">
           <label><span>Task</span><select id="wizardTask"></select></label>
@@ -55,6 +40,15 @@
           <h2>Pick a spend-plan hypothesis</h2>
         </div>
         <div id="recipeGridLite" class="recipe-grid"></div>
+      </section>
+
+      <section class="section supporting-bundles">
+        <div class="section-heading">
+          <p class="eyebrow">Route-derived bundles</p>
+          <h2>Composable route sequences</h2>
+          <p>Supporting examples from RoutesDB plus Analyzer. Use these as ingredient pools, not claims that live endpoint quality has been proven.</p>
+        </div>
+        <div id="bundleGrid" class="bundle-grid"></div>
       </section>
     </main>
     <script src="./artifact.js" type="module"></script>

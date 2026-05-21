@@ -1,8 +1,6 @@
 # RouteSignal
 
-**Activity and metadata intelligence for x402 paid API routes.**
-
-> x402scan shows what is listed. RouteSignal shows what has signal.
+**A field guide to the long tail of paid API routes for agents.**
 
 <p align="center">
   <img src="assets/routesignal-signal-filter-hero.png" alt="RouteSignal filters noisy x402 route listings into evidence-backed route signals" width="100%">
@@ -15,22 +13,40 @@
   <img alt="License" src="https://img.shields.io/badge/license-MIT-151719">
 </p>
 
-RouteSignal compresses 13,517 public x402 route records into a three-page artifact for understanding what paid API routes exist, which providers show observable activity, how complete the route metadata is, where prices cluster, and what long-tail workflows might become possible when agents can buy API calls one at a time.
+As paid API routes get cheaper and easier to publish, the interesting question stops being "can an agent pay an endpoint?" and becomes "what can an agent discover, compare, and compose when thousands of small paid capabilities are available by the call?"
+
+RouteSignal is a static research artifact for that question. It compresses 13,517 public x402 route records into a map of what exists now, where the long tail is forming, which routes have observable activity or usable metadata, how prices cluster, and what Unix-like compositions become possible when paid APIs behave like small command-line ingredients.
 
 [Live demo](https://routesignal.pages.dev) · [Data dictionary](docs/data-dictionary.md) · [Methodology](docs/methodology.md) · [Limitations](docs/limitations.md)
 
+## The Pitch
+
+If agent payments work, the future is not one giant API marketplace. It is a huge long tail of tiny paid routes: sanctions checks, wallet forensics, shipping calculators, social actions, registry lookups, storage receipts, search probes, local data, risk screens, and strange niche tools that are not worth subscribing to but are worth buying once.
+
+That creates a new problem: agents and builders need a way to understand the route universe.
+
+RouteSignal is the early map:
+
+- **What exists?** A canonical database of listed x402 paid routes.
+- **What has evidence?** Observable activity, metadata completeness, price clarity, freshness, and source links.
+- **Where is the long tail?** Capability clusters, route farms, weird niches, and provider concentration.
+- **What can be composed?** Spend-plan recipes that chain small paid calls into useful workflows.
+- **What should not be overclaimed?** Clear limits around listing data, endpoint quality, safety, and legal/compliance risk.
+
+The mental model is closer to Unix pipes than SaaS subscriptions: each route is a small paid capability, and the interesting product surface is the composition layer.
+
 ## Why This Exists
 
-Paid agent APIs are starting to look like a market, but a raw endpoint directory is not enough. Builders need to know:
+A raw endpoint directory is not enough. Builders need to know:
 
 | Question | RouteSignal surface |
 | --- | --- |
-| What routes are listed? | RoutesDB canonical route records. |
+| What paid routes are listed? | RoutesDB canonical route records. |
 | Which routes have observable demand signal? | Activity buckets, transaction counts, buyer counts, and volume where visible. |
 | Which listings are machine-readable enough for agents? | Metadata completeness scoring. |
-| Where do prices cluster? | Analyzer price ladder and route density. |
+| Where does the long tail cluster? | Analyzer capability map, price ladder, and route density. |
 | Which providers distort market size? | Provider shape and route-farm compression. |
-| What could agents actually buy next? | Wizard spend-plan hypotheses grounded in route ingredients. |
+| What could agents compose? | Wizard spend-plan hypotheses grounded in route ingredients. |
 
 ## Product
 
@@ -50,7 +66,7 @@ Primary indicators are observable:
 
 ### 2. Analyzer
 
-The market-compression cockpit. It shows capability clusters, provider concentration, route-count distortion, cost distribution, network distribution, surprising route collections, and trust notes.
+The market-compression cockpit. It shows evidence stages, provider concentration, route-count distortion, signal-map clustering, cost distribution, network distribution, surprising route collections, and trust notes.
 
 ### 3. Wizard
 

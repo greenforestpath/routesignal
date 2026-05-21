@@ -45,9 +45,15 @@
           <label><span>Task</span><select id="wizardTask"></select></label>
           <label><span>Budget</span><select id="wizardBudget"></select></label>
           <label><span>Risk tolerance</span><select id="wizardRisk"></select></label>
-          <label><span>Style</span><select id="wizardStyle"></select></label>
+          <label><span>Angle</span><select id="wizardStyle"></select></label>
+          <label><span>Search</span><input id="wizardSearch" type="search" placeholder="provider, route, failure, receipt"></label>
         </div>
         <p id="wizardReadout" class="artifact-readout"></p>
+        <div id="wizardWorkbench" class="wizard-workbench" aria-live="polite"></div>
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Matching recipes</p>
+          <h2>Pick a spend-plan hypothesis</h2>
+        </div>
         <div id="recipeGridLite" class="recipe-grid"></div>
       </section>
     </main>

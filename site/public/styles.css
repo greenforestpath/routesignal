@@ -434,6 +434,13 @@ h4 {
   margin-bottom: 14px;
 }
 
+.long-tail-controls {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(170px, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
 .route-controls label:nth-last-child(2),
 .route-controls label:last-child {
   grid-column: span 2;
@@ -984,6 +991,92 @@ td small {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
+}
+
+.weird-buckets {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.weird-bucket {
+  display: flex;
+  flex-direction: column;
+  min-height: 245px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--red);
+  background: var(--panel);
+}
+
+.weird-bucket:nth-child(2n) {
+  border-top-color: var(--blue);
+}
+
+.weird-bucket:nth-child(3n) {
+  border-top-color: var(--green);
+}
+
+.weird-bucket p:not(.capability),
+.weird-bucket small {
+  color: var(--muted);
+}
+
+.weird-bucket a {
+  margin-top: auto;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 740;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.long-tail-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.long-tail-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 430px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--amber);
+  background: var(--panel);
+}
+
+.long-tail-card:nth-child(2n) {
+  border-top-color: var(--red);
+}
+
+.long-tail-card:nth-child(3n) {
+  border-top-color: var(--blue);
+}
+
+.long-tail-card-head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.long-tail-card h3 {
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+}
+
+.long-tail-card p:not(.capability),
+.long-tail-card small {
+  color: var(--muted);
+}
+
+.long-tail-card code {
+  display: block;
+  margin-top: 10px;
+  overflow-wrap: anywhere;
 }
 
 .cluster-card {
@@ -2716,6 +2809,7 @@ td small {
   .wizard-workbench,
   .recipe-grid,
   .route-record-grid,
+  .long-tail-controls,
   .wizard-controls {
     grid-template-columns: 1fr;
   }
@@ -2750,6 +2844,8 @@ td small {
   .queue-grid,
   .capability-inventory,
   .composition-grid,
+  .weird-buckets,
+  .long-tail-list,
   .fact-board,
   .family-grid,
   .evidence-deck,
@@ -2876,6 +2972,9 @@ td small {
   .queue-grid,
   .capability-inventory,
   .composition-grid,
+  .weird-buckets,
+  .long-tail-list,
+  .long-tail-controls,
   .fact-board,
   .family-grid,
   .evidence-deck,

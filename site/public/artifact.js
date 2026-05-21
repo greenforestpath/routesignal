@@ -276,6 +276,7 @@ function signalBadge(signal) {
     .replace("observed_high_activity", "high activity")
     .replace("observed_activity", "observed")
     .replace("latest_tx_seen", "latest tx")
+    .replace("no_observed_in_local_scrape", "no local tx")
     .replace("no_observed_activity_in_local_scrape", "no local tx");
   return `<span class="signal-badge signal-${esc(value)}">${esc(label)}</span>`;
 }
@@ -1528,10 +1529,212 @@ function budgetValue(recipe) {
   return 0;
 }
 
+const WEIRD_BUCKETS = [
+  {
+    id: "identity_biometrics",
+    label: "Identity, KYC, biometrics",
+    detail: "SSN, passports, national IDs, KYC, face/liveness, health or identity lookup claims.",
+    pattern: /ssn|passport|identity|document|kyc|cedula|dni|cpf|curp|rfc|liveness|face.?recognition|biometric|rethus|inpec|whitepages|person.?search/i,
+  },
+  {
+    id: "law_sanctions",
+    label: "Law, sanctions, compliance",
+    detail: "FBI/Interpol/DEA claims, OFAC, sanctions, background checks, enhanced due diligence.",
+    pattern: /fbi|interpol|dea|criminal|wanted|penitentiary|background|ofac|sanction|watchlist|due.?diligence|edd|compliance/i,
+  },
+  {
+    id: "external_actions",
+    label: "External actions",
+    detail: "Routes that send messages, buy/renew resources, trigger calls, post, follow, unfollow, or alter outside systems.",
+    pattern: /unfollow|follow|message|dm|send|post|reply|tweet|call|voice|sms|email|inbox|buy|renew|release|purchase|fulfill|ship/i,
+  },
+  {
+    id: "osint_logistics",
+    label: "OSINT, logistics, real world",
+    detail: "Vessels, flights, satellite/fire data, war/conflict/event telemetry, shipping and local-world context.",
+    pattern: /vessel|ais|flight|flightaware|satellite|fire|firms|war|conflict|drone|strike|weather|earthquake|carbon|emission|port|shipping|freight|demurrage|detention/i,
+  },
+  {
+    id: "public_records",
+    label: "Public records and local diligence",
+    detail: "Company registries, CNPJ/CPF, lawsuits, procurement, environmental embargoes, courts, property records.",
+    pattern: /cnpj|cpf|empresa|societ|licit|ambiental|embargo|processos|registry|court|lawsuit|property|ownership|resident|supplier/i,
+  },
+  {
+    id: "wallet_markets",
+    label: "Wallets, prediction, markets",
+    detail: "Wallet identity, token holders, smart money, Polymarket, DeFi, trading, risk scores, market surveillance.",
+    pattern: /wallet|token.?holders|smart.?money|polymarket|defi|nansen|zapper|risk.?score|trading|portfolio|perp|liquidit|funding.?rates/i,
+  },
+  {
+    id: "media_synthetic",
+    label: "Synthetic media and generation",
+    detail: "Image, video, audio, voice, music, TTS, media audit, and generated content routes.",
+    pattern: /image|video|audio|music|voice|tts|generation|generate|flux|stable.?studio|render.?video|lens/i,
+  },
+  {
+    id: "route_farms",
+    label: "Route farms and meta tools",
+    detail: "Large catalogs, route scanners, readiness tools, agent service hubs, endpoint verification surfaces.",
+    pattern: /route.?farm|x402.?scan|scanner|readiness|agent.?tools|services|mcp|preflight|receipt|gateway|directory|marketplace/i,
+  },
+  {
+    id: "niche_utility",
+    label: "Niche utility oddities",
+    detail: "Small one-off tools that are strange mainly because they are tiny payable ingredients.",
+    pattern: /fee|barcode|qr|pdf|calculator|calendar|gotobi|recipe|digest|audit|verify|lookup|score|random|fake.?data/i,
+  },
+];
+
+function weirdMatches(row) {
+  const text = routeText(row);
+  const matches = WEIRD_BUCKETS.filter((bucket) => bucket.pattern.test(text)).map((bucket) => bucket.id);
+  if ((row.risk_flags || []).some((flag) => [
+    "identity_sensitive",
+    "regulated_or_legal",
+    "external_action_or_abuse_risk",
+    "real_world_fulfillment",
+    "health_sensitive",
+    "large_route_farm",
+  ].includes(flag))) {
+    matches.push("risk_flagged");
+  }
+  return [...new Set(matches)];
+}
+
+function weirdScore(row, buckets) {
+  const riskWeight = (row.risk_flags || []).length * 7;
+  const bucketWeight = buckets.length * 12;
+  const activeWeight = row.activity_signal !== "no_observed_activity_in_local_scrape" ? 25 : 0;
+  const priceWeight = typeof row.amount_usd === "number" && row.amount_usd > 0 && row.amount_usd <= 0.1 ? 8 : 0;
+  const longTailWeight = (row.provider_route_count || 999) <= 3 ? 7 : 0;
+  return bucketWeight + riskWeight + activeWeight + priceWeight + longTailWeight + (row.interest_score || 0) / 8 + (row.signal_score || 0) / 35;
+}
+
+function longTailRows(rows) {
+  return rows
+    .map((row) => {
+      const buckets = weirdMatches(row);
+      return { row, buckets, score: weirdScore(row, buckets) };
+    })
+    .filter((item) => item.buckets.length)
+    .sort((a, b) => b.score - a.score || (b.row.signal_score || 0) - (a.row.signal_score || 0));
+}
+
+function bucketLabel(id) {
+  if (id === "risk_flagged") return "Risk flagged";
+  return WEIRD_BUCKETS.find((bucket) => bucket.id === id)?.label || id;
+}
+
+function renderWeirdBuckets(items) {
+  const byBucket = ["risk_flagged", ...WEIRD_BUCKETS.map((bucket) => bucket.id)].map((id) => {
+    const matches = items.filter((item) => item.buckets.includes(id));
+    return {
+      id,
+      label: bucketLabel(id),
+      detail: id === "risk_flagged" ? "Any route with sensitive, legal, external-action, health, fulfillment, or route-farm flags." : WEIRD_BUCKETS.find((bucket) => bucket.id === id)?.detail,
+      count: matches.length,
+      active: matches.filter((item) => item.row.activity_signal !== "no_observed_activity_in_local_scrape").length,
+      providers: new Set(matches.map((item) => item.row.provider)).size,
+      sample: matches[0]?.row,
+    };
+  }).filter((bucket) => bucket.count);
+  return byBucket.map((bucket) => `
+    <article class="weird-bucket" data-bucket="${esc(bucket.id)}">
+      <div class="family-head">
+        <p class="capability">${esc(bucket.label)}</p>
+        <strong>${compact(bucket.count)}</strong>
+      </div>
+      <p>${esc(bucket.detail || "")}</p>
+      <div class="family-metrics">
+        <span><b>${compact(bucket.active)}</b><small>active rows</small></span>
+        <span><b>${compact(bucket.providers)}</b><small>providers</small></span>
+      </div>
+      ${bucket.sample ? `<a href="${esc(bucket.sample.source)}" target="_blank" rel="noreferrer">${esc(bucket.sample.route_name || bucket.sample.provider)} / ${esc(bucket.sample.cost || "unknown")}</a>` : ""}
+    </article>
+  `).join("");
+}
+
+function renderLongTailCard(item) {
+  const row = item.row;
+  return `
+    <article class="long-tail-card">
+      <div class="long-tail-card-head">
+        <div>
+          <p class="capability">${item.buckets.map(bucketLabel).slice(0, 3).map(esc).join(" / ")}</p>
+          <h3>${esc(row.route_name || row.provider || "route")}</h3>
+        </div>
+        ${signalBadge(row.activity_signal)}
+      </div>
+      <p class="evidence-provider">${esc(row.provider)}</p>
+      <p>${esc(truncate(row.capability || row.notes || row.route, 260))}</p>
+      <div class="evidence-route-meta">
+        <span><strong>${esc(row.cost || "unknown")}</strong><small>${esc(row.price_band || "price")}</small></span>
+        <span><strong>${esc(row.category_label || "uncategorized")}</strong><small>score ${Math.round(item.score)}</small></span>
+        <span><strong>${esc(row.metadata_score ?? 0)}/100</strong><small>metadata</small></span>
+      </div>
+      <p class="activity-line">${esc(activityText(row))}</p>
+      <code>${esc(row.route)}</code>
+      <div class="flag-list">${(row.risk_flags || []).slice(0, 6).map((flag) => `<span class="flag">${esc(flag)}</span>`).join("")}</div>
+      <div class="record-links">
+        <a href="${esc(row.source)}" target="_blank" rel="noreferrer">x402scan source</a>
+        <a href="${esc(row.route)}" target="_blank" rel="noreferrer">route URL</a>
+      </div>
+    </article>
+  `;
+}
+
+function initLongTailPage({ routesDb }) {
+  const rows = routesDb.apis || [];
+  const items = longTailRows(rows);
+  const activeItems = items.filter((item) => item.row.activity_signal !== "no_observed_activity_in_local_scrape");
+  renderMetrics(document.querySelector("#pageMetrics"), [
+    { value: compact(items.length), label: "weird matched rows" },
+    { value: compact(activeItems.length), label: "with observed activity" },
+    { value: compact(new Set(items.map((item) => item.row.provider)).size), label: "providers" },
+    { value: compact(items.filter((item) => item.buckets.includes("risk_flagged")).length), label: "risk-flagged rows" },
+    { value: compact(WEIRD_BUCKETS.length + 1), label: "weirdness buckets" },
+  ]);
+  document.querySelector("#weirdBuckets").innerHTML = renderWeirdBuckets(items);
+
+  const bucket = document.querySelector("#longTailBucket");
+  const activity = document.querySelector("#longTailActivity");
+  const risk = document.querySelector("#longTailRisk");
+  const search = document.querySelector("#longTailSearch");
+  const readout = document.querySelector("#longTailReadout");
+  const cards = document.querySelector("#longTailCards");
+  fillSelect(bucket, ["all", "risk_flagged", ...WEIRD_BUCKETS.map((item) => item.id)], "All weird buckets");
+  fillSelect(activity, ["all", ...new Set(items.map((item) => item.row.activity_signal).filter(Boolean).sort())], "All activity");
+  fillSelect(risk, ["all", ...new Set(items.flatMap((item) => item.row.risk_flags || []).filter(Boolean).sort())], "All risk flags");
+
+  function update() {
+    const b = bucket.value;
+    const a = activity.value;
+    const r = risk.value;
+    const q = search.value.trim().toLowerCase();
+    const filtered = items.filter((item) => {
+      const row = item.row;
+      const text = [row.route_id, row.route_name, row.provider, row.route, row.cost, row.capability, row.notes, row.category_label, ...item.buckets.map(bucketLabel), ...(row.risk_flags || []), ...(row.tags || [])].join(" ").toLowerCase();
+      return (b === "all" || item.buckets.includes(b))
+        && (a === "all" || row.activity_signal === a)
+        && (r === "all" || (row.risk_flags || []).includes(r))
+        && (!q || text.includes(q));
+    });
+    const shown = filtered.slice(0, 420);
+    readout.textContent = `${compact(filtered.length)} weird routes matched. Showing ${compact(shown.length)} sorted by weirdness, signal, sensitivity, activity, and price clarity.`;
+    cards.innerHTML = shown.map(renderLongTailCard).join("") || "<p>No weird routes match this filter.</p>";
+  }
+
+  [bucket, activity, risk].forEach((node) => node.addEventListener("change", update));
+  search.addEventListener("input", update);
+  update();
+}
+
 loadArtifactData().then((data) => {
   const page = document.body.dataset.page;
   if (page === "routes") initRoutesPage(data);
   if (page === "analyzer") initAnalysisPage(data);
+  if (page === "long-tail") initLongTailPage(data);
   if (page === "wizard") initRecipesPage(data);
 }).catch((error) => {
   document.body.append(Object.assign(document.createElement("pre"), { textContent: `Failed to load artifact data: ${error.message}` }));

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Long-tail Routes | RouteSignal</title>
+    <meta name="description" content="A route-backed ledger of weird, niche, sensitive, and long-tail x402 paid API routes.">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body data-page="long-tail">
+    <header class="topbar">
+      <a class="brand" href="./index.html"><span class="brand-mark">R</span><span>RouteSignal</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="./index.html">Routes</a>
+        <a href="./analyzer.html">Analyzer</a>
+        <a aria-current="page" href="./long-tail.html">Long-tail</a>
+        <a href="./wizard.html">Wizard</a>
+      </nav>
+    </header>
+    <main class="long-tail-page">
+      <section class="section console-top">
+        <div class="console-title">
+          <p class="eyebrow">Long-tail ledger</p>
+          <h1>Weird routes agents might buy once.</h1>
+          <p>This page is just the strange stuff: sensitive identity claims, compliance screens, social actions, logistics/OSINT, public records, real-world actions, niche utilities, and route farms. Listed route is not proof of endpoint quality.</p>
+        </div>
+        <div id="pageMetrics" class="artifact-metrics compact-metrics"></div>
+      </section>
+
+      <section class="section console-section">
+        <div class="console-section-head">
+          <div>
+            <p class="eyebrow">Buckets</p>
+            <h2>Where weirdness clusters</h2>
+          </div>
+          <p>Counts come from route text, provider text, tags, risk flags, activity, and price metadata.</p>
+        </div>
+        <div id="weirdBuckets" class="weird-buckets"></div>
+      </section>
+
+      <section class="section console-section">
+        <div class="console-section-head">
+          <div>
+            <p class="eyebrow">Route ledger</p>
+            <h2>All matched weird routes</h2>
+          </div>
+          <p>Filter down by bucket, activity, risk, provider, route, or capability. The first screen is sorted by weirdness and evidence signal.</p>
+        </div>
+        <div class="long-tail-controls" aria-label="Long-tail route filters">
+          <label><span>Bucket</span><select id="longTailBucket"></select></label>
+          <label><span>Activity</span><select id="longTailActivity"></select></label>
+          <label><span>Risk flag</span><select id="longTailRisk"></select></label>
+          <label><span>Search</span><input id="longTailSearch" type="search" placeholder="ssn, fbi, vessel, unfollow, phone, cnpj"></label>
+        </div>
+        <p id="longTailReadout" class="artifact-readout"></p>
+        <div id="longTailCards" class="long-tail-list"></div>
+      </section>
+    </main>
+    <script src="./artifact.js" type="module"></script>
+  </body>
+</html>

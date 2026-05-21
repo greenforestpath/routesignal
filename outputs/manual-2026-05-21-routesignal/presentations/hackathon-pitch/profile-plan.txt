@@ -1,0 +1,8 @@
+task mode: create
+primary deck-profile: product-platform
+secondary gates: engineering-platform clarity, appendix-style source precision
+required proof objects: corpus counts, route cluster bars, verdict split, activity caveat, three-page product flow, composition recipes
+source/asset requirements: use local RouteSignal routesdb summary and README hero image only
+brand authenticity constraints: no invented partner logos; use abstract route/procurement visuals
+profile-specific QA gates: every slide has a claim, at least five macro layouts, numbers footnoted to local data, composition thesis is explicit
+known missing inputs: live demo URL is not embedded because page agents may still be changing the site

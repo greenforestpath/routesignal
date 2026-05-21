@@ -1328,10 +1328,7 @@ td small {
 }
 
 .tool-header {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(460px, 0.8fr);
-  gap: 22px;
-  align-items: start;
+  display: block;
   margin-bottom: 18px;
 }
 
@@ -1340,8 +1337,8 @@ td small {
 }
 
 .wizard-tool h1 {
-  font-size: 42px;
-  line-height: 1.05;
+  font-size: 32px;
+  line-height: 1.08;
 }
 
 .wizard-tool .section-copy {
@@ -1373,7 +1370,7 @@ td small {
   grid-template-columns: minmax(320px, 0.72fr) minmax(0, 1.28fr);
   gap: 14px;
   align-items: stretch;
-  margin: 20px 0 16px;
+  margin: 22px 0 16px;
 }
 
 .composer-input-panel,
@@ -1520,17 +1517,25 @@ td small {
   margin-top: 12px;
 }
 
-.generated-chain span {
+.step-route {
   display: grid;
-  grid-template-columns: 26px minmax(0, 1fr);
-  gap: 9px;
-  align-items: center;
-  padding: 8px 10px;
+  grid-template-columns: minmax(210px, 0.75fr) minmax(0, 1fr);
+  gap: 10px;
+  min-width: 0;
+  padding: 10px;
   background: #eef2f5;
   overflow-wrap: anywhere;
 }
 
-.generated-chain b {
+.step-route > div {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 9px;
+  align-items: center;
+  min-width: 0;
+}
+
+.step-route b {
   display: grid;
   width: 22px;
   height: 22px;
@@ -1538,6 +1543,41 @@ td small {
   background: var(--ink);
   color: #fff;
   font-size: 12px;
+}
+
+.step-route strong,
+.step-route span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.step-route-ref {
+  display: block;
+  min-width: 0;
+  padding: 8px;
+  background: #fff;
+  color: inherit;
+  text-decoration: none;
+}
+
+.step-route-ref strong,
+.step-route-ref span {
+  display: block;
+}
+
+.step-route-ref span {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.route-miss {
+  display: block;
+  padding: 8px;
+  border-left: 4px solid var(--amber);
+  background: #fff7ed;
+  color: #7c4a10;
+  font-size: 13px;
 }
 
 .composer-stop {
@@ -1600,13 +1640,17 @@ td small {
 
 .wizard-controls {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
   margin: 20px 0 14px;
 }
 
-.wizard-controls label:last-child {
+.wizard-controls label:nth-child(4) {
   grid-column: span 2;
+}
+
+.hidden-control {
+  display: none;
 }
 
 .compact-heading {
@@ -1698,24 +1742,8 @@ td small {
   margin-top: 18px;
 }
 
-.workbench-chain span {
-  display: grid;
-  grid-template-columns: 30px minmax(0, 1fr);
-  gap: 10px;
-  align-items: center;
-  padding: 9px 11px;
-  background: var(--wash);
-  overflow-wrap: anywhere;
-}
-
-.workbench-chain b {
-  display: grid;
-  width: 24px;
-  height: 24px;
-  place-items: center;
-  background: var(--ink);
-  color: #fff;
-  font-size: 12px;
+.workbench-chain h4 {
+  margin: 0 0 4px;
 }
 
 .wizard-workbench-side section {
@@ -2677,6 +2705,10 @@ td small {
     grid-column: auto;
   }
 
+  .wizard-controls label:nth-child(4) {
+    grid-column: auto;
+  }
+
   .wizard-workbench-side {
     border-top: 1px solid var(--line);
     border-left: 0;
@@ -2688,7 +2720,8 @@ td small {
 
   .composer-result-grid,
   .composer-two-col,
-  .pipe-chips {
+  .pipe-chips,
+  .step-route {
     grid-template-columns: 1fr;
   }
 

@@ -1887,6 +1887,25 @@ td small {
   overflow-wrap: anywhere;
 }
 
+.compact-step-list span {
+  grid-template-columns: 28px minmax(0, 1fr);
+}
+
+.compact-step-list i,
+.compact-step-list small {
+  display: block;
+  min-width: 0;
+  font-style: normal;
+  overflow-wrap: anywhere;
+}
+
+.compact-step-list small {
+  grid-column: 2;
+  margin-top: -4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .recipe-chain b {
   display: grid;
   width: 22px;

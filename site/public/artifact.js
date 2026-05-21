@@ -1236,14 +1236,17 @@ function routeSearchText(row) {
 }
 
 function firstMatchingRoute(rows, patterns, fallbackPattern) {
-  const found = rows.find((row) => patterns.some((pattern) => pattern.test(routeSearchText(row))));
-  if (found) return found;
+  for (const pattern of patterns) {
+    const found = rows.find((row) => pattern.test(routeSearchText(row)));
+    if (found) return found;
+  }
   if (fallbackPattern) return rows.find((row) => fallbackPattern.test(routeSearchText(row)));
   return null;
 }
 
 function routeForStep(step, recipe, rows) {
   const text = `${step} ${recipe.title} ${recipe.task}`.toLowerCase();
+  if (/x402scan|schema|challenge|intent/.test(text)) return firstMatchingRoute(rows, [/x402.*scan.*stats|dexter.*x402|x402scan/]);
   if (/property|hotel|long-stay|neighborhood/.test(text)) return firstMatchingRoute(rows, [/property-risk-full|tripadvisor|hmo-check/]);
   if (/discover|search|serper|exa/.test(text)) return firstMatchingRoute(rows, [/stableenrich.*minerva|contacts-enrich|x402\.twit\.sh|databr.*duediligence/]);
   if (/scrape|firecrawl|source/.test(text)) return firstMatchingRoute(rows, [/firecrawl|summarize-url|databr.*duediligence/]);
@@ -1396,7 +1399,7 @@ function setupWizardControls(recipeRows, routeRows = []) {
     const selected = filtered.find((recipe) => recipe.id === selectedId) || recipeRows.find((recipe) => recipe.id === selectedId) || filtered[0] || recipeRows[0];
     readout.textContent = `${compact(filtered.length)} recipes matched. Showing strongest compositions; each recipe should resolve to a first-dollar call, route chain, missing route/gap, stop rule, and receipt trail.`;
     workbench.innerHTML = selected ? renderWizardWorkbench(selected, routeRows) : "<p>No recipes match this wizard state.</p>";
-    recipeGrid.innerHTML = filtered.slice(0, 8).map((recipe) => recipeCard(recipe, recipe.id === selectedId)).join("") || "<p>No recipes match this wizard state.</p>";
+    recipeGrid.innerHTML = filtered.slice(0, 8).map((recipe) => recipeCard(recipe, recipe.id === selectedId, routeRows)).join("") || "<p>No recipes match this wizard state.</p>";
     recipeGrid.querySelectorAll("[data-recipe-id]").forEach((node) => {
       node.addEventListener("click", () => {
         selectedId = node.dataset.recipeId;
@@ -1478,7 +1481,8 @@ function renderWizardWorkbench(recipe, routeRows = []) {
   `;
 }
 
-function recipeCard(recipe, selected = false) {
+function recipeCard(recipe, selected = false, routeRows = []) {
+  const steps = recipeStepRows(recipe, routeRows, 4);
   return `
     <button class="recipe-card compact-recipe ${selected ? "is-selected" : ""}" type="button" data-recipe-id="${esc(recipe.id)}">
       <div class="recipe-topline"><span class="recipe-budget">${esc(budgetText(recipe))}</span><span>${esc(recipe.task || "workflow")}</span></div>
@@ -1486,8 +1490,14 @@ function recipeCard(recipe, selected = false) {
       <p class="hook">${esc(recipe.human_hook || recipe.why_agent_payments_matter || "")}</p>
       <div class="first-dollar"><strong>First-dollar call</strong><span>${esc(recipe.first_dollar_call || "Pick the cheapest qualifying route and capture the receipt.")}</span></div>
       <div class="route-gap"><strong>Missing route / gap</strong><span>${esc(recipeGap(recipe))}</span></div>
-      <div class="recipe-chain">
-        ${(recipe.call_chain || []).slice(0, 5).map((step, index) => `<span><b>${index + 1}</b>${esc(step)}</span>`).join("")}
+      <div class="recipe-chain compact-step-list">
+        ${steps.map(({ step, index, route }) => `
+          <span>
+            <b>${index + 1}</b>
+            <i>${esc(step)}</i>
+            <small>${route ? `${esc(truncate(route.route_name || route.provider, 34))} / ${esc(route.cost || "unknown")}` : "gap: no listed route"}</small>
+          </span>
+        `).join("")}
       </div>
       <div class="missing-product">${esc(recipe.stop_rule || "Stop when confidence is high enough or spend cap is reached.")}</div>
     </button>

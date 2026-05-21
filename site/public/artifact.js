@@ -49,6 +49,61 @@ function renderMetrics(root, metrics) {
   `).join("");
 }
 
+function iconFor(categoryId = "") {
+  const icons = {
+    search_scrape: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.5"></circle><path d="M15 15l5 5"></path></svg>`,
+    trust_risk: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-2.7 8.1-7 10-4.3-1.9-7-5.5-7-10V6l7-3z"></path><path d="M9 12l2 2 4-5"></path></svg>`,
+    onchain_finance: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v10H4z"></path><path d="M7 8V6h10v2"></path><circle cx="12" cy="13" r="2.5"></circle></svg>`,
+    communication_action: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5z"></path><path d="M8 9h8M8 13h5"></path></svg>`,
+    media_generation: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14v14H5z"></path><path d="M8 16l3-4 3 3 2-2 3 3"></path><circle cx="9" cy="9" r="1.5"></circle></svg>`,
+    data_enrichment: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V5"></path><path d="M5 19h15"></path><path d="M8 16v-4M12 16V8M16 16v-6"></path></svg>`,
+    agent_runtime: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h8v8H8z"></path><path d="M12 3v5M12 16v5M3 12h5M16 12h5"></path><circle cx="12" cy="12" r="2"></circle></svg>`,
+    long_tail_tools: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l6 6-10 10H4v-6L14 4z"></path><path d="M12 6l6 6"></path></svg>`,
+  };
+  return `<span class="route-icon">${icons[categoryId] || icons.long_tail_tools}</span>`;
+}
+
+function renderSignalWall(root, rows) {
+  const active = diverseRows(
+    rows.filter((row) => row.activity_signal !== "no_observed_activity_in_local_scrape"),
+    7
+  );
+  root.innerHTML = active.map((row, index) => `
+    <a class="signal-wall-row" href="${esc(row.source)}" target="_blank" rel="noreferrer">
+      <span class="wall-rank">${index + 1}</span>
+      ${iconFor(row.category_id)}
+      <span class="wall-main">
+        <strong>${esc(truncate(row.route_name || row.provider, 34))}</strong>
+        <small>${esc(truncate(row.provider, 52))}</small>
+      </span>
+      <span class="wall-proof">
+        <strong>${compact(row.observed_txns_30d || row.latest_tx_count_in_scrape || 0)}</strong>
+        <small>${esc(row.cost || "unknown")}</small>
+      </span>
+    </a>
+  `).join("");
+}
+
+function renderSignalProof(root, rows) {
+  const activity = rows.filter((row) => row.activity_signal !== "no_observed_activity_in_local_scrape").length;
+  const routeFarm = rows.filter((row) => (row.risk_flags || []).includes("large_route_farm")).length;
+  const nonUsdc = rows.filter((row) => (row.risk_flags || []).includes("non_usdc_or_unknown_price")).length;
+  const highMeta = rows.filter((row) => (row.metadata_score || 0) >= 90).length;
+  const proofs = [
+    ["Observed activity", compact(activity), "provider-level transaction signal"],
+    ["High metadata", compact(highMeta), "90+ completeness score"],
+    ["Route farms flagged", compact(routeFarm), "count distortion visible"],
+    ["Price ambiguity", compact(nonUsdc), "non-USDC or unknown price"],
+  ];
+  root.innerHTML = proofs.map(([label, value, note]) => `
+    <article>
+      <span>${esc(label)}</span>
+      <strong>${esc(value)}</strong>
+      <small>${esc(note)}</small>
+    </article>
+  `).join("");
+}
+
 function renderSchemaGrid(root) {
   const fields = [
     ["route_id", "Stable local ID for joins, citations, and copy/paste agent plans."],
@@ -115,6 +170,8 @@ function initRoutesPage({ routes, routesDb }) {
     { value: compact(pricedRows.length), label: "USDC-normalized prices" },
     { value: compact(new Set(rows.map((row) => row.route)).size), label: "distinct routes" },
   ]);
+  renderSignalWall(document.querySelector("#signalWall"), rows);
+  renderSignalProof(document.querySelector("#signalProof"), rows);
 
   const activity = document.querySelector("#routeActivityFilter");
   const metadata = document.querySelector("#routeMetadataFilter");
@@ -229,6 +286,7 @@ function routeCard(row) {
     <article class="route-record">
       <div class="record-topline">
         ${signalBadge(row.activity_signal)}
+        ${iconFor(row.category_id)}
         <code>${esc(row.route_id)}</code>
       </div>
       <h3>${esc(row.route_name || "route")}</h3>

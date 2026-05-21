@@ -17,21 +17,30 @@
       </nav>
     </header>
     <main>
-      <section class="artifact-hero">
+      <section class="artifact-hero signal-hero">
         <div>
-          <p class="eyebrow">RouteSignal</p>
-          <h1>Which x402 routes have actual signal?</h1>
-          <p class="lead">x402scan shows what is listed. RouteSignal shows observable activity, metadata completeness, price clarity, freshness, and evidence for paid API routes.</p>
+          <p class="eyebrow">Live route intelligence</p>
+          <h1>13,517 paid API routes, ranked by observable signal.</h1>
+          <p class="lead">Activity, metadata completeness, price clarity, freshness, and evidence for x402 routes. No claim that a listed endpoint is good until the signal supports it.</p>
           <div class="hero-actions">
             <a class="button primary" href="./data/routesdb.csv" download>Download RoutesDB CSV</a>
             <a class="button secondary" href="./data/routesdb.json">Open JSON</a>
           </div>
         </div>
-        <div id="pageMetrics" class="artifact-metrics"></div>
+        <div class="hero-stack" aria-label="RouteSignal live evidence summary">
+          <div id="pageMetrics" class="artifact-metrics compact-metrics"></div>
+          <div class="signal-wall">
+            <div class="wall-heading">
+              <span>Top observed routes</span>
+              <strong>activity first</strong>
+            </div>
+            <div id="signalWall"></div>
+          </div>
+        </div>
       </section>
 
-      <section class="section thesis-strip">
-        <p>We compressed 13k x402 routes into a signal layer: <strong>activity</strong>, <strong>metadata completeness</strong>, <strong>price clarity</strong>, <strong>freshness</strong>, and <strong>evidence</strong>.</p>
+      <section class="section proof-strip">
+        <div id="signalProof" class="signal-proof"></div>
       </section>
 
       <section class="section schema-section">

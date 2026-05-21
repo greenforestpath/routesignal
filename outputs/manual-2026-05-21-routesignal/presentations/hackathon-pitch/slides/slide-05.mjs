@@ -20,9 +20,9 @@ export async function slide05(presentation, ctx) {
 
   rect(ctx, slide, 646, 258, 508, 300, { fill: "#FFFFFF", stroke: C.faint });
   textBox(ctx, slide, "Evidence ladder", 672, 282, 250, 24, { size: 21, bold: true, color: C.ink });
-  metric(ctx, slide, 672, 330, "metadata complete", "11,728", C.green);
-  metric(ctx, slide, 872, 330, "probe candidates", "279", C.blue);
-  metric(ctx, slide, 1032, 330, "activity observed", "88", C.amber);
+  metric(ctx, slide, 672, 330, "metadata complete", "11,728", C.green, false, { w: 160, valueSize: 34 });
+  metric(ctx, slide, 858, 330, "probe candidates", "279", C.blue, false, { w: 132, valueSize: 34 });
+  metric(ctx, slide, 1010, 330, "activity observed", "88", C.amber, false, { w: 120, valueSize: 34 });
   card(ctx, slide, 672, 462, 420, 62, { fill: "#F9FBFA", accent: C.red });
   textBox(ctx, slide, "Caveat: 13,150 routes had no observed activity in the local scrape. That is not failure; it is exactly why signal matters.", 696, 476, 368, 34, {
     size: 15,

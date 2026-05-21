@@ -86,14 +86,15 @@ export function title(ctx, slide, eyebrow, headline, subhead, dark = false) {
   }
 }
 
-export function metric(ctx, slide, x, y, label, value, color = C.green, dark = false) {
-  textBox(ctx, slide, value, x, y, 210, 52, {
-    size: 38,
+export function metric(ctx, slide, x, y, label, value, color = C.green, dark = false, opt = {}) {
+  const w = opt.w ?? 180;
+  textBox(ctx, slide, value, x, y, w, 48, {
+    size: opt.valueSize ?? 38,
     bold: true,
     color,
   });
-  textBox(ctx, slide, label, x, y + 50, 210, 44, {
-    size: 15,
+  textBox(ctx, slide, label, x, y + 56, w, 36, {
+    size: opt.labelSize ?? 15,
     color: dark ? "#B8CAD1" : C.muted,
     lineSpacing: 1.05,
   });

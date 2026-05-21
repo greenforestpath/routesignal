@@ -25,7 +25,7 @@ export async function slide03(presentation, ctx) {
   bar(ctx, slide, 96, 462, 132, "Base mainnet", 12043, 12043, C.green, { valueLabel: "12,043", valueW: 62 });
   bar(ctx, slide, 96, 496, 132, "Solana canonical", 615, 12043, C.blue, { valueLabel: "615", valueW: 62 });
   bar(ctx, slide, 96, 530, 132, "Solana mainnet", 599, 12043, C.blue, { valueLabel: "599", valueW: 62 });
-  textBox(ctx, slide, "Base dominates the listed surface; the product has to separate ecosystem activity from catalog inflation.", 96, 562, 405, 22, {
+  textBox(ctx, slide, "Base dominates the listed surface; the product has to separate ecosystem activity from catalog inflation.", 96, 548, 405, 24, {
     size: 14,
     color: C.muted,
     lineSpacing: 1.06,
@@ -40,7 +40,7 @@ export async function slide03(presentation, ctx) {
   bar(ctx, slide, 674, 462, 132, "0.01 USDC", 3448, 3448, C.green, { valueLabel: "3,448", valueW: 62 });
   bar(ctx, slide, 674, 496, 132, "0.001 USDC", 994, 3448, C.blue, { valueLabel: "994", valueW: 62 });
   bar(ctx, slide, 674, 530, 132, "0.005 USDC", 817, 3448, C.amber, { valueLabel: "817", valueW: 62 });
-  textBox(ctx, slide, "The useful primitive is the cheap probe: spend pennies, collect a receipt, stop early.", 674, 562, 405, 22, {
+  textBox(ctx, slide, "The useful primitive is the cheap probe: spend pennies, collect a receipt, stop early.", 674, 548, 405, 24, {
     size: 14,
     color: C.muted,
     lineSpacing: 1.06,

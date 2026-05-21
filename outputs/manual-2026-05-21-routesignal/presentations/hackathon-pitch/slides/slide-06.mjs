@@ -30,14 +30,14 @@ export async function slide06(presentation, ctx) {
     color: C.green2,
   });
 
-  card(ctx, slide, 804, 294, 270, 88, { fill: "#123745", stroke: "#35535D", accent: C.green2 });
+  card(ctx, slide, 804, 288, 270, 98, { fill: "#123745", stroke: "#35535D", accent: C.green2 });
   textBox(ctx, slide, "First-dollar rule", 828, 314, 220, 20, { size: 14, bold: true, color: C.green2 });
   textBox(ctx, slide, "Start with the cheapest call that can kill the task.", 828, 340, 208, 30, {
     size: 15,
     color: "#D7E5E2",
     lineSpacing: 1.08,
   });
-  card(ctx, slide, 804, 410, 270, 88, { fill: "#123745", stroke: "#35535D", accent: C.amber });
+  card(ctx, slide, 804, 410, 270, 98, { fill: "#123745", stroke: "#35535D", accent: C.amber });
   textBox(ctx, slide, "Stop rule", 828, 430, 220, 20, { size: 14, bold: true, color: C.amber });
   textBox(ctx, slide, "Stop on contradiction, sanctions, reused media, or weak evidence.", 828, 456, 208, 34, {
     size: 15,

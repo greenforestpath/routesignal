@@ -4,6 +4,17 @@
 
 > x402scan shows what is listed. RouteSignal shows what has signal.
 
+<p align="center">
+  <img src="assets/routesignal-readme-hero.png" alt="RouteSignal route intelligence dashboard preview" width="100%">
+</p>
+
+<p align="center">
+  <a href="https://routesignal.pages.dev"><img alt="Live demo" src="https://img.shields.io/badge/demo-routesignal.pages.dev-167a5a"></a>
+  <img alt="Static site" src="https://img.shields.io/badge/site-static%20HTML%2FCSS%2FJS-2454a6">
+  <img alt="Dataset" src="https://img.shields.io/badge/dataset-13%2C517%20routes-b66a15">
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-151719">
+</p>
+
 RouteSignal compresses 13,517 public x402 route records into a three-page artifact for understanding what paid API routes exist, which providers show observable activity, how complete the route metadata is, where prices cluster, and what long-tail workflows might become possible when agents can buy API calls one at a time.
 
 [Live demo](https://routesignal.pages.dev) · [Data dictionary](docs/data-dictionary.md) · [Methodology](docs/methodology.md) · [Limitations](docs/limitations.md)
@@ -141,11 +152,6 @@ docs/                    methodology, data dictionary, limitations
 research/                selected research notes
 ```
 
-## About Contributions
-
-Please don't take this the wrong way, but I do not accept outside contributions for any of my projects. I simply don't have the mental bandwidth to review anything, and it's my name on the thing, so I'm responsible for any problems it causes; thus, the risk-reward is highly asymmetric from my perspective. I'd also have to worry about other "stakeholders," which seems unwise for tools I mostly make for myself for free. Feel free to submit issues, and even PRs if you want to illustrate a proposed fix, but know I won't merge them directly. Instead, I'll have Claude or Codex review submissions via `gh` and independently decide whether and how to address them. Bug reports in particular are welcome. Sorry if this offends, but I want to avoid wasted time and hurt feelings. I understand this isn't in sync with the prevailing open-source ethos that seeks community contributions, but it's the only way I can move at this velocity and keep my sanity.
-
 ## License
 
 MIT
-

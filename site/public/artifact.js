@@ -631,6 +631,216 @@ function renderRouteFamilies(rows) {
   }).join("");
 }
 
+function hasFlag(row, pattern) {
+  return (row.risk_flags || []).some((flag) => pattern.test(flag));
+}
+
+function riskLabel(row) {
+  if (hasFlag(row, /external_action_or_abuse_risk/)) return "human gate";
+  if (hasFlag(row, /identity_sensitive|regulated_or_legal|health_sensitive/)) return "consent/legal";
+  if (hasFlag(row, /large_route_farm/)) return "route farm";
+  if (hasFlag(row, /non_usdc_or_unknown_price/)) return "price unclear";
+  if (hasFlag(row, /accept_unverified/)) return "verify accept";
+  return "normal";
+}
+
+function sortByActivity(a, b) {
+  return (b.observed_txns_30d || 0) - (a.observed_txns_30d || 0)
+    || (b.latest_tx_count_in_scrape || 0) - (a.latest_tx_count_in_scrape || 0)
+    || (b.signal_score || 0) - (a.signal_score || 0);
+}
+
+function renderPopularRoutes(rows) {
+  const active = rows
+    .filter((row) => row.activity_signal !== "no_observed_activity_in_local_scrape")
+    .slice()
+    .sort(sortByActivity)
+    .slice(0, 18);
+  return `
+    <div class="ledger-row ledger-head">
+      <span>#</span>
+      <span>Route / use case</span>
+      <span>Provider</span>
+      <span>Activity</span>
+      <span>Price</span>
+      <span>Risk</span>
+      <span>Source</span>
+    </div>
+    ${active.map((row, index) => `
+      <article class="ledger-row">
+        <span class="wall-rank">${index + 1}</span>
+        <span>
+          <strong>${esc(row.route_name || "route")}</strong>
+          <small>${esc(row.market_signal || row.category_label || "activity observed")}</small>
+        </span>
+        <span>${esc(truncate(row.provider, 54))}</span>
+        <span><strong>${compact(row.observed_txns_30d || row.latest_tx_count_in_scrape || 0)}</strong><small>${esc(row.activity_signal || "activity")}</small></span>
+        <span>${esc(row.cost || "unknown")}</span>
+        <span><mark>${esc(riskLabel(row))}</mark></span>
+        <span><a href="${esc(row.source)}" target="_blank" rel="noreferrer">open</a></span>
+      </article>
+    `).join("")}
+  `;
+}
+
+function queueSample(rows, predicate, limit = 3) {
+  return rows
+    .filter(predicate)
+    .slice()
+    .sort((a, b) => sortByActivity(a, b) || (b.interest_score || 0) - (a.interest_score || 0))
+    .slice(0, limit);
+}
+
+function renderProcurementQueues(rows) {
+  const queues = [
+    {
+      label: "Probe candidates",
+      action: "try first",
+      test: (row) => row.evidence_stage === "probe_candidate",
+      why: "Active, priced, metadata-complete, and not carrying the hardest risk flags.",
+    },
+    {
+      label: "Active but gated",
+      action: "require policy",
+      test: (row) => row.activity_signal !== "no_observed_activity_in_local_scrape" && /human gate|consent\/legal/.test(riskLabel(row)),
+      why: "Activity exists, but the route can touch identity, legal, health, or external action surfaces.",
+    },
+    {
+      label: "Priced but quiet",
+      action: "sample cheaply",
+      test: (row) => row.activity_signal === "no_observed_activity_in_local_scrape" && row.amount_usd != null && (row.metadata_score || 0) >= 80,
+      why: "Machine-readable and priced, but not activity-backed in the local scrape.",
+    },
+    {
+      label: "Catalog inflation",
+      action: "de-duplicate",
+      test: (row) => hasFlag(row, /large_route_farm/) || row.provider_shape_type === "route farm",
+      why: "Useful inventory, bad market-size evidence.",
+    },
+    {
+      label: "Price unclear",
+      action: "normalize terms",
+      test: (row) => row.amount_usd == null,
+      why: "An agent cannot compare or budget routes until price terms normalize.",
+    },
+    {
+      label: "Long-tail weird",
+      action: "compose later",
+      test: (row) => /vessel|flight|tarot|dream|wine|meme|astrology|relationship|accent|weather|satellite|phone|gift card|unfollow/i.test(routeText(row)),
+      why: "Niche ingredients become valuable when composed with search, enrichment, policy checks, and receipts.",
+    },
+  ];
+  return queues.map((queue) => {
+    const matches = rows.filter(queue.test);
+    const samples = queueSample(rows, queue.test);
+    return `
+      <article class="queue-card">
+        <div class="queue-top">
+          <p class="capability">${esc(queue.action)}</p>
+          <strong>${compact(matches.length)}</strong>
+        </div>
+        <h3>${esc(queue.label)}</h3>
+        <p>${esc(queue.why)}</p>
+        <ol>
+          ${samples.map((row) => `
+            <li>
+              <a href="${esc(row.source)}" target="_blank" rel="noreferrer">${esc(truncate(row.route_name || row.provider, 42))}</a>
+              <span>${esc(row.cost || "unknown")} / ${esc(riskLabel(row))}</span>
+            </li>
+          `).join("")}
+        </ol>
+      </article>
+    `;
+  }).join("");
+}
+
+function familyRows(rows) {
+  return [
+    ["Search/crawl", /search|crawl|scrape|browser|web|query|extract/i, "feed evidence into downstream calls"],
+    ["Enrichment", /enrich|lead|email|phone|contact|profile|apollo|clado|linkedin/i, "turn unknown people or companies into records"],
+    ["Identity/KYC", /ssn|passport|identity|document|kyc|liveness|face|biometric|cedula|cpf/i, "gate onboarding and sensitive decisions"],
+    ["Compliance", /ofac|sanction|watchlist|background|criminal|interpol|fbi|dea|due.?diligence/i, "preflight risk before higher spend"],
+    ["Wallet/markets", /wallet|token|defi|portfolio|polymarket|trading|market|price/i, "route money-aware agents"],
+    ["Social/action", /twitter|x\/|tweet|follow|unfollow|message|dm|post|like|social|call|sms/i, "trigger external-world actions"],
+    ["OSINT/telemetry", /vessel|flight|satellite|weather|ship|port|war|conflict|earthquake|carbon|fire/i, "monitor world state cheaply"],
+    ["Media/generation", /image|video|audio|music|voice|caption|transcript|generate/i, "produce artifacts from gathered context"],
+  ].map(([label, pattern, hook]) => {
+    const matches = rows.filter((row) => pattern.test(routeText(row)));
+    const active = matches.filter((row) => row.activity_signal !== "no_observed_activity_in_local_scrape");
+    const priced = matches.filter((row) => typeof row.amount_usd === "number");
+    const cheapest = priced.slice().sort((a, b) => a.amount_usd - b.amount_usd)[0];
+    const topProvider = countBy(matches, (row) => row.provider).sort((a, b) => b.rows - a.rows)[0];
+    const sample = sampleForPattern(rows, pattern, 1)[0];
+    return { label, hook, matches, active, cheapest, topProvider, sample };
+  });
+}
+
+function renderCapabilityInventory(rows) {
+  return familyRows(rows).map((family) => `
+    <article class="capability-card">
+      <div class="queue-top">
+        <p class="capability">${esc(family.label)}</p>
+        <strong>${compact(family.matches.length)}</strong>
+      </div>
+      <p>${esc(family.hook)}</p>
+      <div class="capability-metrics">
+        <span><b>${compact(family.active.length)}</b><small>active</small></span>
+        <span><b>${family.cheapest ? esc(family.cheapest.cost) : "unknown"}</b><small>cheapest listed</small></span>
+        <span><b>${family.topProvider ? compact(family.topProvider.rows) : "0"}</b><small>top provider rows</small></span>
+      </div>
+      ${family.sample ? `<a href="${esc(family.sample.source)}" target="_blank" rel="noreferrer">${esc(truncate(family.sample.route_name || family.sample.provider, 58))}</a>` : ""}
+    </article>
+  `).join("");
+}
+
+function renderCompositionBridge(rows) {
+  const recipes = [
+    {
+      title: "Micro-SDR with receipts",
+      ingredients: [["lead/contact", /lead|email|phone|contact|apollo|clado|linkedin|enrich/i], ["validation", /validate|verify|quality|score/i], ["outreach", /message|dm|email|sms|call|twitter|x\//i]],
+      output: "Find lead -> verify contact -> send one gated action.",
+      gap: "Needs policy gates, opt-out handling, and response-quality checks.",
+    },
+    {
+      title: "Wallet preflight diligence",
+      ingredients: [["wallet data", /wallet|address|transaction|token|portfolio/i], ["sanctions", /ofac|sanction|watchlist|compliance/i], ["identity/entity", /identity|company|business|cnpj|kyc/i]],
+      output: "Screen wallet/context before routing higher spend.",
+      gap: "Needs freshness, false-positive handling, and receipt storage.",
+    },
+    {
+      title: "Long-tail travel monitor",
+      ingredients: [["flight/weather", /flight|weather|travel|hotel/i], ["telemetry", /vessel|satellite|fire|earthquake|ship/i], ["notification", /sms|email|message|phone/i]],
+      output: "Watch disruptions and buy only the next necessary check.",
+      gap: "Needs user preference memory and escalation rules.",
+    },
+    {
+      title: "Founder contradiction finder",
+      ingredients: [["search/crawl", /search|crawl|scrape|web/i], ["people/company", /person|people|company|org|profile|linkedin/i], ["public records", /court|lawsuit|processos|background|due.?diligence|sanction/i]],
+      output: "Spend cents to find one source-backed contradiction before a meeting.",
+      gap: "Needs citation scoring and duplicate-claim reconciliation.",
+    },
+  ];
+  return recipes.map((recipe) => `
+    <article class="composition-card">
+      <h3>${esc(recipe.title)}</h3>
+      <p>${esc(recipe.output)}</p>
+      <div class="ingredient-list">
+        ${recipe.ingredients.map(([label, pattern]) => {
+          const matches = rows.filter((row) => pattern.test(routeText(row)));
+          const sample = sampleForPattern(rows, pattern, 1)[0];
+          return `
+            <span>
+              <b>${esc(label)}</b>
+              <small>${compact(matches.length)} rows${sample ? ` / ${esc(truncate(sample.route_name || sample.provider, 28))}` : ""}</small>
+            </span>
+          `;
+        }).join("")}
+      </div>
+      <div class="missing-product">${esc(recipe.gap)}</div>
+    </article>
+  `).join("");
+}
+
 function firstRoute(rows, predicate) {
   return rows.find(predicate);
 }
@@ -815,86 +1025,30 @@ function renderClusterCounts(rows) {
 
 function initAnalysisPage({ routes, routesDb, insights }) {
   const rows = routesDb.apis || [];
-  const compression = insights.compression || { cards: [], truths: [] };
+  const activeRows = rows.filter((row) => row.activity_signal !== "no_observed_activity_in_local_scrape");
+  const probeRows = rows.filter((row) => row.evidence_stage === "probe_candidate");
+  const longTailProviders = new Set(rows.filter((row) => (row.provider_route_count || 0) <= 2).map((row) => row.provider));
   renderMetrics(document.querySelector("#pageMetrics"), [
-    { value: compact(routes.summary?.route_count), label: "routes compressed" },
-    { value: compact((insights.clusters || []).length), label: "market clusters" },
-    { value: compact((insights.evidence_ladder || []).find((stage) => stage.id === "probe_candidate")?.count || 0), label: "probe candidates" },
-    { value: compact((insights.compression?.cards || []).find((card) => card.label === "Observed activity rows")?.value || 0), label: "activity rows" },
+    { value: compact(routes.summary?.route_count || rows.length), label: "listed routes" },
+    { value: compact(activeRows.length), label: "activity rows" },
+    { value: compact(probeRows.length), label: "probe candidates" },
+    { value: compact(longTailProviders.size), label: "long-tail providers" },
   ]);
 
-  const categories = (insights.categories || []).slice().sort((a, b) => b.count - a.count);
-  const factBoardRoot = document.querySelector("#factBoard");
-  if (factBoardRoot) factBoardRoot.innerHTML = renderFactBoard(rows);
-  const hotTakesRoot = document.querySelector("#hotTakes");
-  if (hotTakesRoot) hotTakesRoot.innerHTML = renderHotTakes(rows);
-  const displayModelRoot = document.querySelector("#displayModel");
-  if (displayModelRoot) displayModelRoot.innerHTML = renderDisplayModel();
-  const routeFamiliesRoot = document.querySelector("#routeFamilies");
-  if (routeFamiliesRoot) routeFamiliesRoot.innerHTML = renderRouteFamilies(rows);
-  const compressionRoot = document.querySelector("#compressionCards");
-  if (compressionRoot) compressionRoot.innerHTML = renderCompressionCards(compression);
-  const signalMapRoot = document.querySelector("#signalMap");
-  if (signalMapRoot) signalMapRoot.innerHTML = renderSignalMap(insights.signal_map || { points: [] });
+  const popularRoot = document.querySelector("#popularRoutes");
+  if (popularRoot) popularRoot.innerHTML = renderPopularRoutes(rows);
+  const queuesRoot = document.querySelector("#procurementQueues");
+  if (queuesRoot) queuesRoot.innerHTML = renderProcurementQueues(rows);
+  const providerDistortionRoot = document.querySelector("#providerDistortion");
+  if (providerDistortionRoot) providerDistortionRoot.innerHTML = renderProviderDistortion(rows);
   const evidenceRoot = document.querySelector("#evidenceLadder");
   if (evidenceRoot) evidenceRoot.innerHTML = renderEvidenceLadder(insights.evidence_ladder || []);
-  const clusterRoot = document.querySelector("#clusterGrid");
-  if (clusterRoot) clusterRoot.innerHTML = renderClusterGrid(insights.clusters || []);
-  const categoryBarsRoot = document.querySelector("#categoryBars");
-  if (categoryBarsRoot) categoryBarsRoot.innerHTML = categoryBars(categories);
-  const mentalMapRoot = document.querySelector("#mentalMap");
-  if (mentalMapRoot) mentalMapRoot.innerHTML = renderMentalMap(categories.slice(0, 8), insights.bundles || []);
-  document.querySelector("#costBars").innerHTML = densityBars(insights.summary?.top_costs || []);
-  document.querySelector("#networkBars").innerHTML = densityBars(insights.summary?.top_networks || []);
-  document.querySelector("#providerShapes").innerHTML = (insights.provider_shapes || []).slice(0, 10).map((provider) => `
-    <article class="provider-shape">
-      <div class="provider-shape-head">
-        <strong>${esc(provider.provider)}</strong>
-        <span>${esc(provider.shape_type || "provider")}</span>
-      </div>
-      <div class="provider-shape-metrics">
-        <span><b>${compact(provider.count)}</b><small>rows</small></span>
-        <span><b>${compact(provider.distinct_routes)}</b><small>distinct</small></span>
-        <span><b>${esc(provider.share_pct ?? 0)}%</b><small>row share</small></span>
-        <span><b>${compact(provider.max_txns_30d || 0)}</b><small>max tx 30d</small></span>
-      </div>
-      <small>${(provider.top_categories || []).map((item) => `${esc(item.name)} ${compact(item.count)}`).join(" / ")}</small>
-    </article>
-  `).join("");
-  document.querySelector("#surprisingRoutes").innerHTML = (insights.interesting_routes || []).slice(0, 24).map((route) => `
-    <article class="interesting-card">
-      <p class="capability">${esc(route.cluster || route.category)} / ${esc(route.evidence_stage || "listed")} / ${esc(route.cost)}</p>
-      <h4>${esc(route.route_name || route.provider)}</h4>
-      <p>${esc(truncate(route.capability, 190))}</p>
-      <p class="market-signal">${esc(route.market_signal || "listed route")}</p>
-      <small>${esc(route.why_interesting)} Caveat: ${esc(route.caveat)}.</small>
-      <a href="${esc(route.source)}" target="_blank" rel="noreferrer">Open source</a>
-    </article>
-  `).join("");
-  document.querySelector("#warnings").innerHTML = (insights.warnings || []).map((warning) => `
-    <li><strong>${esc(warning.title)}</strong><span>${esc(warning.detail)}</span></li>
-  `).join("");
-}
-
-function initBetaInsightsPage({ routes, routesDb }) {
-  const rows = routesDb.apis || [];
-  const activeRows = rows.filter((row) => row.activity_signal !== "no_observed_activity_in_local_scrape");
-  const routeFarmRows = rows.filter((row) => (row.risk_flags || []).includes("large_route_farm"));
-  const pricedRows = rows.filter((row) => typeof row.amount_usd === "number");
-  renderMetrics(document.querySelector("#pageMetrics"), [
-    { value: compact(rows.length), label: "route rows analyzed" },
-    { value: compact(activeRows.length), label: "activity-backed rows" },
-    { value: compact(new Set(activeRows.map((row) => row.provider)).size), label: "active providers" },
-    { value: compact(routeFarmRows.length), label: "route-farm rows" },
-    { value: compact(pricedRows.length), label: "normalized prices" },
-  ]);
-  document.querySelector("#factBoard").innerHTML = renderFactBoard(rows);
-  document.querySelector("#evidenceDeck").innerHTML = renderEvidenceDeck(rows);
-  document.querySelector("#providerDistortion").innerHTML = renderProviderDistortion(rows);
-  document.querySelector("#clusterCounts").innerHTML = renderClusterCounts(rows);
-  document.querySelector("#hotTakes").innerHTML = renderHotTakes(rows);
-  document.querySelector("#displayModel").innerHTML = renderDisplayModel();
-  document.querySelector("#routeFamilies").innerHTML = renderRouteFamilies(rows);
+  const capabilityRoot = document.querySelector("#capabilityInventory");
+  if (capabilityRoot) capabilityRoot.innerHTML = renderCapabilityInventory(rows);
+  const compositionRoot = document.querySelector("#compositionBridge");
+  if (compositionRoot) compositionRoot.innerHTML = renderCompositionBridge(rows);
+  const longTailRoot = document.querySelector("#longTailRoutes");
+  if (longTailRoot) longTailRoot.innerHTML = renderEvidenceDeck(rows);
 }
 
 function densityBars(entries) {
@@ -955,7 +1109,155 @@ function initRecipesPage({ insights, recipes }) {
       </ol>
     </article>
   `).join("");
+  renderCapabilityMatrix(document.querySelector("#capabilityMatrix"));
+  setupRecipeComposer(recipeRows);
   setupWizardControls(recipeRows);
+}
+
+const capabilityPipes = [
+  ["Search", "find public surface"],
+  ["Scrape", "turn pages into evidence"],
+  ["Registry", "verify entity existence"],
+  ["Wallet risk", "screen payment counterparties"],
+  ["Social", "check recency and momentum"],
+  ["Sanctions", "stop unsafe payments"],
+  ["Storage", "preserve receipts"],
+  ["Messaging", "optional human action"],
+  ["Local attestation", "missing long-tail gap"],
+];
+
+function renderCapabilityMatrix(root) {
+  if (!root) return;
+  root.innerHTML = `
+    <div class="pipe-copy">
+      <p class="eyebrow">Capability palette</p>
+      <h2>Routes are ingredients</h2>
+      <p>Search + registry + wallet risk + social signal + receipt storage becomes a workflow. The Wizard exists because a giant paid-route market needs composition, not another directory.</p>
+    </div>
+    <div class="pipe-chips">
+      ${capabilityPipes.map(([label, note], index) => `
+        <span><b>${index + 1}</b><strong>${esc(label)}</strong><small>${esc(note)}</small></span>
+      `).join("")}
+    </div>
+  `;
+}
+
+function recipeGap(recipe) {
+  const text = recipeText(recipe);
+  if (/hotel|guesthouse|long-stay|property|bangkok|local/.test(text)) return "Verified local attestation: a paid route that can confirm the property/operator state from the ground.";
+  if (/conference|lead|people|social/.test(text)) return "Consent-aware people graph: a route that distinguishes useful contact context from spammy enrichment.";
+  if (/token|wallet|trade|market|crypto/.test(text)) return "Freshness and policy gate: a route that proves the data timestamp and blocks autonomous execution.";
+  if (/merch|ad|microstore|trend|meme/.test(text)) return "Tiny fulfillment proof: a route that can quote or reserve one real production/ad slot without a full account.";
+  if (/security|package|mcp|install/.test(text)) return "Install sandbox verdict: a paid route that runs a package/tool in isolation and returns a reproducible receipt.";
+  if (/provider|bakeoff|compare/.test(text)) return "Quality benchmark route: a neutral evaluator that scores multiple paid endpoints against the same task.";
+  return "Endpoint-quality proof: listed payable routes still need a live probe showing useful output, latency, and receipt behavior.";
+}
+
+function recipeCapabilities(recipe) {
+  const chain = recipe.call_chain || [];
+  const names = (recipe.ingredients || []).map((ingredient) => ingredient.name);
+  const text = [...chain, ...names, recipe.title, recipe.task].join(" ").toLowerCase();
+  const caps = [];
+  if (/search|serper|exa|discover|scrape|firecrawl|source/.test(text)) caps.push("Search/scrape");
+  if (/registry|company|globalapi|entity|property/.test(text)) caps.push("Registry");
+  if (/wallet|ofac|sanction|risk|safety|preflight/.test(text)) caps.push("Risk gate");
+  if (/social|twitter|twit|cascade|neynar|meme|trend/.test(text)) caps.push("Social signal");
+  if (/people|clado|apollo|contact|lead/.test(text)) caps.push("People/contact");
+  if (/storage|receipt|pinata|402104|evidence/.test(text)) caps.push("Receipt storage");
+  if (/media|image|merch|ad|checkout/.test(text)) caps.push("Media/action");
+  return [...new Set(caps)].slice(0, 6);
+}
+
+function composerMatch(prompt, recipeRows) {
+  const text = prompt.toLowerCase();
+  const rules = [
+    [/hotel|guesthouse|long.?stay|property|bangkok|asset|neighborhood/, "no_account_data_room_for_long_stay_asset", "You are trying to decide whether an obscure real-world asset deserves deeper attention."],
+    [/founder|vendor|claim|contradiction|supplier|company|meeting/, "pay_per_contradiction_founder_diligence", "You need the cheapest source-backed contradiction or confidence check before a meeting/payment."],
+    [/supplier|wire|counterparty|wallet|sanction|risk|payment/, "counterparty_risk_preflight", "You need a pre-spend safety gate before an agent or human sends money."],
+    [/token|prediction|market|trade|wallet|crypto|research/, "thin_liquidity_thesis_ladder", "You need a research-only ladder that explicitly refuses autonomous trading."],
+    [/trend|meme|merch|ad|audience|campaign|social/, "meme_to_merch_microstore", "You want to turn weak social signal into a tiny market test without building a full business."],
+    [/conference|booth|sponsor|hallway|lead|event/, "conference_hallway_radar", "You need to rank who is worth talking to and what to ask."],
+    [/package|mcp|install|security|npm|tool/, "node_package_security_microaudit", "You need a tiny provenance and security audit before installing a tool."],
+    [/compare|provider|bakeoff|latency|freshness|quality/, "provider_collision_bakeoff", "You want to ask multiple paid routes the same question and compare quality per dollar."],
+  ];
+  const match = rules.find(([pattern]) => pattern.test(text));
+  const fallback = recipeRows.find((recipe) => recipe.id === "pay_per_contradiction_founder_diligence") || recipeRows[0];
+  if (!match) return { recipe: fallback, interpreted: "You need a composable paid-route workflow with a cheap first probe, evidence trail, and stop rule." };
+  return {
+    recipe: recipeRows.find((recipe) => recipe.id === match[1]) || fallback,
+    interpreted: match[2],
+  };
+}
+
+function renderComposerOutput(recipe, interpreted) {
+  const caps = recipeCapabilities(recipe);
+  const ingredients = recipe.ingredients || [];
+  return `
+    <div class="composer-output-head">
+      <span>Deterministic prototype</span>
+      <strong>${esc(recipe.title)}</strong>
+    </div>
+    <div class="composer-result-grid">
+      <article>
+        <h3>Interpreted task</h3>
+        <p>${esc(interpreted)}</p>
+      </article>
+      <article>
+        <h3>Route categories needed</h3>
+        <div class="cap-list">${caps.map((cap) => `<span>${esc(cap)}</span>`).join("")}</div>
+      </article>
+      <article>
+        <h3>Estimated spend</h3>
+        <p>${esc(budgetText(recipe))}</p>
+      </article>
+    </div>
+    <div class="generated-chain">
+      <h3>Generated route recipe</h3>
+      ${(recipe.call_chain || []).slice(0, 7).map((step, index) => `<span><b>${index + 1}</b>${esc(step)}</span>`).join("")}
+    </div>
+    <div class="composer-two-col">
+      <article>
+        <h3>Matching route examples</h3>
+        ${(ingredients || []).slice(0, 4).map((ingredient) => `<p><strong>${esc(ingredient.name)}</strong><span>${esc(ingredient.role)}</span></p>`).join("")}
+      </article>
+      <article>
+        <h3>Missing route / gap</h3>
+        <p>${esc(recipeGap(recipe))}</p>
+        <h3>First-dollar call</h3>
+        <p>${esc(recipe.first_dollar_call || "Start with the cheapest qualifying route and preserve the receipt.")}</p>
+      </article>
+    </div>
+    <div class="composer-stop">
+      <strong>Stop rule</strong>
+      <span>${esc(recipe.stop_rule || "Stop when confidence fails, the budget cap is reached, or a policy gate blocks the next call.")}</span>
+    </div>
+    <p class="evidence-boundary">Mock generator: local recipe matching, not live paid execution or endpoint-quality proof.</p>
+  `;
+}
+
+function setupRecipeComposer(recipeRows) {
+  const prompt = document.querySelector("#recipePrompt");
+  const output = document.querySelector("#composerOutput");
+  const compose = document.querySelector("#composeRecipe");
+  const clear = document.querySelector("#clearRecipe");
+  if (!prompt || !output || !compose || !clear) return;
+
+  function generate(value = prompt.value) {
+    const input = value.trim() || "Find the cheapest useful route chain for a weird long-tail task.";
+    prompt.value = input;
+    const { recipe, interpreted } = composerMatch(input, recipeRows);
+    output.innerHTML = renderComposerOutput(recipe, interpreted);
+  }
+
+  compose.addEventListener("click", () => generate());
+  clear.addEventListener("click", () => {
+    prompt.value = "";
+    generate("I need to verify a supplier before sending money.");
+  });
+  document.querySelectorAll("[data-prompt]").forEach((node) => {
+    node.addEventListener("click", () => generate(node.dataset.prompt || ""));
+  });
+  generate("Verify a supplier before payment.");
 }
 
 function setupWizardControls(recipeRows) {
@@ -996,9 +1298,9 @@ function setupWizardControls(recipeRows) {
     });
     if (!filtered.some((recipe) => recipe.id === selectedId)) selectedId = filtered[0]?.id || recipeRows[0]?.id || "";
     const selected = filtered.find((recipe) => recipe.id === selectedId) || recipeRows.find((recipe) => recipe.id === selectedId) || filtered[0] || recipeRows[0];
-    readout.textContent = `${compact(filtered.length)} recipes matched. Each recipe should resolve to a first-dollar call, route chain, spend cap, stop rule, and evidence trail.`;
+    readout.textContent = `${compact(filtered.length)} recipes matched. Showing strongest compositions; each recipe should resolve to a first-dollar call, route chain, missing route/gap, stop rule, and receipt trail.`;
     workbench.innerHTML = selected ? renderWizardWorkbench(selected) : "<p>No recipes match this wizard state.</p>";
-    recipeGrid.innerHTML = filtered.slice(0, 12).map((recipe) => recipeCard(recipe, recipe.id === selectedId)).join("") || "<p>No recipes match this wizard state.</p>";
+    recipeGrid.innerHTML = filtered.slice(0, 8).map((recipe) => recipeCard(recipe, recipe.id === selectedId)).join("") || "<p>No recipes match this wizard state.</p>";
     recipeGrid.querySelectorAll("[data-recipe-id]").forEach((node) => {
       node.addEventListener("click", () => {
         selectedId = node.dataset.recipeId;
@@ -1080,6 +1382,7 @@ function recipeCard(recipe, selected = false) {
       <h3>${esc(recipe.title)}</h3>
       <p class="hook">${esc(recipe.human_hook || recipe.why_agent_payments_matter || "")}</p>
       <div class="first-dollar"><strong>First-dollar call</strong><span>${esc(recipe.first_dollar_call || "Pick the cheapest qualifying route and capture the receipt.")}</span></div>
+      <div class="route-gap"><strong>Missing route / gap</strong><span>${esc(recipeGap(recipe))}</span></div>
       <div class="recipe-chain">
         ${(recipe.call_chain || []).slice(0, 5).map((step, index) => `<span><b>${index + 1}</b>${esc(step)}</span>`).join("")}
       </div>
@@ -1116,7 +1419,6 @@ loadArtifactData().then((data) => {
   const page = document.body.dataset.page;
   if (page === "routes") initRoutesPage(data);
   if (page === "analyzer") initAnalysisPage(data);
-  if (page === "beta-insights") initBetaInsightsPage(data);
   if (page === "wizard") initRecipesPage(data);
 }).catch((error) => {
   document.body.append(Object.assign(document.createElement("pre"), { textContent: `Failed to load artifact data: ${error.message}` }));

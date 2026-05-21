@@ -858,18 +858,6 @@ td small {
   overflow: hidden;
 }
 
-.signal-map-canvas::before {
-  position: absolute;
-  right: 18px;
-  top: 18px;
-  padding: 6px 8px;
-  background: #dff3ea;
-  color: #075b40;
-  font-size: 12px;
-  font-weight: 850;
-  content: "best evidence";
-}
-
 .axis-label {
   position: absolute;
   z-index: 1;
@@ -1380,6 +1368,236 @@ td small {
   border-top: 1px solid var(--line);
 }
 
+.recipe-composer {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.72fr) minmax(0, 1.28fr);
+  gap: 14px;
+  align-items: stretch;
+  margin: 20px 0 16px;
+}
+
+.composer-input-panel,
+.composer-output,
+.capability-matrix {
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.composer-input-panel,
+.composer-output {
+  min-width: 0;
+  padding: 18px;
+}
+
+.composer-heading h2 {
+  font-size: 25px;
+}
+
+.composer-prompt {
+  display: block;
+  margin-top: 14px;
+}
+
+.composer-prompt textarea {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 118px;
+  padding: 12px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.composer-actions,
+.prompt-chips,
+.cap-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.composer-actions {
+  margin-top: 12px;
+}
+
+.prompt-chips {
+  margin-top: 16px;
+}
+
+.prompt-chips button,
+.cap-list span {
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  background: var(--wash);
+  color: #303946;
+  font: inherit;
+  font-size: 13px;
+  white-space: normal;
+}
+
+.prompt-chips button {
+  flex: 1 1 140px;
+  max-width: 100%;
+  cursor: pointer;
+}
+
+.composer-output {
+  min-width: 0;
+  background: #f8fafb;
+}
+
+.composer-output-head {
+  display: grid;
+  gap: 5px;
+  margin-bottom: 13px;
+}
+
+.composer-output-head span,
+.composer-result-grid h3,
+.generated-chain h3,
+.composer-two-col h3,
+.composer-stop strong {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.composer-output-head strong {
+  font-size: 25px;
+  line-height: 1.1;
+}
+
+.composer-result-grid,
+.composer-two-col {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.composer-result-grid article,
+.composer-two-col article,
+.composer-stop {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.composer-result-grid p,
+.composer-two-col p,
+.composer-stop span {
+  margin: 7px 0 0;
+  color: #303946;
+  font-size: 14px;
+}
+
+.composer-two-col {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  margin-top: 10px;
+}
+
+.composer-two-col p strong,
+.composer-two-col p span,
+.composer-stop strong,
+.composer-stop span {
+  display: block;
+}
+
+.composer-two-col p span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.generated-chain {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.generated-chain span {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 9px;
+  align-items: center;
+  padding: 8px 10px;
+  background: #eef2f5;
+  overflow-wrap: anywhere;
+}
+
+.generated-chain b {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  background: var(--ink);
+  color: #fff;
+  font-size: 12px;
+}
+
+.composer-stop {
+  margin-top: 10px;
+  border-left: 4px solid var(--green);
+}
+
+.capability-matrix {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.55fr) minmax(0, 1.45fr);
+  gap: 14px;
+  padding: 16px;
+}
+
+.pipe-copy p:not(.eyebrow) {
+  color: var(--muted);
+}
+
+.pipe-copy h2 {
+  font-size: 25px;
+}
+
+.pipe-chips {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.pipe-chips span {
+  display: grid;
+  grid-template-columns: 25px minmax(0, 1fr);
+  gap: 6px 9px;
+  align-items: center;
+  min-width: 0;
+  padding: 10px;
+  background: var(--wash);
+}
+
+.pipe-chips b {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  background: var(--ink);
+  color: #fff;
+  font-size: 11px;
+}
+
+.pipe-chips strong,
+.pipe-chips small {
+  display: block;
+  min-width: 0;
+}
+
+.pipe-chips small {
+  grid-column: 2;
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .wizard-controls {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -1602,6 +1820,29 @@ td small {
   background: #eef5f1;
 }
 
+.route-gap {
+  margin-top: 10px;
+  padding: 10px;
+  border-left: 4px solid var(--amber);
+  background: #fff7ed;
+}
+
+.route-gap strong,
+.route-gap span {
+  display: block;
+}
+
+.route-gap strong {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.route-gap span {
+  margin-top: 5px;
+  color: #7c4a10;
+  font-size: 13px;
+}
+
 .recipe-chain {
   display: grid;
   gap: 8px;
@@ -1633,6 +1874,257 @@ td small {
   padding: 12px;
   background: #eef5f1;
   color: var(--muted);
+}
+
+.analyzer-console .section {
+  padding: 30px 0;
+}
+
+.console-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(520px, 0.9fr);
+  gap: 24px;
+  align-items: end;
+  border-bottom: 1px solid var(--line);
+}
+
+.console-title h1 {
+  max-width: none;
+  font-size: 42px;
+  line-height: 1.05;
+}
+
+.console-title p:not(.eyebrow) {
+  max-width: 680px;
+  margin: 12px 0 0;
+  color: #303946;
+  font-size: 17px;
+}
+
+.console-section {
+  border-bottom: 1px solid var(--line);
+}
+
+.console-section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 14px;
+}
+
+.console-section-head.tight {
+  margin-bottom: 10px;
+}
+
+.console-section-head h2 {
+  font-size: 26px;
+}
+
+.console-section-head > p {
+  max-width: 430px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.split-console {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+  gap: 18px;
+}
+
+.procurement-table {
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.ledger-row {
+  display: grid;
+  grid-template-columns: 36px minmax(210px, 1.25fr) minmax(160px, 0.8fr) minmax(112px, 0.55fr) minmax(104px, 0.55fr) minmax(104px, 0.55fr) 62px;
+  gap: 12px;
+  align-items: center;
+  min-width: 1040px;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--line);
+  color: #303946;
+  font-size: 13px;
+}
+
+.ledger-row:last-child {
+  border-bottom: 0;
+}
+
+.ledger-head {
+  position: sticky;
+  top: 61px;
+  z-index: 2;
+  background: #eaf0f4;
+  color: #28313d;
+  font-size: 11px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.ledger-row strong,
+.ledger-row small {
+  display: block;
+}
+
+.ledger-row small {
+  margin-top: 3px;
+  color: var(--muted);
+}
+
+.ledger-row a {
+  color: var(--blue);
+  font-weight: 780;
+  text-decoration: none;
+}
+
+.ledger-row mark {
+  display: inline-flex;
+  padding: 4px 7px;
+  background: var(--wash);
+  color: #334155;
+  font-size: 11px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.queue-grid,
+.capability-inventory,
+.composition-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.queue-card,
+.capability-card,
+.composition-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.queue-card {
+  border-top: 5px solid var(--blue);
+}
+
+.queue-card:nth-child(2n),
+.composition-card:nth-child(2n) {
+  border-top-color: var(--amber);
+}
+
+.queue-card:nth-child(3n),
+.composition-card:nth-child(3n) {
+  border-top-color: var(--green);
+}
+
+.queue-top {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.queue-top strong {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.queue-card p:not(.capability),
+.capability-card p,
+.composition-card p,
+.queue-card li span,
+.capability-card small,
+.composition-card small {
+  color: var(--muted);
+}
+
+.queue-card ol,
+.composition-card ol {
+  display: grid;
+  gap: 8px;
+  margin: auto 0 0;
+  padding-left: 20px;
+}
+
+.queue-card li a,
+.queue-card li span,
+.capability-card > a {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.queue-card li a,
+.capability-card > a {
+  color: var(--blue);
+  font-weight: 760;
+  text-decoration: none;
+}
+
+.capability-card {
+  min-height: 230px;
+  border-top: 5px solid var(--cyan);
+}
+
+.capability-card:nth-child(2n) {
+  border-top-color: var(--violet);
+}
+
+.capability-metrics,
+.ingredient-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.capability-metrics span,
+.ingredient-list span {
+  min-width: 0;
+  padding: 8px;
+  background: var(--wash);
+}
+
+.capability-metrics b,
+.capability-metrics small,
+.ingredient-list b,
+.ingredient-list small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.capability-metrics small,
+.ingredient-list small {
+  margin-top: 3px;
+  font-size: 11px;
+}
+
+.composition-card {
+  min-height: 310px;
+  border-top: 5px solid var(--red);
+}
+
+.compact-evidence {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.compact-evidence .evidence-route {
+  min-height: 360px;
+}
+
+.compact-evidence .evidence-route:nth-child(n + 13) {
+  display: none;
+}
+
+.procurement-table {
+  overflow-x: auto;
 }
 
 .fact-board,
@@ -2170,8 +2662,12 @@ td small {
   .artifact-hero,
   .signal-hero,
   .analysis-grid,
+  .console-top,
+  .split-console,
   .signal-map-panel,
   .tool-header,
+  .recipe-composer,
+  .capability-matrix,
   .bundle-grid,
   .wizard-workbench,
   .recipe-grid,
@@ -2193,9 +2689,18 @@ td small {
     grid-template-columns: 1fr;
   }
 
+  .composer-result-grid,
+  .composer-two-col,
+  .pipe-chips {
+    grid-template-columns: 1fr;
+  }
+
   .schema-grid,
   .interesting-grid,
   .cluster-grid,
+  .queue-grid,
+  .capability-inventory,
+  .composition-grid,
   .fact-board,
   .family-grid,
   .evidence-deck,
@@ -2287,6 +2792,9 @@ td small {
   .recipe-card p,
   .wizard-workbench p,
   .wizard-workbench li,
+  .composer-output p,
+  .composer-output li,
+  .pipe-copy p,
   .artifact-readout {
     max-width: 320px;
     text-wrap: wrap;
@@ -2298,9 +2806,17 @@ td small {
   }
 
   .route-controls,
+  .recipe-composer,
+  .capability-matrix,
+  .composer-result-grid,
+  .composer-two-col,
+  .pipe-chips,
   .schema-grid,
   .interesting-grid,
   .cluster-grid,
+  .queue-grid,
+  .capability-inventory,
+  .composition-grid,
   .fact-board,
   .family-grid,
   .evidence-deck,
@@ -2324,7 +2840,9 @@ td small {
   }
 
   .cluster-metrics,
-  .provider-shape-metrics {
+  .provider-shape-metrics,
+  .capability-metrics,
+  .ingredient-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -2352,5 +2870,10 @@ td small {
 
   .record-meta {
     flex-direction: column;
+  }
+
+  .prompt-chips button {
+    flex-basis: 100%;
+    text-align: left;
   }
 }

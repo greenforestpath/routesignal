@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Wizard | RouteSignal</title>
     <meta name="description" content="Long-tail paid API route idea wizard based on RouteSignal data and analysis lenses.">
+    <link rel="icon" href="data:,">
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body data-page="wizard">
@@ -21,11 +22,44 @@
         <div class="tool-header">
           <div>
             <p class="eyebrow">Wizard</p>
-            <h1>Spend-plan workbench</h1>
-            <p class="section-copy">Filter route-grounded hypotheses, inspect the chain, and decide what the first paid or simulated call should be.</p>
+            <h1>Compose long-tail paid API routes into agent recipes.</h1>
+            <p class="section-copy">When agents can buy one tiny route at a time, the hard problem is knowing which weird capability to call next, when to stop, and what evidence to keep.</p>
           </div>
           <div id="pageMetrics" class="artifact-metrics compact-metrics"></div>
         </div>
+
+        <div class="recipe-composer">
+          <div class="composer-input-panel">
+            <div class="composer-heading">
+              <p class="eyebrow">Recipe creator</p>
+              <h2>What should the agent accomplish?</h2>
+            </div>
+            <label class="composer-prompt">
+              <span>Goal</span>
+              <textarea id="recipePrompt" rows="4" placeholder="Example: Help me diligence a weird hotel in Bangkok before I spend time on it."></textarea>
+            </label>
+            <div class="composer-actions">
+              <button id="composeRecipe" class="button primary" type="button">Generate route recipe</button>
+              <button id="clearRecipe" class="button secondary" type="button">Reset</button>
+            </div>
+            <div class="prompt-chips" aria-label="Example prompts">
+              <button type="button" data-prompt="Help me diligence a weird hotel or long-stay asset before I waste time on it.">Long-stay asset</button>
+              <button type="button" data-prompt="Find the cheapest contradiction in a founder or vendor claim before a meeting.">Founder contradiction</button>
+              <button type="button" data-prompt="Turn a niche social trend into a tiny merch or ad-cell test without building a full store.">Trend to merch</button>
+              <button type="button" data-prompt="Check whether a new token or prediction-market event deserves human research, but do not trade.">Token research</button>
+            </div>
+          </div>
+          <div id="composerOutput" class="composer-output" aria-live="polite"></div>
+        </div>
+
+        <div id="capabilityMatrix" class="capability-matrix"></div>
+
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Possible recipes</p>
+          <h2>Browse route compositions</h2>
+          <p>Each recipe turns existing route capabilities into a use case, flags gaps, and keeps the caveat explicit: listed payable route is not endpoint-quality proof.</p>
+        </div>
+
         <div class="wizard-controls" aria-label="Wizard controls">
           <label><span>Task</span><select id="wizardTask"></select></label>
           <label><span>Budget</span><select id="wizardBudget"></select></label>
@@ -35,10 +69,6 @@
         </div>
         <p id="wizardReadout" class="artifact-readout"></p>
         <div id="wizardWorkbench" class="wizard-workbench" aria-live="polite"></div>
-        <div class="section-heading compact-heading">
-          <p class="eyebrow">Matching recipes</p>
-          <h2>Pick a spend-plan hypothesis</h2>
-        </div>
         <div id="recipeGridLite" class="recipe-grid"></div>
       </section>
 

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Analyzer | RouteSignal</title>
     <meta name="description" content="Analysis, visualization, clustering, provider distortion, surprising routes, and trust notes for the x402 route universe.">
+    <link rel="icon" href="data:,">
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body data-page="analyzer">
@@ -16,83 +17,90 @@
         <a href="./wizard.html">Wizard</a>
       </nav>
     </header>
-    <main>
-      <section class="artifact-hero">
-        <div>
+    <main class="analyzer-console">
+      <section class="section console-top">
+        <div class="console-title">
           <p class="eyebrow">Analyzer</p>
-          <h1>Compress the route universe into activity, metadata, and market-shape signals.</h1>
-          <p class="lead">The raw table is not the story. The story is where activity concentrates, where route count distorts market size, which metadata is missing, and which route categories are emerging.</p>
+          <h1>Route procurement console</h1>
+          <p>Rank what is used, separate inflated catalogs from activity, and expose ingredients agents can compose.</p>
         </div>
-        <div id="pageMetrics" class="artifact-metrics"></div>
+        <div id="pageMetrics" class="artifact-metrics compact-metrics"></div>
       </section>
 
-      <section class="section analyzer-focus">
-        <div class="section-heading">
-          <p class="eyebrow">Market truth</p>
-          <h2>Listed routes separate into active signal, catalog inflation, and probe candidates.</h2>
-          <p>The raw marketplace looks larger than the activity-backed market. RouteSignal separates the rows that are merely listed from the rows with enough evidence for cautious probing.</p>
-        </div>
-        <div id="compressionCards" class="compression-cards"></div>
-        <div class="signal-map-panel">
-          <div class="map-copy">
-            <p class="eyebrow">Signal map</p>
-            <h3>Metadata completeness vs observed activity</h3>
-            <p>Representative high-signal routes only. Every point keeps its source link and caveat.</p>
+      <section class="section console-section">
+        <div class="console-section-head">
+          <div>
+            <p class="eyebrow">Used today</p>
+            <h2>Most active routes and use cases</h2>
           </div>
-          <div id="signalMap" class="signal-map" aria-label="Route signal map"></div>
+          <p>Sorted by observed activity first. Listed route is still not endpoint-quality proof.</p>
         </div>
+        <div id="popularRoutes" class="procurement-table"></div>
       </section>
 
-      <section class="section analysis-grid">
+      <section class="section console-section">
+        <div class="console-section-head">
+          <div>
+            <p class="eyebrow">Procurement queues</p>
+            <h2>What an agent should do with the route universe</h2>
+          </div>
+          <p>Each queue is a routing decision, not a marketing category.</p>
+        </div>
+        <div id="procurementQueues" class="queue-grid"></div>
+      </section>
+
+      <section class="section console-section split-console">
         <div>
-          <p class="eyebrow">Evidence ladder</p>
-          <h2>What the data can actually support</h2>
+          <div class="console-section-head tight">
+            <div>
+              <p class="eyebrow">Market distortion</p>
+              <h2>Provider concentration</h2>
+            </div>
+          </div>
+          <div id="providerDistortion" class="provider-distortion"></div>
+        </div>
+        <div>
+          <div class="console-section-head tight">
+            <div>
+              <p class="eyebrow">Evidence funnel</p>
+              <h2>From listed to probe-ready</h2>
+            </div>
+          </div>
           <div id="evidenceLadder" class="evidence-ladder"></div>
         </div>
-        <div>
-          <p class="eyebrow">Provider compression</p>
-          <h2>Route count is not market size</h2>
-          <div id="providerShapes" class="provider-shapes provider-shapes-rich"></div>
-        </div>
       </section>
 
-      <section class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Cluster explorer</p>
-          <h2>The route universe compresses into inspectable market clusters.</h2>
-          <p>Clusters make the project feel less like a directory and more like a real market read: activity, risk, route-farm distortion, and probe-readiness by segment.</p>
+      <section class="section console-section">
+        <div class="console-section-head">
+          <div>
+            <p class="eyebrow">Capability inventory</p>
+            <h2>What agents can buy as ingredients</h2>
+          </div>
+          <p>Counts, active rows, cheapest examples, risks, and composition hooks by capability family.</p>
         </div>
-        <div id="clusterGrid" class="cluster-grid"></div>
+        <div id="capabilityInventory" class="capability-inventory"></div>
       </section>
 
-      <section class="section analysis-grid">
-        <div>
-          <p class="eyebrow">Cost distribution</p>
-          <h2>Where prices cluster</h2>
-          <div id="costBars" class="density-bars"></div>
+      <section class="section console-section">
+        <div class="console-section-head">
+          <div>
+            <p class="eyebrow">Composition bridge</p>
+            <h2>Ingredients that become recipes</h2>
+          </div>
+          <p>Analyzer exposes available ingredients and gaps. Wizard turns them into recipe plans.</p>
         </div>
-        <div>
-          <p class="eyebrow">Network distribution</p>
-          <h2>Where routes settle</h2>
-          <div id="networkBars" class="density-bars"></div>
-        </div>
+        <div id="compositionBridge" class="composition-grid"></div>
       </section>
 
-      <section class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Outlier routes</p>
-          <h2>Routes worth inspecting first</h2>
-          <p>Selected for actionability, sensitivity, weirdness, economic value, or because they reveal where agent commerce needs guardrails.</p>
+      <section class="section console-section">
+        <div class="console-section-head">
+          <div>
+            <p class="eyebrow">Long tail</p>
+            <h2>Weird routes worth inspecting</h2>
+          </div>
+          <p>Niche routes make composition valuable, but many should be treated as verification targets first.</p>
         </div>
-        <div id="surprisingRoutes" class="interesting-grid"></div>
-      </section>
-
-      <section class="section warning-panel">
-        <div class="section-heading">
-          <p class="eyebrow">Trust notes</p>
-          <h2>What not to assume</h2>
-        </div>
-        <ul id="warnings"></ul>
+        <div id="longTailRoutes" class="evidence-deck compact-evidence"></div>
       </section>
     </main>
     <script src="./artifact.js" type="module"></script>

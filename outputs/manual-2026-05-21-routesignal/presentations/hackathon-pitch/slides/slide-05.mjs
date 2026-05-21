@@ -13,10 +13,10 @@ export async function slide05(presentation, ctx) {
 
   rect(ctx, slide, 70, 258, 520, 300, { fill: "#FFFFFF", stroke: C.faint });
   textBox(ctx, slide, "Verdict split", 96, 282, 250, 24, { size: 21, bold: true, color: C.ink });
-  bar(ctx, slide, 96, 334, 210, "PAY", 6259, 6259, C.green, { valueLabel: "6,259", boldLabel: true });
-  bar(ctx, slide, 96, 384, 210, "PROBE", 5749, 6259, C.blue, { valueLabel: "5,749", boldLabel: true });
-  bar(ctx, slide, 96, 434, 210, "WARN", 815, 6259, C.amber, { valueLabel: "815" });
-  bar(ctx, slide, 96, 484, 210, "BLOCK", 694, 6259, C.red, { valueLabel: "694" });
+  bar(ctx, slide, 96, 334, 170, "PAY", 6259, 6259, C.green, { valueLabel: "6,259", boldLabel: true, valueW: 58 });
+  bar(ctx, slide, 96, 384, 170, "PROBE", 5749, 6259, C.blue, { valueLabel: "5,749", boldLabel: true, valueW: 58 });
+  bar(ctx, slide, 96, 434, 170, "WARN", 815, 6259, C.amber, { valueLabel: "815", valueW: 58 });
+  bar(ctx, slide, 96, 484, 170, "BLOCK", 694, 6259, C.red, { valueLabel: "694", valueW: 58 });
 
   rect(ctx, slide, 646, 258, 508, 300, { fill: "#FFFFFF", stroke: C.faint });
   textBox(ctx, slide, "Evidence ladder", 672, 282, 250, 24, { size: 21, bold: true, color: C.ink });

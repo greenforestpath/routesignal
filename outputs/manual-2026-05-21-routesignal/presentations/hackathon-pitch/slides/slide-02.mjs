@@ -56,15 +56,15 @@ export async function slide02(presentation, ctx) {
     bold: true,
     color: C.ink,
   });
-  card(ctx, slide, 735, 536, 430, 72, { accent: C.red });
-  textBox(ctx, slide, "What should an agent warn on or block before spending?", 763, 558, 350, 28, {
-    size: 19,
+  card(ctx, slide, 735, 526, 430, 62, { accent: C.red });
+  textBox(ctx, slide, "What should an agent warn on or block before spending?", 763, 545, 350, 26, {
+    size: 18,
     bold: true,
     color: C.ink,
   });
 
-  tag(ctx, slide, "10B FUTURE ROUTES", 92, 594, 168, C.green);
-  tag(ctx, slide, "PAY / PROBE / WARN / BLOCK", 930, 594, 210, C.dark);
+  tag(ctx, slide, "10B FUTURE ROUTES", 92, 614, 168, C.green);
+  tag(ctx, slide, "PAY / PROBE / WARN / BLOCK", 930, 614, 210, C.dark);
   footer(ctx, slide, 2);
   return slide;
 }

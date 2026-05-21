@@ -141,7 +141,7 @@ export function bar(ctx, slide, x, y, w, label, value, max, color = C.green, opt
     fill: color,
     line: { fill: color, width: 0 },
   });
-  textBox(ctx, slide, opt.valueLabel ?? value.toLocaleString("en-US"), x + 260 + w, y - 2, 90, 20, {
+  textBox(ctx, slide, opt.valueLabel ?? value.toLocaleString("en-US"), opt.valueX ?? x + 260 + w, y - 2, opt.valueW ?? 90, 20, {
     size: 14,
     color: opt.dark ? "#B8CAD1" : C.muted,
     align: "right",

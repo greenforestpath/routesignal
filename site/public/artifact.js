@@ -41,6 +41,7 @@ async function loadArtifactData() {
 }
 
 function renderMetrics(root, metrics) {
+  if (!root) return;
   root.innerHTML = metrics.map((metric) => `
     <div class="artifact-metric">
       <strong>${esc(metric.value)}</strong>
@@ -1095,16 +1096,18 @@ function renderMentalMap(categories, bundles) {
   `;
 }
 
-function initRecipesPage({ insights, recipes }) {
+function initRecipesPage({ insights, recipes, routesDb }) {
   const bundles = insights.bundles || [];
-  const recipeRows = recipes.recipes || [];
+  const recipeRows = orderedWizardRecipes(recipes.recipes || []);
+  const routeRows = routesDb.apis || [];
   renderMetrics(document.querySelector("#pageMetrics"), [
     { value: compact(bundles.length), label: "route-derived bundles" },
     { value: compact(recipeRows.length), label: "generated recipes" },
     { value: compact(insights.interesting_routes?.length), label: "outlier ingredients" },
     { value: compact(insights.categories?.length), label: "route lenses" },
   ]);
-  document.querySelector("#bundleGrid").innerHTML = bundles.map((bundle) => `
+  const bundleGrid = document.querySelector("#bundleGrid");
+  if (bundleGrid) bundleGrid.innerHTML = bundles.map((bundle) => `
     <article class="bundle-card">
       <p class="capability">Route-derived recipe</p>
       <h3>${esc(bundle.title)}</h3>
@@ -1117,8 +1120,40 @@ function initRecipesPage({ insights, recipes }) {
     </article>
   `).join("");
   renderCapabilityMatrix(document.querySelector("#capabilityMatrix"));
-  setupRecipeComposer(recipeRows);
-  setupWizardControls(recipeRows);
+  setupRecipeComposer(recipeRows, routeRows);
+  setupWizardControls(recipeRows, routeRows);
+}
+
+const weirdRecipeOrder = [
+  "counterparty_risk_preflight",
+  "no_account_data_room_for_long_stay_asset",
+  "pay_per_contradiction_founder_diligence",
+  "node_package_security_microaudit",
+  "meme_to_merch_microstore",
+  "thin_liquidity_thesis_ladder",
+  "conference_hallway_radar",
+  "provider_collision_bakeoff",
+];
+
+const weirdRecipeTitles = {
+  counterparty_risk_preflight: "Supplier Ghost Detector",
+  no_account_data_room_for_long_stay_asset: "Neighborhood Reality Check",
+  pay_per_contradiction_founder_diligence: "Founder Contradiction Finder",
+  node_package_security_microaudit: "MCP Tool Install Preflight",
+  meme_to_merch_microstore: "Meme Origin To Merch Test",
+  thin_liquidity_thesis_ladder: "Wallet Before You Ape",
+  conference_hallway_radar: "Conference Lead Reality Check",
+  provider_collision_bakeoff: "Provider Collision Bakeoff",
+};
+
+function orderedWizardRecipes(recipeRows) {
+  const byId = new Map(recipeRows.map((recipe) => [recipe.id, recipe]));
+  const ordered = weirdRecipeOrder.map((id) => byId.get(id)).filter(Boolean);
+  return [...ordered, ...recipeRows.filter((recipe) => !weirdRecipeOrder.includes(recipe.id))];
+}
+
+function displayRecipeTitle(recipe) {
+  return weirdRecipeTitles[recipe.id] || recipe.title || "Route recipe";
 }
 
 const capabilityPipes = [
@@ -1196,13 +1231,62 @@ function composerMatch(prompt, recipeRows) {
   };
 }
 
-function renderComposerOutput(recipe, interpreted) {
+function routeSearchText(row) {
+  return [row.route_name, row.provider, row.route, row.capability, row.notes, row.category_label, ...(row.tags || [])].join(" ").toLowerCase();
+}
+
+function firstMatchingRoute(rows, patterns, fallbackPattern) {
+  const found = rows.find((row) => patterns.some((pattern) => pattern.test(routeSearchText(row))));
+  if (found) return found;
+  if (fallbackPattern) return rows.find((row) => fallbackPattern.test(routeSearchText(row)));
+  return null;
+}
+
+function routeForStep(step, recipe, rows) {
+  const text = `${step} ${recipe.title} ${recipe.task}`.toLowerCase();
+  if (/property|hotel|long-stay|neighborhood/.test(text)) return firstMatchingRoute(rows, [/property-risk-full|tripadvisor|hmo-check/]);
+  if (/discover|search|serper|exa/.test(text)) return firstMatchingRoute(rows, [/stableenrich.*minerva|contacts-enrich|x402\.twit\.sh|databr.*duediligence/]);
+  if (/scrape|firecrawl|source/.test(text)) return firstMatchingRoute(rows, [/firecrawl|summarize-url|databr.*duediligence/]);
+  if (/registry|globalapi|company|entity/.test(text)) return firstMatchingRoute(rows, [/globalapi|databr.*empresas|duediligence/]);
+  if (/operator|people|clado|apollo|contact|lead/.test(text)) return firstMatchingRoute(rows, [/clado|contacts-enrich|whitepages|apollo/]);
+  if (/social|twitter|twit|cascade|trend|meme/.test(text)) return firstMatchingRoute(rows, [/x402\.twit\.sh|xactions|stablesocial|surf twitter/]);
+  if (/wallet|ofac|sanction|risk|safety|preflight|kyc/.test(text)) return firstMatchingRoute(rows, [/ofac-wallet-screen|aurelianflo|wallet.*verify|kyc|sanction|beezshield|risk-score/]);
+  if (/market|stablecrypto|token|nansen|alpha|fees|satoshi|polymarket/.test(text)) return firstMatchingRoute(rows, [/stablecrypto|nansen|satoshi|polymarket|smart-money|defillama|hyreagent/]);
+  if (/image|media|merch|ad|checkout/.test(text)) return firstMatchingRoute(rows, [/agentmerch|image|stablestudio|orbis-image|ad/]);
+  if (/storage|receipt|pinata|ipfs|evidence/.test(text)) return firstMatchingRoute(rows, [/ipfs|pin\/image|pinata|storage|receipt/]);
+  if (/package|mcp|install|security/.test(text)) return firstMatchingRoute(rows, [/mcp|security|risk-score|github|repos/]);
+  if (/compare|provider|bakeoff/.test(text)) return firstMatchingRoute(rows, [/stableenrich|blockrun|hyreagent|402\.bot/]);
+  return firstMatchingRoute(rows, [new RegExp((recipe.category_id || recipe.id || "").replaceAll("_", ".*"))], /stableenrich|blockrun|globalapi/);
+}
+
+function recipeStepRows(recipe, rows, limit = 8) {
+  return (recipe.call_chain || []).slice(0, limit).map((step, index) => ({
+    step,
+    index,
+    route: routeForStep(step, recipe, rows),
+  }));
+}
+
+function routeRef(row) {
+  if (!row) {
+    return `<span class="route-miss">Gap: no matching listed route in this capture</span>`;
+  }
+  return `
+    <a class="step-route-ref" href="${esc(row.source)}" target="_blank" rel="noreferrer">
+      <strong>${esc(truncate(row.route_name || row.provider, 44))}</strong>
+      <span>${esc(truncate(row.provider, 58))} / ${esc(row.cost || "unknown")}</span>
+    </a>
+  `;
+}
+
+function renderComposerOutput(recipe, interpreted, routeRows = []) {
   const caps = recipeCapabilities(recipe);
   const ingredients = recipe.ingredients || [];
+  const steps = recipeStepRows(recipe, routeRows, 7);
   return `
     <div class="composer-output-head">
       <span>Deterministic prototype</span>
-      <strong>${esc(recipe.title)}</strong>
+      <strong>${esc(displayRecipeTitle(recipe))}</strong>
     </div>
     <div class="composer-result-grid">
       <article>
@@ -1220,7 +1304,12 @@ function renderComposerOutput(recipe, interpreted) {
     </div>
     <div class="generated-chain">
       <h3>Generated route recipe</h3>
-      ${(recipe.call_chain || []).slice(0, 7).map((step, index) => `<span><b>${index + 1}</b>${esc(step)}</span>`).join("")}
+      ${steps.map(({ step, index, route }) => `
+        <article class="step-route">
+          <div><b>${index + 1}</b><strong>${esc(step)}</strong></div>
+          ${routeRef(route)}
+        </article>
+      `).join("")}
     </div>
     <div class="composer-two-col">
       <article>
@@ -1242,7 +1331,7 @@ function renderComposerOutput(recipe, interpreted) {
   `;
 }
 
-function setupRecipeComposer(recipeRows) {
+function setupRecipeComposer(recipeRows, routeRows = []) {
   const prompt = document.querySelector("#recipePrompt");
   const output = document.querySelector("#composerOutput");
   const compose = document.querySelector("#composeRecipe");
@@ -1253,7 +1342,7 @@ function setupRecipeComposer(recipeRows) {
     const input = value.trim() || "Find the cheapest useful route chain for a weird long-tail task.";
     prompt.value = input;
     const { recipe, interpreted } = composerMatch(input, recipeRows);
-    output.innerHTML = renderComposerOutput(recipe, interpreted);
+    output.innerHTML = renderComposerOutput(recipe, interpreted, routeRows);
   }
 
   compose.addEventListener("click", () => generate());
@@ -1267,7 +1356,7 @@ function setupRecipeComposer(recipeRows) {
   generate("Verify a supplier before payment.");
 }
 
-function setupWizardControls(recipeRows) {
+function setupWizardControls(recipeRows, routeRows = []) {
   const task = document.querySelector("#wizardTask");
   const budget = document.querySelector("#wizardBudget");
   const risk = document.querySelector("#wizardRisk");
@@ -1306,7 +1395,7 @@ function setupWizardControls(recipeRows) {
     if (!filtered.some((recipe) => recipe.id === selectedId)) selectedId = filtered[0]?.id || recipeRows[0]?.id || "";
     const selected = filtered.find((recipe) => recipe.id === selectedId) || recipeRows.find((recipe) => recipe.id === selectedId) || filtered[0] || recipeRows[0];
     readout.textContent = `${compact(filtered.length)} recipes matched. Showing strongest compositions; each recipe should resolve to a first-dollar call, route chain, missing route/gap, stop rule, and receipt trail.`;
-    workbench.innerHTML = selected ? renderWizardWorkbench(selected) : "<p>No recipes match this wizard state.</p>";
+    workbench.innerHTML = selected ? renderWizardWorkbench(selected, routeRows) : "<p>No recipes match this wizard state.</p>";
     recipeGrid.innerHTML = filtered.slice(0, 8).map((recipe) => recipeCard(recipe, recipe.id === selectedId)).join("") || "<p>No recipes match this wizard state.</p>";
     recipeGrid.querySelectorAll("[data-recipe-id]").forEach((node) => {
       node.addEventListener("click", () => {
@@ -1338,20 +1427,21 @@ function recipeText(recipe) {
   ].join(" ").toLowerCase();
 }
 
-function renderWizardWorkbench(recipe) {
+function renderWizardWorkbench(recipe, routeRows = []) {
   const budget = recipe.budget_usd || {};
   const target = typeof budget === "object" && budget.target ? `$${budget.target.toFixed(2)}` : budgetText(recipe);
   const cap = typeof budget === "object" && budget.hard_cap ? `$${budget.hard_cap.toFixed(2)}` : "cap TBD";
   const ingredients = recipe.ingredients || [];
   const failureModes = recipe.failure_modes || [];
   const receipts = recipe.receipt_trail || [];
+  const steps = recipeStepRows(recipe, routeRows, 9);
   return `
     <div class="wizard-workbench-main">
       <div class="wizard-plan-head">
         <span class="recipe-budget">${esc(budgetText(recipe))}</span>
         <span>${esc(recipe.feasibility?.level || "feasibility TBD")}</span>
       </div>
-      <h3>${esc(recipe.title)}</h3>
+      <h3>${esc(displayRecipeTitle(recipe))}</h3>
       <p class="hook">${esc(recipe.human_hook || recipe.task || "")}</p>
       <div class="spend-rail">
         <article><strong>First-dollar call</strong><span>${esc(recipe.first_dollar_call || "Start with the cheapest qualifying route.")}</span></article>
@@ -1359,7 +1449,13 @@ function renderWizardWorkbench(recipe) {
         <article><strong>Stop rule</strong><span>${esc(recipe.stop_rule || "Stop when confidence is high enough or spend cap is reached.")}</span></article>
       </div>
       <div class="workbench-chain">
-        ${(recipe.call_chain || []).slice(0, 9).map((step, index) => `<span><b>${index + 1}</b>${esc(step)}</span>`).join("")}
+        <h4>Steps with actual route references</h4>
+        ${steps.map(({ step, index, route }) => `
+          <article class="step-route">
+            <div><b>${index + 1}</b><strong>${esc(step)}</strong></div>
+            ${routeRef(route)}
+          </article>
+        `).join("")}
       </div>
     </div>
     <div class="wizard-workbench-side">
@@ -1386,7 +1482,7 @@ function recipeCard(recipe, selected = false) {
   return `
     <button class="recipe-card compact-recipe ${selected ? "is-selected" : ""}" type="button" data-recipe-id="${esc(recipe.id)}">
       <div class="recipe-topline"><span class="recipe-budget">${esc(budgetText(recipe))}</span><span>${esc(recipe.task || "workflow")}</span></div>
-      <h3>${esc(recipe.title)}</h3>
+      <h3>${esc(displayRecipeTitle(recipe))}</h3>
       <p class="hook">${esc(recipe.human_hook || recipe.why_agent_payments_matter || "")}</p>
       <div class="first-dollar"><strong>First-dollar call</strong><span>${esc(recipe.first_dollar_call || "Pick the cheapest qualifying route and capture the receipt.")}</span></div>
       <div class="route-gap"><strong>Missing route / gap</strong><span>${esc(recipeGap(recipe))}</span></div>

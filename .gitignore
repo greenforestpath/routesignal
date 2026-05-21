@@ -8,4 +8,4 @@ data/*.sqlite
 site/verification-*.png
 dist/
 tmp/
-
+.playwright-cli/

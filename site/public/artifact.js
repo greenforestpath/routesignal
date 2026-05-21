@@ -364,15 +364,19 @@ function renderSignalMap(signalMap) {
     <div class="signal-map-canvas">
       <span class="axis-label axis-x">Metadata completeness</span>
       <span class="axis-label axis-y">Observed activity</span>
-      ${points.map((point) => {
+      ${points.map((point, index) => {
         const size = Math.max(9, Math.min(25, 8 + Math.log10((point.provider_route_count || 1) + 1) * 6));
+        const xJitter = (((index * 37) % 17) - 8) * 0.65;
+        const yJitter = (((index * 53) % 19) - 9) * 0.58;
+        const x = Math.max(3, Math.min(97, (point.metadata_score || 0) + xJitter));
+        const y = Math.max(4, Math.min(96, (point.activity_index || 0) + yJitter));
         return `
           <a
             class="signal-point"
             href="${esc(point.source)}"
             target="_blank"
             rel="noreferrer"
-            style="--x:${Math.max(3, Math.min(97, point.metadata_score || 0))}%; --y:${Math.max(4, Math.min(96, point.activity_index || 0))}%; --point-color:${esc(point.cluster_color || "#2454a6")}; --point-size:${size}px"
+            style="--x:${x}%; --y:${y}%; --point-color:${esc(point.cluster_color || "#2454a6")}; --point-size:${size}px"
             title="${esc(point.route_name)} / ${esc(point.provider)} / ${esc(point.market_signal)}"
             aria-label="${esc(point.route_name)} ${esc(point.market_signal)}"
           ></a>
@@ -627,6 +631,188 @@ function renderRouteFamilies(rows) {
   }).join("");
 }
 
+function firstRoute(rows, predicate) {
+  return rows.find(predicate);
+}
+
+function evidenceRouteRows(rows) {
+  const picks = [
+    {
+      angle: "Activity-backed lead enrichment",
+      why: "This is the clearest active commercial surface: contact enrichment sold per call with provider-level 30-day activity.",
+      route: firstRoute(rows, (row) => row.route === "https://stableenrich.dev/api/clado/contacts-enrich"),
+    },
+    {
+      angle: "Agent can buy a phone number",
+      why: "A wallet-bound phone number lease is not just data lookup. It is real-world communications inventory sold to agents.",
+      route: firstRoute(rows, (row) => row.route === "https://blockrun.ai/api/v1/phone/numbers/buy"),
+    },
+    {
+      angle: "Agent can initiate a voice call",
+      why: "Outbound calling is where pay-per-call APIs stop being passive data and become externally visible action.",
+      route: firstRoute(rows, (row) => row.route === "https://blockrun.ai/api/v1/voice/call"),
+    },
+    {
+      angle: "Wallet identity as a paid primitive",
+      why: "Address-to-identity is exactly the kind of tiny preflight an agent would buy before routing money or outreach.",
+      route: firstRoute(rows, (row) => row.route === "https://public.zapper.xyz/x402/account-identity"),
+    },
+    {
+      angle: "SSN validation listed as a payable route",
+      why: "This is the most jarring metadata row: U.S. SSN validation packaged behind x402 payment metadata.",
+      route: firstRoute(rows, (row) => row.route === "https://ai.verifik.co/api/usa/ssn"),
+    },
+    {
+      angle: "FBI background check claim",
+      why: "The route claim is extraordinary enough that the UI should treat it as a verification target, not a trusted product.",
+      route: firstRoute(rows, (row) => row.route === "https://ai.verifik.co/api/fbi"),
+    },
+    {
+      angle: "OFAC wallet screening",
+      why: "This is a clean micro-compliance primitive: screen a wallet before a higher-value paid action.",
+      route: firstRoute(rows, (row) => row.route === "https://x402.aurelianflo.com/api/ofac-wallet-screen/:address"),
+    },
+    {
+      angle: "Enhanced due diligence report",
+      why: "This looks closer to a packaged workflow than a raw endpoint: a paid memo with case metadata and review labels.",
+      route: firstRoute(rows, (row) => row.route === "https://x402.aurelianflo.com/api/workflows/compliance/edd-report"),
+    },
+    {
+      angle: "Brazil company diligence",
+      why: "DataBR is a strong long-tail example: CNPJ, sanctions/procurement/lawsuits/environmental data in one paid route.",
+      route: firstRoute(rows, (row) => row.route === "https://databr.api.br/v1/empresas/00000000000191/duediligence"),
+    },
+    {
+      angle: "Influence graph for companies",
+      why: "Corporate relationship graphs are the hidden-risk version of agent-buyable data, not another generic search API.",
+      route: firstRoute(rows, (row) => row.route === "https://databr.api.br/v1/rede/00000000000191/influencia"),
+    },
+    {
+      angle: "Vessel position as OSINT ingredient",
+      why: "AIS vessel position becomes a tiny paid ingredient for logistics, sanctions, insurance, and conflict monitoring workflows.",
+      route: firstRoute(rows, (row) => row.route === "https://war-tracker.com/api/v1/vessels/9217981/position"),
+    },
+    {
+      angle: "Flight tracking as route ingredient",
+      why: "Flight tracks are not a crypto-native category, which is exactly why they are interesting as agent-buyable context.",
+      route: firstRoute(rows, (row) => row.route === "https://stabletravel.dev/api/flightaware/flights/id/track"),
+    },
+    {
+      angle: "Dangerous social action",
+      why: "A paid route named unfollow-everyone is the fastest way to explain why agents need action gates before payment.",
+      route: firstRoute(rows, (row) => row.route === "https://xactions.app/api/ai/action/unfollow-everyone"),
+    },
+    {
+      angle: "Paid social DM sending",
+      why: "Agent-paid messaging is commercially obvious and abuse-prone at the same time.",
+      route: firstRoute(rows, (row) => row.route === "https://xactions.app/api/ai/messages/send"),
+    },
+    {
+      angle: "Polymarket wallet digest",
+      why: "Prepared market-intelligence recipes show the higher-level product shape: not data, but paid interpretation.",
+      route: firstRoute(rows, (row) => row.route === "https://api.402.bot/v1/recipes/polymarket-activity-digest/probe"),
+    },
+    {
+      angle: "Trading track-record claim",
+      why: "A claimed prop-firm trading record is specific and falsifiable, which makes it a good evidence-design example.",
+      route: firstRoute(rows, (row) => row.route === "https://api.carbon-cashmere.de/v1/proven-track-record"),
+    },
+  ];
+  return picks.filter((pick) => pick.route);
+}
+
+function renderEvidenceDeck(rows) {
+  return evidenceRouteRows(rows).map((pick) => {
+    const row = pick.route;
+    const activity = activityText(row);
+    const flags = (row.risk_flags || []).slice(0, 4);
+    return `
+      <article class="evidence-route">
+        <div class="evidence-route-head">
+          <p class="capability">${esc(pick.angle)}</p>
+          ${signalBadge(row.activity_signal)}
+        </div>
+        <h3>${esc(row.route_name || row.provider)}</h3>
+        <p class="evidence-provider">${esc(row.provider)}</p>
+        <p>${esc(pick.why)}</p>
+        <div class="evidence-route-meta">
+          <span><strong>${esc(row.cost || "unknown")}</strong><small>listed price</small></span>
+          <span><strong>${esc(row.category_label || "uncategorized")}</strong><small>${esc(row.price_band || "unknown price")}</small></span>
+          <span><strong>${esc(row.metadata_score ?? 0)}/100</strong><small>metadata</small></span>
+        </div>
+        <p class="activity-line">${esc(activity)}</p>
+        <code>${esc(row.route)}</code>
+        <div class="flag-list">${flags.map((flag) => `<span class="flag">${esc(flag)}</span>`).join("")}</div>
+        <div class="record-links">
+          <a href="${esc(row.source)}" target="_blank" rel="noreferrer">x402scan source</a>
+          <a href="${esc(row.route)}" target="_blank" rel="noreferrer">route URL</a>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function countBy(rows, keyFn) {
+  return Object.values(rows.reduce((map, row) => {
+    const key = keyFn(row) || "unknown";
+    map[key] ||= { name: key, rows: 0, distinct: new Set(), active: 0, maxTx: 0, examples: [] };
+    map[key].rows += 1;
+    map[key].distinct.add(row.route);
+    if (row.activity_signal !== "no_observed_activity_in_local_scrape") map[key].active += 1;
+    map[key].maxTx = Math.max(map[key].maxTx, row.observed_txns_30d || 0);
+    if (map[key].examples.length < 3) map[key].examples.push(row.route_name || row.route);
+    return map;
+  }, {})).map((item) => ({ ...item, distinct: item.distinct.size }));
+}
+
+function renderProviderDistortion(rows) {
+  const providers = countBy(rows, (row) => row.provider)
+    .sort((a, b) => b.rows - a.rows)
+    .slice(0, 14);
+  return providers.map((provider, index) => `
+    <article class="provider-row">
+      <span class="wall-rank">${index + 1}</span>
+      <div>
+        <strong>${esc(provider.name)}</strong>
+        <small>${compact(provider.rows)} rows / ${compact(provider.distinct)} distinct URLs / ${compact(provider.active)} active rows / max ${compact(provider.maxTx)} observed 30d tx</small>
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderClusterCounts(rows) {
+  const families = [
+    ["Agent runtime", /agent|mcp|wallet|budget|runtime|model|claude|openclaw|receipt|preflight/i],
+    ["Finance and market data", /polymarket|wallet|token|defi|stock|trading|portfolio|market|price/i],
+    ["OSINT / travel / telemetry", /satellite|fire|vessel|ais|flight|weather|ship|port|conflict|war|earthquake|carbon|emission/i],
+    ["Social and external actions", /twitter|x\/|tweet|follow|unfollow|message|dm|post|like|social/i],
+    ["Lead/contact enrichment", /lead|email|phone|contact|apollo|clado|whitepages|linkedin|maps|enrich/i],
+    ["Identity / KYC / biometrics", /ssn|passport|identity|document|kyc|cedula|dni|cpf|liveness|face|biometric/i],
+    ["Compliance / sanctions", /ofac|sanction|watchlist|background|criminal|interpol|fbi|dea|due.?diligence/i],
+    ["Brazil/public records", /cnpj|cpf|empresa|societ|licit|ambiental|processos|brazil|brasil|receita/i],
+  ].map(([name, pattern]) => {
+    const matches = rows.filter((row) => pattern.test(routeText(row)));
+    return {
+      name,
+      rows: matches.length,
+      active: matches.filter((row) => row.activity_signal !== "no_observed_activity_in_local_scrape").length,
+      providers: new Set(matches.map((row) => row.provider)).size,
+      sample: sampleForPattern(rows, pattern, 1)[0],
+    };
+  });
+  const max = Math.max(1, ...families.map((family) => family.rows));
+  return families.map((family) => `
+    <article class="cluster-count">
+      <div>
+        <strong>${esc(family.name)}</strong>
+        <small>${compact(family.rows)} matching rows / ${compact(family.active)} active / ${compact(family.providers)} providers</small>
+      </div>
+      <i style="--bar-width:${Math.max(5, family.rows / max * 100)}%"></i>
+      ${family.sample ? `<a href="${esc(family.sample.source)}" target="_blank" rel="noreferrer">${esc(family.sample.route_name || family.sample.provider)}</a>` : ""}
+    </article>
+  `).join("");
+}
+
 function initAnalysisPage({ routes, routesDb, insights }) {
   const rows = routesDb.apis || [];
   const compression = insights.compression || { cards: [], truths: [] };
@@ -703,6 +889,9 @@ function initBetaInsightsPage({ routes, routesDb }) {
     { value: compact(pricedRows.length), label: "normalized prices" },
   ]);
   document.querySelector("#factBoard").innerHTML = renderFactBoard(rows);
+  document.querySelector("#evidenceDeck").innerHTML = renderEvidenceDeck(rows);
+  document.querySelector("#providerDistortion").innerHTML = renderProviderDistortion(rows);
+  document.querySelector("#clusterCounts").innerHTML = renderClusterCounts(rows);
   document.querySelector("#hotTakes").innerHTML = renderHotTakes(rows);
   document.querySelector("#displayModel").innerHTML = renderDisplayModel();
   document.querySelector("#routeFamilies").innerHTML = renderRouteFamilies(rows);

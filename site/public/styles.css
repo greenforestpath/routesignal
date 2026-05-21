@@ -1638,7 +1638,8 @@ td small {
 .fact-board,
 .compression-cards,
 .cluster-grid,
-.family-grid {
+.family-grid,
+.evidence-deck {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
@@ -1650,6 +1651,9 @@ td small {
 .compression-card,
 .cluster-card,
 .family-card,
+.evidence-route,
+.provider-row,
+.cluster-count,
 .ladder-row {
   border: 1px solid var(--line);
   background: var(--panel);
@@ -1699,10 +1703,133 @@ td small {
 
 .hot-takes,
 .display-model,
+.provider-distortion,
+.cluster-counts,
 .evidence-ladder {
   display: grid;
   gap: 12px;
   margin-top: 18px;
+}
+
+.evidence-route {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 430px;
+  padding: 17px;
+  border-top: 5px solid var(--red);
+}
+
+.evidence-route:nth-child(2n) {
+  border-top-color: var(--blue);
+}
+
+.evidence-route:nth-child(3n) {
+  border-top-color: var(--green);
+}
+
+.evidence-route-head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.evidence-route h3 {
+  margin-top: 12px;
+  overflow-wrap: anywhere;
+}
+
+.evidence-route p:not(.capability),
+.evidence-route small,
+.evidence-provider {
+  color: var(--muted);
+}
+
+.evidence-provider {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 720;
+}
+
+.evidence-route-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: auto;
+}
+
+.evidence-route-meta span {
+  min-width: 0;
+  padding: 9px;
+  background: var(--wash);
+  overflow-wrap: anywhere;
+}
+
+.evidence-route-meta strong,
+.evidence-route-meta small {
+  display: block;
+}
+
+.evidence-route code {
+  display: block;
+  margin-top: 10px;
+  overflow-wrap: anywhere;
+}
+
+.provider-row {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 10px;
+  padding: 13px;
+}
+
+.provider-row strong,
+.provider-row small,
+.cluster-count strong,
+.cluster-count small,
+.cluster-count a {
+  display: block;
+}
+
+.provider-row strong {
+  overflow-wrap: anywhere;
+}
+
+.provider-row small,
+.cluster-count small {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.cluster-count {
+  display: grid;
+  gap: 8px;
+  padding: 13px;
+}
+
+.cluster-count i {
+  display: block;
+  width: 100%;
+  height: 9px;
+  background: var(--wash);
+}
+
+.cluster-count i::before {
+  display: block;
+  width: var(--bar-width);
+  height: 100%;
+  background: var(--red);
+  content: "";
+}
+
+.cluster-count a {
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 740;
+  text-decoration: none;
+  overflow-wrap: anywhere;
 }
 
 .take-card {
@@ -2069,6 +2196,9 @@ td small {
   .schema-grid,
   .interesting-grid,
   .cluster-grid,
+  .fact-board,
+  .family-grid,
+  .evidence-deck,
   .signal-proof {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2131,6 +2261,21 @@ td small {
     font-size: 30px;
   }
 
+  .wizard-tool .section-copy {
+    max-width: 320px;
+    text-wrap: wrap;
+  }
+
+  .wizard-plan-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .wizard-plan-head span {
+    max-width: 300px;
+    overflow-wrap: break-word;
+  }
+
   .wizard-tool .compact-metrics {
     grid-template-columns: 1fr;
   }
@@ -2141,8 +2286,11 @@ td small {
   .bundle-card li,
   .recipe-card p,
   .wizard-workbench p,
-  .wizard-workbench li {
-    max-width: 330px;
+  .wizard-workbench li,
+  .artifact-readout {
+    max-width: 320px;
+    text-wrap: wrap;
+    overflow-wrap: break-word;
   }
 
   .section {
@@ -2153,6 +2301,9 @@ td small {
   .schema-grid,
   .interesting-grid,
   .cluster-grid,
+  .fact-board,
+  .family-grid,
+  .evidence-deck,
   .compression-cards,
   .route-record-grid,
   .wizard-controls,

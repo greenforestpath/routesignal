@@ -1956,9 +1956,6 @@ td small {
 }
 
 .ledger-head {
-  position: sticky;
-  top: 61px;
-  z-index: 2;
   background: #eaf0f4;
   color: #28313d;
   font-size: 11px;
@@ -2783,6 +2780,16 @@ td small {
 
   .wizard-tool .compact-metrics {
     grid-template-columns: 1fr;
+  }
+
+  .console-section-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .console-section-head > p {
+    max-width: 320px;
   }
 
   .section-heading p,

@@ -651,11 +651,18 @@ function sortByActivity(a, b) {
 }
 
 function renderPopularRoutes(rows) {
+  const selected = [];
+  const seenProviders = new Set();
   const active = rows
     .filter((row) => row.activity_signal !== "no_observed_activity_in_local_scrape")
     .slice()
-    .sort(sortByActivity)
-    .slice(0, 18);
+    .sort(sortByActivity);
+  for (const row of active) {
+    if (selected.length >= 18) break;
+    if (seenProviders.has(row.provider)) continue;
+    selected.push(row);
+    seenProviders.add(row.provider);
+  }
   return `
     <div class="ledger-row ledger-head">
       <span>#</span>
@@ -666,7 +673,7 @@ function renderPopularRoutes(rows) {
       <span>Risk</span>
       <span>Source</span>
     </div>
-    ${active.map((row, index) => `
+    ${selected.map((row, index) => `
       <article class="ledger-row">
         <span class="wall-rank">${index + 1}</span>
         <span>

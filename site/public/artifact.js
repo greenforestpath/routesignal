@@ -104,40 +104,6 @@ function renderSignalProof(root, rows) {
   `).join("");
 }
 
-function renderSchemaGrid(root) {
-  const fields = [
-    ["route_id", "Stable local ID for joins, citations, and copy/paste agent plans."],
-    ["activity_signal", "Observed activity bucket from local x402scan activity and transaction captures."],
-    ["observed_txns_30d", "Thirty-day transaction count when x402scan exposes it for the provider."],
-    ["observed_volume_usd_30d", "Thirty-day listed payment volume when available."],
-    ["observed_buyers_30d", "Thirty-day buyer count when available."],
-    ["metadata_score", "Completeness score over observable route, payment, provider, and source fields."],
-    ["signal_score", "Default sort score from activity, metadata completeness, price clarity, and freshness."],
-    ["price_band", "micro_probe, cheap_probe, paid_check, premium_call, high_value, unknown."],
-    ["risk_flags", "Observable sensitivity, abuse, route-farm, price, and verification flags."],
-    ["latest_activity", "Most recent activity label captured from the x402scan activity surface."],
-    ["tags", "Searchable route tags for downstream agents."],
-    ["route", "Canonical payable URL or route path."],
-    ["provider", "Origin title or provider URL from x402scan."],
-    ["cost", "Normalized human-readable price when possible."],
-    ["capability", "Route/resource description used for clustering and recipes."],
-    ["network", "Payment network or chain identifier."],
-    ["asset", "Token contract or asset identifier from payment terms."],
-    ["pay_to", "Payment recipient address."],
-    ["scheme", "x402 payment scheme, usually exact."],
-    ["x402_version", "Version exposed by the listed route metadata."],
-    ["evidence_grade", "Conservative provenance label."],
-    ["origin_id/resource_id", "Stable x402scan identifiers for joins."],
-    ["source", "x402scan server page for inspection."],
-  ];
-  root.innerHTML = fields.map(([name, detail]) => `
-    <article class="schema-card">
-      <strong>${esc(name)}</strong>
-      <span>${esc(detail)}</span>
-    </article>
-  `).join("");
-}
-
 function routeRow(row) {
   return `
     <tr>
@@ -162,7 +128,6 @@ function initRoutesPage({ routes, routesDb }) {
   const observedRows = rows.filter((row) => row.activity_signal !== "no_observed_activity_in_local_scrape");
   const avgMetadata = rows.length ? Math.round(rows.reduce((sum, row) => sum + (row.metadata_score || 0), 0) / rows.length) : 0;
   const pricedRows = rows.filter((row) => typeof row.amount_usd === "number");
-  renderSchemaGrid(document.querySelector("#schemaGrid"));
   renderMetrics(document.querySelector("#pageMetrics"), [
     { value: compact(routes.summary?.route_count || rows.length), label: "route records" },
     { value: compact(observedRows.length), label: "with observed activity" },
@@ -212,7 +177,7 @@ function initRoutesPage({ routes, routesDb }) {
         && (!q || text.includes(q));
     });
     const cardRows = diverseRows(filtered, 36);
-    readout.textContent = `${compact(filtered.length)} records matched. Showing ${cardRows.length} diversified signal records; developer table renders first 220.`;
+    readout.textContent = `${compact(filtered.length)} routes matched. Showing ${cardRows.length} provider-diversified route records; raw table renders first 220.`;
     cards.innerHTML = cardRows.map(routeCard).join("");
     tbody.innerHTML = filtered.slice(0, 220).map(routeRow).join("");
     if (!filtered.length) {

@@ -10,7 +10,7 @@ RouteSignal has exactly three public pages:
 - `site/public/analyzer.html`: market compression, clustering, and trust notes.
 - `site/public/wizard.html`: route-grounded long-tail spend-plan hypotheses.
 
-Do not add landing pages, marketing sections, or unrelated research dashboards unless the product shape changes deliberately.
+Do not add marketing sections or unrelated research dashboards unless the product shape changes deliberately.
 
 ## Data Contract
 
@@ -37,4 +37,3 @@ npm run refresh
 - Keep PAY/PROBE/WARN/BLOCK language secondary and mostly wizard-specific.
 - Preserve the caveat: listed payable route is not proof of endpoint quality.
 - Test desktop and mobile before publishing.
-

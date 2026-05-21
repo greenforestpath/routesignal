@@ -43,26 +43,15 @@
         <div id="signalProof" class="signal-proof"></div>
       </section>
 
-      <section class="section schema-section">
-        <div class="section-heading">
-          <p class="eyebrow">Data contract</p>
-          <h2>Machine-readable evidence, enriched with observable signals.</h2>
-          <p>Every route keeps the source metadata and adds local derived fields for downstream agents: route IDs, activity signals, metadata score, price band, risk flags, freshness, and source links.</p>
-        </div>
-        <div class="export-strip">
-          <a href="./data/routesdb.json">routesdb.json</a>
-          <a href="./data/routesdb.jsonl">routesdb.jsonl</a>
-          <a href="./data/routesdb.csv" download>routesdb.csv</a>
-          <a href="./data/api-routes.json">raw api-routes.json</a>
-          <a href="./data/api-routes.csv" download>raw api-routes.csv</a>
-        </div>
-        <div id="schemaGrid" class="schema-grid"></div>
-      </section>
-
       <section class="section">
         <div class="section-heading">
-          <p class="eyebrow">Signal filters</p>
-          <h2>Start from observable evidence, not a spreadsheet.</h2>
+          <p class="eyebrow">RoutesDB</p>
+          <h2>Filter the route universe.</h2>
+        </div>
+        <div class="export-strip">
+          <a href="./data/routesdb.json">JSON</a>
+          <a href="./data/routesdb.jsonl">JSONL</a>
+          <a href="./data/routesdb.csv" download>CSV</a>
         </div>
         <div class="route-controls" aria-label="Route filters">
           <label><span>Activity</span><select id="routeActivityFilter"></select></label>

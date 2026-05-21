@@ -20,23 +20,80 @@
       <section class="artifact-hero">
         <div>
           <p class="eyebrow">Analyzer</p>
-          <h1>Compress the route universe into activity, metadata, and market-shape signals.</h1>
-          <p class="lead">The raw table is not the story. The story is where activity concentrates, where route count distorts market size, which metadata is missing, and which route categories are emerging.</p>
+          <h1>Surprising facts hiding inside the route universe.</h1>
+          <p class="lead">The catalog is big, but the market signal is uneven: activity clusters, route farms inflate counts, sensitive data is already packaged as payable endpoints, and the best UI is a fact board with evidence drilldowns.</p>
         </div>
         <div id="pageMetrics" class="artifact-metrics"></div>
       </section>
 
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Most surprising</p>
+          <h2>Facts first, then route evidence.</h2>
+          <p>The strongest display pattern is not another giant grid. Lead with quantified claims, show the caveat beside each claim, then expose the underlying routes as evidence.</p>
+        </div>
+        <div id="factBoard" class="fact-board"></div>
+      </section>
+
+      <section class="section analysis-grid hot-take-grid">
+        <div>
+          <p class="eyebrow">Contrarian takes</p>
+          <h2>What the rows imply</h2>
+          <div id="hotTakes" class="hot-takes"></div>
+        </div>
+        <div>
+          <p class="eyebrow">Display answer</p>
+          <h2>How to show this without drowning people</h2>
+          <div id="displayModel" class="display-model"></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Hidden clusters</p>
+          <h2>The fascinating route families</h2>
+          <p>Keyword clusters are intentionally blunt. They are a discovery lens, not a claim that every matching endpoint is good, lawful, fresh, or usable.</p>
+        </div>
+        <div id="routeFamilies" class="family-grid"></div>
+      </section>
+
+      <section class="section analyzer-focus">
+        <div class="section-heading">
+          <p class="eyebrow">Market truth</p>
+          <h2>Listed routes separate into active signal, catalog inflation, and probe candidates.</h2>
+          <p>The highest-confidence improvement is to make this distinction visible immediately instead of asking judges to infer it from a table.</p>
+        </div>
+        <div id="compressionCards" class="compression-cards"></div>
+        <div class="signal-map-panel">
+          <div class="map-copy">
+            <p class="eyebrow">Signal map</p>
+            <h3>Metadata completeness vs observed activity</h3>
+            <p>Representative high-signal routes only. Every point keeps its source link and caveat.</p>
+          </div>
+          <div id="signalMap" class="signal-map" aria-label="Route signal map"></div>
+        </div>
+      </section>
+
       <section class="section analysis-grid">
         <div>
-          <p class="eyebrow">Mental map</p>
-          <h2>How route categories connect</h2>
-          <div id="mentalMap" class="mental-map"></div>
+          <p class="eyebrow">Evidence ladder</p>
+          <h2>What the data can actually support</h2>
+          <div id="evidenceLadder" class="evidence-ladder"></div>
         </div>
         <div>
-          <p class="eyebrow">Capability compression</p>
-          <h2>Eight lenses beat 13k rows</h2>
-          <div id="categoryBars" class="category-bars"></div>
+          <p class="eyebrow">Provider compression</p>
+          <h2>Route count is not market size</h2>
+          <div id="providerShapes" class="provider-shapes provider-shapes-rich"></div>
         </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Cluster explorer</p>
+          <h2>The route universe compresses into inspectable market clusters.</h2>
+          <p>Clusters make the project feel less like a directory and more like a real market read: activity, risk, route-farm distortion, and probe-readiness by segment.</p>
+        </div>
+        <div id="clusterGrid" class="cluster-grid"></div>
       </section>
 
       <section class="section analysis-grid">
@@ -61,17 +118,12 @@
         <div id="surprisingRoutes" class="interesting-grid"></div>
       </section>
 
-      <section class="section analysis-grid">
-        <div>
-          <p class="eyebrow">Provider shape</p>
-          <h2>Route count is not market size</h2>
-          <div id="providerShapes" class="provider-shapes"></div>
-        </div>
-        <div class="warning-panel">
+      <section class="section warning-panel">
+        <div class="section-heading">
           <p class="eyebrow">Trust notes</p>
           <h2>What not to assume</h2>
-          <ul id="warnings"></ul>
         </div>
+        <ul id="warnings"></ul>
       </section>
     </main>
     <script src="./artifact.js" type="module"></script>

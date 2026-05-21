@@ -5,7 +5,7 @@
 > x402scan shows what is listed. RouteSignal shows what has signal.
 
 <p align="center">
-  <img src="assets/routesignal-readme-hero.png" alt="RouteSignal route intelligence dashboard preview" width="100%">
+  <img src="assets/routesignal-signal-filter-hero.png" alt="RouteSignal filters noisy x402 route listings into evidence-backed route signals" width="100%">
 </p>
 
 <p align="center">

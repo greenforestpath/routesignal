@@ -99,6 +99,87 @@ const weirdTerms = [
   "medical",
 ];
 
+const evidenceStages = {
+  listed: {
+    rank: 1,
+    label: "Listed",
+    detail: "Public payable route metadata exists, but price, completeness, and activity are not enough for a probe.",
+  },
+  priced: {
+    rank: 2,
+    label: "Priced",
+    detail: "The listed cost can be normalized to USDC, so routes can be compared economically.",
+  },
+  metadata_complete: {
+    rank: 3,
+    label: "Metadata complete",
+    detail: "The route has enough payment, provider, and source fields to be machine-readable.",
+  },
+  activity_observed: {
+    rank: 4,
+    label: "Activity observed",
+    detail: "Local x402scan activity captures show provider-level or latest-transaction activity.",
+  },
+  probe_candidate: {
+    rank: 5,
+    label: "Probe candidate",
+    detail: "Activity, price clarity, and metadata are strong enough for a cautious first-dollar probe.",
+  },
+};
+
+const clusterDefinitions = [
+  {
+    id: "active_procurement",
+    label: "Active procurement surfaces",
+    color: "#167a5a",
+    thesis: "Routes where activity plus metadata suggest agents may already be buying useful API ingredients.",
+  },
+  {
+    id: "route_farm_catalog",
+    label: "Route farms and catalog inflation",
+    color: "#64748b",
+    thesis: "Large catalogs that can reveal market imagination but distort apparent market size.",
+  },
+  {
+    id: "sensitive_verification",
+    label: "Sensitive verification and legal risk",
+    color: "#b66a15",
+    thesis: "Identity, sanctions, legal, medical, or compliance routes that require consent and policy review.",
+  },
+  {
+    id: "external_action",
+    label: "External action channels",
+    color: "#b63b42",
+    thesis: "Routes that send messages, automate social platforms, or touch the outside world.",
+  },
+  {
+    id: "onchain_finance",
+    label: "Onchain market data and wallets",
+    color: "#2454a6",
+    thesis: "Wallet, token, DeFi, portfolio, and transaction routes where payment-native agents have natural demand.",
+  },
+  {
+    id: "real_world_fulfillment",
+    label: "Real-world fulfillment",
+    color: "#147784",
+    thesis: "Shipping, flights, phone numbers, refills, and other routes where an API call may trigger real-world effects.",
+  },
+  {
+    id: "media_and_generation",
+    label: "Media and generation",
+    color: "#5b4aa0",
+    thesis: "Per-call creation routes for images, video, audio, captions, transcripts, and creative assets.",
+  },
+  {
+    id: "long_tail_utilities",
+    label: "Long-tail utilities",
+    color: "#475569",
+    thesis: "Useful, weird, or niche tools that show the breadth of the per-call API market.",
+  },
+];
+
+const clusterById = new Map(clusterDefinitions.map((cluster) => [cluster.id, cluster]));
+
 const curatedBoosts = new Map([
   ["https://ai.verifik.co/api/usa/ssn", 240],
   ["https://ai.verifik.co/api/fbi", 235],
@@ -215,7 +296,12 @@ function topEntries(map, limit = 12) {
 }
 
 function csvEscape(value) {
-  const text = Array.isArray(value) ? value.join("|") : value == null ? "" : String(value);
+  const raw = Array.isArray(value)
+    ? value.map((item) => String(item).trim()).join("|")
+    : value == null
+      ? ""
+      : String(value).trim();
+  const text = raw.replace(/[ \t]+(\r?\n)/g, "$1");
   if (/[",\n\r]/.test(text)) return `"${text.replaceAll('"', '""')}"`;
   return text;
 }
@@ -239,6 +325,15 @@ function writeCsv(records, filePath) {
     "quality_score",
     "signal_score",
     "default_sort_rank",
+    "evidence_stage",
+    "evidence_stage_rank",
+    "market_signal",
+    "cluster_id",
+    "cluster_label",
+    "provider_shape_type",
+    "provider_route_count",
+    "provider_distinct_routes",
+    "provider_share_pct",
     "metadata_score",
     "metadata_complete_count",
     "metadata_total_count",
@@ -404,6 +499,88 @@ function activitySignal(activity) {
   return "no_observed_activity_in_local_scrape";
 }
 
+function hasHardRisk(flags) {
+  return flags.some((flag) =>
+    ["identity_sensitive", "regulated_or_legal", "external_action_or_abuse_risk", "health_sensitive"].includes(flag)
+  );
+}
+
+function evidenceStageFor(row, flags, completeness, signal) {
+  const priced = numericCost(row) != null;
+  const complete = (completeness.metadata_score || 0) >= 80;
+  const active = signal !== "no_observed_activity_in_local_scrape";
+  if (active && priced && complete && !hasHardRisk(flags)) return "probe_candidate";
+  if (active) return "activity_observed";
+  if (priced && complete) return "metadata_complete";
+  if (priced) return "priced";
+  return "listed";
+}
+
+function marketSignalFor(row) {
+  const flags = row.risk_flags || [];
+  if (row.evidence_stage === "probe_candidate") return "probe-worthy active route";
+  if (row.activity_signal !== "no_observed_activity_in_local_scrape") return "activity observed";
+  if (flags.includes("large_route_farm")) return "catalog inflation";
+  if (hasHardRisk(flags)) return "policy-sensitive listing";
+  if (row.evidence_stage === "metadata_complete") return "machine-readable listing";
+  if (row.amount_usd == null) return "price unclear";
+  return "listed route";
+}
+
+function buildProviderStats(records) {
+  const map = new Map();
+  for (const row of records) {
+    const key = row.provider || "unknown";
+    const stat = map.get(key) || {
+      provider: key,
+      count: 0,
+      routes: new Set(),
+      origins: new Set(),
+      active_rows: 0,
+      latest_rows: 0,
+      max_txns_30d: 0,
+      max_volume_usd_30d: 0,
+      categories: new Map(),
+      prices: new Map(),
+    };
+    stat.count += 1;
+    if (row.route) stat.routes.add(row.route);
+    if (row.origin_id) stat.origins.add(row.origin_id);
+    if (row.activity_signal !== "no_observed_activity_in_local_scrape") stat.active_rows += 1;
+    if ((row.latest_tx_count_in_scrape || 0) > 0) stat.latest_rows += 1;
+    stat.max_txns_30d = Math.max(stat.max_txns_30d, row.observed_txns_30d || 0);
+    stat.max_volume_usd_30d = Math.max(stat.max_volume_usd_30d, row.observed_volume_usd_30d || 0);
+    stat.categories.set(row.category_label, (stat.categories.get(row.category_label) || 0) + 1);
+    stat.prices.set(row.cost || "unknown", (stat.prices.get(row.cost || "unknown") || 0) + 1);
+    map.set(key, stat);
+  }
+  return map;
+}
+
+function providerShapeType(stat, totalRows) {
+  const share = stat.count / Math.max(1, totalRows);
+  if (stat.max_txns_30d > 0 && stat.count >= 20) return "active anchor";
+  if (stat.count >= 120 || share >= 0.01) return "route farm";
+  if (stat.count >= 20) return "broad catalog";
+  if (stat.count >= 4) return "focused provider";
+  return "long tail";
+}
+
+function clusterFor(row) {
+  const flags = row.risk_flags || [];
+  if (flags.includes("large_route_farm")) return clusterById.get("route_farm_catalog");
+  if (flags.includes("identity_sensitive") || flags.includes("regulated_or_legal") || flags.includes("health_sensitive")) {
+    return clusterById.get("sensitive_verification");
+  }
+  if (flags.includes("external_action_or_abuse_risk")) return clusterById.get("external_action");
+  if (flags.includes("real_world_fulfillment")) return clusterById.get("real_world_fulfillment");
+  if (row.evidence_stage === "probe_candidate") return clusterById.get("active_procurement");
+  if (row.category_id === "onchain_finance") return clusterById.get("onchain_finance");
+  if (row.category_id === "communication_action") return clusterById.get("external_action");
+  if (row.category_id === "media_generation") return clusterById.get("media_and_generation");
+  return clusterById.get("long_tail_utilities");
+}
+
 function routeSignalScore(row) {
   let score = 0;
   score += (row.observed_txns_30d || 0) > 0 ? Math.log10(row.observed_txns_30d + 1) * 420 : 0;
@@ -420,6 +597,9 @@ const enriched = rows.map((row) => {
   const riskFlags = riskFlagsFor(row);
   const activity = activityByOrigin.get(row.origin_id) || {};
   const completeness = metadataCompleteness(row, riskFlags);
+  const signal = activitySignal(activity);
+  const evidenceStage = evidenceStageFor(row, riskFlags, completeness, signal);
+  const evidence = evidenceStages[evidenceStage];
   const score = routeScore({ ...row, category_id: category.id }, new Map(), new Map());
   return {
     ...row,
@@ -434,7 +614,7 @@ const enriched = rows.map((row) => {
     verdict: verdictFor(row, riskFlags),
     recommended_next_action: nextActionFor(row, riskFlags),
     ...completeness,
-    activity_signal: activitySignal(activity),
+    activity_signal: signal,
     observed_txns_30d: activity.observed_txns_30d || 0,
     observed_volume_usd_30d: activity.observed_volume_usd_30d || 0,
     observed_buyers_30d: activity.observed_buyers_30d || 0,
@@ -442,6 +622,10 @@ const enriched = rows.map((row) => {
     latest_tx_count_in_scrape: activity.latest_tx_count_in_scrape || 0,
     latest_tx_seen: activity.latest_tx_seen || "",
     activity_source: activity.activity_source || "",
+    evidence_stage: evidenceStage,
+    evidence_stage_rank: evidence.rank,
+    evidence_stage_label: evidence.label,
+    evidence_stage_detail: evidence.detail,
     interest_score: Math.round(score),
     signal_score: 0,
     quality_score: qualityScoreFor(row, riskFlags),
@@ -449,13 +633,27 @@ const enriched = rows.map((row) => {
 });
 
 const providerCounts = countBy(enriched, (row) => row.provider);
+const providerStats = buildProviderStats(enriched);
 const categoryCounts = countBy(enriched, (row) => row.category_id);
 const networkCounts = countBy(enriched, (row) => row.network || "unknown");
 const costCounts = countBy(enriched, (row) => row.cost || "unknown");
 
 for (const row of enriched) {
+  const stat = providerStats.get(row.provider || "unknown");
+  const shape = providerShapeType(stat, enriched.length);
+  row.provider_shape_type = shape;
+  row.provider_route_count = stat.count;
+  row.provider_distinct_routes = stat.routes.size;
+  row.provider_origin_count = stat.origins.size;
+  row.provider_share_pct = Number(((stat.count / Math.max(1, enriched.length)) * 100).toFixed(2));
   row.interest_score = Math.round(routeScore(row, categoryCounts, providerCounts));
   row.signal_score = routeSignalScore(row);
+  row.market_signal = marketSignalFor(row);
+  const cluster = clusterFor(row);
+  row.cluster_id = cluster.id;
+  row.cluster_label = cluster.label;
+  row.cluster_color = cluster.color;
+  row.cluster_thesis = cluster.thesis;
 }
 
 const categories = lenses.map((lens) => {
@@ -494,6 +692,9 @@ const interesting_routes = enriched
     provider: row.provider,
     cost: row.cost,
     category: row.category_label,
+    cluster: row.cluster_label,
+    evidence_stage: row.evidence_stage_label,
+    market_signal: row.market_signal,
     capability: row.capability,
     why_interesting: whyInteresting(row),
     caveat: caveatFor(row),
@@ -521,20 +722,197 @@ function caveatFor(row) {
 
 const provider_shapes = topEntries(providerCounts, 16).map((entry) => {
   const providerRows = enriched.filter((row) => row.provider === entry.name);
+  const stat = providerStats.get(entry.name);
   return {
     provider: entry.name,
     count: entry.count,
     distinct_routes: new Set(providerRows.map((row) => row.route)).size,
+    origin_count: stat.origins.size,
+    share_pct: Number(((entry.count / Math.max(1, enriched.length)) * 100).toFixed(2)),
+    shape_type: providerShapeType(stat, enriched.length),
+    active_rows: stat.active_rows,
+    max_txns_30d: stat.max_txns_30d,
+    max_volume_usd_30d: stat.max_volume_usd_30d,
     top_categories: topEntries(countBy(providerRows, (row) => row.category_label), 4),
     common_costs: topEntries(countBy(providerRows, (row) => row.cost), 4),
     sample_routes: providerRows.slice(0, 5).map((row) => ({
       route: row.route,
       cost: row.cost,
       capability: row.capability,
+      evidence_stage: row.evidence_stage_label,
       source: row.source,
     })),
   };
 });
+
+function pct(part, total, digits = 1) {
+  return Number(((part / Math.max(1, total)) * 100).toFixed(digits));
+}
+
+const providerStatRows = [...providerStats.values()].map((stat) => ({
+  provider: stat.provider,
+  count: stat.count,
+  distinct_routes: stat.routes.size,
+  origin_count: stat.origins.size,
+  active_rows: stat.active_rows,
+  max_txns_30d: stat.max_txns_30d,
+  shape_type: providerShapeType(stat, enriched.length),
+}));
+
+const top10ProviderRows = providerStatRows
+  .slice()
+  .sort((a, b) => b.count - a.count)
+  .slice(0, 10)
+  .reduce((sum, stat) => sum + stat.count, 0);
+const activeProviderCount = providerStatRows.filter((stat) => stat.active_rows > 0 || stat.max_txns_30d > 0).length;
+const routeFarmProviders = providerStatRows.filter((stat) => stat.shape_type === "route farm").length;
+const longTailProviders = providerStatRows.filter((stat) => stat.count <= 2).length;
+const activeRows = enriched.filter((row) => row.activity_signal !== "no_observed_activity_in_local_scrape").length;
+const probeCandidateRows = enriched.filter((row) => row.evidence_stage === "probe_candidate").length;
+const routeFarmRows = enriched.filter((row) => (row.risk_flags || []).includes("large_route_farm")).length;
+
+const compression = {
+  cards: [
+    {
+      label: "Listed rows",
+      value: enriched.length,
+      note: `${providerCounts.size} providers, ${new Set(enriched.map((row) => row.route)).size} distinct route URLs`,
+    },
+    {
+      label: "Observed activity rows",
+      value: activeRows,
+      note: `${activeProviderCount} providers have local activity evidence`,
+    },
+    {
+      label: "Probe candidates",
+      value: probeCandidateRows,
+      note: "Activity, price clarity, and metadata without hard-risk flags",
+    },
+    {
+      label: "Top-10 provider share",
+      value: `${pct(top10ProviderRows, enriched.length)}%`,
+      note: `${routeFarmProviders} providers look like route farms or broad catalogs`,
+    },
+    {
+      label: "Long-tail providers",
+      value: longTailProviders,
+      note: "Providers with one or two listed route rows",
+    },
+  ],
+  truths: [
+    "Route count is not market size: a small number of catalogs can create thousands of rows.",
+    "Activity is sparse but meaningful: observed transactions point to where the market is actually moving.",
+    "Metadata completeness is strong enough for routing, but endpoint quality still needs paid-call verification.",
+    "The safest demo story is evidence-gated probing, not blind autonomous spending.",
+  ],
+};
+
+const evidence_ladder = Object.entries(evidenceStages)
+  .sort((a, b) => a[1].rank - b[1].rank)
+  .map(([id, stage]) => ({
+    id,
+    rank: stage.rank,
+    label: stage.label,
+    detail: stage.detail,
+    count: enriched.filter((row) => row.evidence_stage === id).length,
+    share: pct(enriched.filter((row) => row.evidence_stage === id).length, enriched.length),
+    sample_routes: enriched
+      .filter((row) => row.evidence_stage === id)
+      .slice()
+      .sort((a, b) => b.signal_score - a.signal_score || b.interest_score - a.interest_score)
+      .slice(0, 3)
+      .map((row) => ({
+        route: row.route,
+        route_name: row.route_name,
+        provider: row.provider,
+        cost: row.cost,
+        source: row.source,
+      })),
+  }));
+
+const clusters = clusterDefinitions
+  .map((definition) => {
+    const clusterRows = enriched.filter((row) => row.cluster_id === definition.id);
+    const active = clusterRows.filter((row) => row.activity_signal !== "no_observed_activity_in_local_scrape").length;
+    const probe = clusterRows.filter((row) => row.evidence_stage === "probe_candidate").length;
+    return {
+      ...definition,
+      count: clusterRows.length,
+      share: pct(clusterRows.length, enriched.length),
+      provider_count: new Set(clusterRows.map((row) => row.provider)).size,
+      active_rows: active,
+      probe_candidate_rows: probe,
+      route_farm_rows: clusterRows.filter((row) => (row.risk_flags || []).includes("large_route_farm")).length,
+      top_providers: topEntries(countBy(clusterRows, (row) => row.provider), 4),
+      top_price_bands: topEntries(countBy(clusterRows, (row) => row.price_band), 4),
+      sample_routes: clusterRows
+        .slice()
+        .sort((a, b) => b.signal_score - a.signal_score || b.interest_score - a.interest_score)
+        .slice(0, 5)
+        .map((row) => ({
+          route: row.route,
+          route_name: row.route_name,
+          provider: row.provider,
+          cost: row.cost,
+          evidence_stage: row.evidence_stage_label,
+          market_signal: row.market_signal,
+          source: row.source,
+        })),
+    };
+  })
+  .filter((cluster) => cluster.count > 0);
+
+const maxActivityLog = Math.max(1, ...enriched.map((row) => Math.log10((row.observed_txns_30d || 0) + 1)));
+const signalPointCandidates = [
+  ...enriched
+    .filter((row) => row.activity_signal !== "no_observed_activity_in_local_scrape")
+    .sort((a, b) => b.signal_score - a.signal_score)
+    .slice(0, 90),
+  ...enriched.slice().sort((a, b) => b.interest_score - a.interest_score).slice(0, 90),
+  ...clusters.flatMap((cluster) =>
+    enriched
+      .filter((row) => row.cluster_id === cluster.id)
+      .sort((a, b) => b.signal_score - a.signal_score || b.interest_score - a.interest_score)
+      .slice(0, 12)
+  ),
+];
+const signalSeen = new Set();
+const signal_map = {
+  x_axis: "metadata_score",
+  y_axis: "log_observed_activity",
+  caveat: "Map points are representative high-signal records, not every listed route.",
+  points: signalPointCandidates
+    .filter((row) => {
+      if (signalSeen.has(row.route_id)) return false;
+      signalSeen.add(row.route_id);
+      return true;
+    })
+    .slice(0, 180)
+    .map((row) => {
+      const activityIndex = row.observed_txns_30d
+        ? Math.round((Math.log10(row.observed_txns_30d + 1) / maxActivityLog) * 100)
+        : row.latest_tx_count_in_scrape
+          ? 12
+          : 2;
+      return {
+        route_id: row.route_id,
+        route: row.route,
+        route_name: row.route_name,
+        provider: row.provider,
+        cost: row.cost,
+        metadata_score: row.metadata_score,
+        activity_index: activityIndex,
+        observed_txns_30d: row.observed_txns_30d,
+        provider_route_count: row.provider_route_count,
+        evidence_stage: row.evidence_stage_label,
+        cluster_id: row.cluster_id,
+        cluster_label: row.cluster_label,
+        cluster_color: row.cluster_color,
+        market_signal: row.market_signal,
+        source: row.source,
+      };
+    }),
+};
 
 const warnings = [
   {
@@ -615,6 +993,10 @@ const insights = {
     top_costs: topEntries(costCounts, 8),
   },
   categories,
+  clusters,
+  evidence_ladder,
+  compression,
+  signal_map,
   provider_shapes,
   interesting_routes,
   bundles,
@@ -628,6 +1010,9 @@ const routesDb = {
     ...insights.summary,
     verdicts: topEntries(countBy(enriched, (row) => row.verdict), 8),
     activity_signals: topEntries(countBy(enriched, (row) => row.activity_signal), 8),
+    evidence_stages: topEntries(countBy(enriched, (row) => row.evidence_stage), 8),
+    clusters: topEntries(countBy(enriched, (row) => row.cluster_label), 10),
+    provider_shape_types: topEntries(countBy(enriched, (row) => row.provider_shape_type), 8),
     price_bands: topEntries(countBy(enriched, (row) => row.price_band), 8),
     risk_flags: topEntries(
       enriched.reduce((map, row) => {
@@ -642,6 +1027,11 @@ const routesDb = {
     verdict: "PAY, PROBE, or WARN recommendation for analyst triage, not financial/legal advice.",
     recommended_next_action: "Suggested next step before spending or composing the route.",
     risk_flags: "Heuristic flags for sensitivity, abuse risk, route farms, unverified accepts, and pricing issues.",
+    evidence_stage: "Listed, priced, metadata-complete, activity-observed, or probe-candidate evidence ladder stage.",
+    market_signal: "Short analyst label describing the strongest visible route signal.",
+    cluster_id: "Higher-level market cluster used by the Analyzer view.",
+    provider_shape_type: "Provider-level shape such as active anchor, route farm, broad catalog, focused provider, or long tail.",
+    provider_share_pct: "Provider row share of the local route capture.",
     interest_score: "Heuristic ranking score for outlier surfacing.",
     quality_score: "Heuristic metadata quality score, not endpoint quality proof.",
     activity_signal: "Observable activity bucket from local x402scan activity scrapes.",

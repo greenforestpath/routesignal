@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Analyzer | RouteSignal</title>
+    <meta name="description" content="Analysis, visualization, clustering, provider distortion, surprising routes, and trust notes for the x402 route universe.">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body data-page="analyzer">
+    <header class="topbar">
+      <a class="brand" href="./index.html"><span class="brand-mark">R</span><span>RouteSignal</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="./index.html">Routes</a>
+        <a aria-current="page" href="./analyzer.html">Analyzer</a>
+        <a href="./wizard.html">Wizard</a>
+      </nav>
+    </header>
+    <main>
+      <section class="artifact-hero">
+        <div>
+          <p class="eyebrow">Analyzer</p>
+          <h1>Compress the route universe into activity, metadata, and market-shape signals.</h1>
+          <p class="lead">The raw table is not the story. The story is where activity concentrates, where route count distorts market size, which metadata is missing, and which route categories are emerging.</p>
+        </div>
+        <div id="pageMetrics" class="artifact-metrics"></div>
+      </section>
+
+      <section class="section analysis-grid">
+        <div>
+          <p class="eyebrow">Mental map</p>
+          <h2>How route categories connect</h2>
+          <div id="mentalMap" class="mental-map"></div>
+        </div>
+        <div>
+          <p class="eyebrow">Capability compression</p>
+          <h2>Eight lenses beat 13k rows</h2>
+          <div id="categoryBars" class="category-bars"></div>
+        </div>
+      </section>
+
+      <section class="section analysis-grid">
+        <div>
+          <p class="eyebrow">Cost distribution</p>
+          <h2>Where prices cluster</h2>
+          <div id="costBars" class="density-bars"></div>
+        </div>
+        <div>
+          <p class="eyebrow">Network distribution</p>
+          <h2>Where routes settle</h2>
+          <div id="networkBars" class="density-bars"></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Outlier routes</p>
+          <h2>Routes worth inspecting first</h2>
+          <p>Selected for actionability, sensitivity, weirdness, economic value, or because they reveal where agent commerce needs guardrails.</p>
+        </div>
+        <div id="surprisingRoutes" class="interesting-grid"></div>
+      </section>
+
+      <section class="section analysis-grid">
+        <div>
+          <p class="eyebrow">Provider shape</p>
+          <h2>Route count is not market size</h2>
+          <div id="providerShapes" class="provider-shapes"></div>
+        </div>
+        <div class="warning-panel">
+          <p class="eyebrow">Trust notes</p>
+          <h2>What not to assume</h2>
+          <ul id="warnings"></ul>
+        </div>
+      </section>
+    </main>
+    <script src="./artifact.js" type="module"></script>
+  </body>
+</html>

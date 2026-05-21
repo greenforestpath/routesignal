@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RouteSignal | Activity and Metadata Intelligence for x402 Routes</title>
+    <meta name="description" content="Activity, pricing, freshness, and metadata intelligence for x402 paid API routes.">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body data-page="routes">
+    <header class="topbar">
+      <a class="brand" href="./index.html"><span class="brand-mark">R</span><span>RouteSignal</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a aria-current="page" href="./index.html">Routes</a>
+        <a href="./analyzer.html">Analyzer</a>
+        <a href="./wizard.html">Wizard</a>
+      </nav>
+    </header>
+    <main>
+      <section class="artifact-hero">
+        <div>
+          <p class="eyebrow">RouteSignal</p>
+          <h1>Which x402 routes have actual signal?</h1>
+          <p class="lead">x402scan shows what is listed. RouteSignal shows observable activity, metadata completeness, price clarity, freshness, and evidence for paid API routes.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="./data/routesdb.csv" download>Download RoutesDB CSV</a>
+            <a class="button secondary" href="./data/routesdb.json">Open JSON</a>
+          </div>
+        </div>
+        <div id="pageMetrics" class="artifact-metrics"></div>
+      </section>
+
+      <section class="section thesis-strip">
+        <p>We compressed 13k x402 routes into a signal layer: <strong>activity</strong>, <strong>metadata completeness</strong>, <strong>price clarity</strong>, <strong>freshness</strong>, and <strong>evidence</strong>.</p>
+      </section>
+
+      <section class="section schema-section">
+        <div class="section-heading">
+          <p class="eyebrow">Data contract</p>
+          <h2>Machine-readable evidence, enriched with observable signals.</h2>
+          <p>Every route keeps the source metadata and adds local derived fields for downstream agents: route IDs, activity signals, metadata score, price band, risk flags, freshness, and source links.</p>
+        </div>
+        <div class="export-strip">
+          <a href="./data/routesdb.json">routesdb.json</a>
+          <a href="./data/routesdb.jsonl">routesdb.jsonl</a>
+          <a href="./data/routesdb.csv" download>routesdb.csv</a>
+          <a href="./data/api-routes.json">raw api-routes.json</a>
+          <a href="./data/api-routes.csv" download>raw api-routes.csv</a>
+        </div>
+        <div id="schemaGrid" class="schema-grid"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Signal filters</p>
+          <h2>Start from observable evidence, not a spreadsheet.</h2>
+        </div>
+        <div class="route-controls" aria-label="Route filters">
+          <label><span>Activity</span><select id="routeActivityFilter"></select></label>
+          <label><span>Metadata</span><select id="routeMetadataFilter"></select></label>
+          <label><span>Price band</span><select id="routePriceFilter"></select></label>
+          <label><span>Category</span><select id="routeCategoryFilter"></select></label>
+          <label><span>Risk flag</span><select id="routeRiskFilter"></select></label>
+          <label><span>Network</span><select id="routeNetworkFilter"></select></label>
+          <label><span>Provider</span><input id="routeProviderSearch" type="search" placeholder="Verifik, DataBR, AurelianFlo"></label>
+          <label><span>Route, capability, tag</span><input id="routeSearch" type="search" placeholder="ssn, ofac, vessel, flight, preflight"></label>
+        </div>
+        <p id="routeReadout" class="artifact-readout"></p>
+        <div id="routeCards" class="route-record-grid"></div>
+        <details class="developer-table">
+          <summary>Open raw developer table</summary>
+          <div class="table-wrap route-table-wrap">
+            <table class="route-table">
+              <thead>
+                <tr>
+                  <th>Route ID</th>
+                  <th>Route</th>
+                  <th>Provider</th>
+                  <th>Cost</th>
+                  <th>Activity</th>
+                  <th>Metadata</th>
+                  <th>Evidence</th>
+                </tr>
+              </thead>
+              <tbody id="routeTable"></tbody>
+            </table>
+          </div>
+        </details>
+      </section>
+    </main>
+    <script src="./artifact.js" type="module"></script>
+  </body>
+</html>

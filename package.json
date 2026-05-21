@@ -1,0 +1,18 @@
+{
+  "name": "routesignal",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Activity and metadata intelligence for x402 paid API routes.",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev site/public",
+    "preview": "python3 -m http.server 8795 --directory site/public",
+    "analyze": "node scripts/analyze-api-routes.mjs",
+    "refresh": "node scripts/extract-api-routes.mjs && node scripts/analyze-api-routes.mjs",
+    "deploy": "wrangler pages deploy site/public --project-name routesignal"
+  },
+  "devDependencies": {
+    "wrangler": "latest"
+  }
+}
+

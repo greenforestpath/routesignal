@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wizard | RouteSignal</title>
+    <meta name="description" content="Long-tail paid API route idea wizard based on RouteSignal data and analysis lenses.">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body data-page="wizard">
+    <header class="topbar">
+      <a class="brand" href="./index.html"><span class="brand-mark">R</span><span>RouteSignal</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="./index.html">Routes</a>
+        <a href="./analyzer.html">Analyzer</a>
+        <a aria-current="page" href="./wizard.html">Wizard</a>
+      </nav>
+    </header>
+    <main>
+      <section class="artifact-hero">
+        <div>
+          <p class="eyebrow">Wizard</p>
+          <h1>Generate long-tail spend plans from routes with signal.</h1>
+          <p class="lead">The wizard uses RouteSignal evidence: activity, metadata completeness, price band, category, risk flags, route samples, and stop rules.</p>
+        </div>
+        <div id="pageMetrics" class="artifact-metrics"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Route-derived bundles</p>
+          <h2>Composable sequences from RoutesDB plus Analyzer</h2>
+          <p>These are the strongest demo units: each bundle spends across different kinds of paid routes and stops when enough evidence is gathered.</p>
+        </div>
+        <div id="bundleGrid" class="bundle-grid"></div>
+      </section>
+
+      <section class="section wizard-board">
+        <div>
+          <p class="eyebrow">Idea board</p>
+          <h2>Generated long-tail hypotheses</h2>
+          <p class="section-copy">Each card should be read as a testable hypothesis: route ingredients, why per-call payment matters, budget shape, and stop rule.</p>
+        </div>
+        <div class="wizard-controls" aria-label="Wizard controls">
+          <label><span>Task</span><select id="wizardTask"></select></label>
+          <label><span>Budget</span><select id="wizardBudget"></select></label>
+          <label><span>Risk tolerance</span><select id="wizardRisk"></select></label>
+          <label><span>Style</span><select id="wizardStyle"></select></label>
+        </div>
+        <p id="wizardReadout" class="artifact-readout"></p>
+        <div id="recipeGridLite" class="recipe-grid"></div>
+      </section>
+    </main>
+    <script src="./artifact.js" type="module"></script>
+  </body>
+</html>

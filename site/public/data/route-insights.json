@@ -1,0 +1,2626 @@
+{
+  "generated_at": "2026-05-21T03:34:06.478Z",
+  "summary": {
+    "route_rows": 13517,
+    "distinct_routes": 12857,
+    "providers": 1753,
+    "networks": 6,
+    "top_networks": [
+      {
+        "name": "eip155:8453",
+        "count": 12043
+      },
+      {
+        "name": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+        "count": 615
+      },
+      {
+        "name": "solana:mainnet",
+        "count": 599
+      },
+      {
+        "name": "eip155:84532",
+        "count": 135
+      },
+      {
+        "name": "eip155:43114",
+        "count": 122
+      },
+      {
+        "name": "base-sepolia",
+        "count": 3
+      }
+    ],
+    "top_costs": [
+      {
+        "name": "0.01 USDC",
+        "count": 3448
+      },
+      {
+        "name": "0.001 USDC",
+        "count": 994
+      },
+      {
+        "name": "0.005 USDC",
+        "count": 817
+      },
+      {
+        "name": "0.02 USDC",
+        "count": 601
+      },
+      {
+        "name": "0.05 USDC",
+        "count": 597
+      },
+      {
+        "name": "0.1 USDC",
+        "count": 516
+      },
+      {
+        "name": "1 USDC",
+        "count": 477
+      },
+      {
+        "name": "3 USDC",
+        "count": 440
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "agent_runtime",
+      "label": "Agent runtime primitives",
+      "color": "#2454a6",
+      "count": 3104,
+      "provider_count": 441,
+      "share": 0.2296367537175409,
+      "top_providers": [
+        {
+          "name": "Verifik AI",
+          "count": 349
+        },
+        {
+          "name": "XActions — Free AI-Powered X/Twitter Automation Tools | Mass Unfollow, Auto-Follow & More",
+          "count": 166
+        },
+        {
+          "name": "402.bot | Recipes and token-efficient x402 workflows for AI agents",
+          "count": 120
+        },
+        {
+          "name": "Arch Tools - The First API Platform AI Agents Can Pay Autonomously",
+          "count": 88
+        },
+        {
+          "name": "Loyal Spark - Loyalty Rewards That Grow",
+          "count": 73
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://ai.verifik.co/api/usa/ssn",
+          "provider": "Verifik AI",
+          "cost": "140000000000000 atomic units token",
+          "capability": "Validate a U.S. Social Security Number (SSN). Pass the SSN as the documentNumber query parameter (formatted as on the document).",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://ai.verifik.co/api/fbi",
+          "provider": "Verifik AI",
+          "cost": "140000000000000 atomic units token",
+          "capability": "Comprehensive background check using FBI (Federal Bureau of Investigation) databases. Search by full name OR document number with document type. Verify individuals against federal criminal records.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://ai.verifik.co/api/interpol",
+          "provider": "Verifik AI",
+          "cost": "140000000000000 atomic units token",
+          "capability": "International background check using Interpol databases. Search by full name OR document number with document type. Verify individuals against international criminal records and wanted lists.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://ai.verifik.co/api/dea",
+          "provider": "Verifik AI",
+          "cost": "140000000000000 atomic units token",
+          "capability": "Comprehensive background check service using DEA (Drug Enforcement Administration) databases. Search by full name OR document number with document type. Verify individuals against international drug enforcement records.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://ai.verifik.co/api/face-recognition/liveness",
+          "provider": "Verifik AI",
+          "cost": "150000000000000 atomic units token",
+          "capability": "Detects whether a submitted face image comes from a live person or a spoof (photo, screen replay, printed copy). Returns a liveness score and a pass/fail outcome based on a minimum score threshold.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://ai.verifik.co/api/co/cedula/rethus",
+          "provider": "Verifik AI",
+          "cost": "140000000000000 atomic units token",
+          "capability": "Access Colombian health records through Rethus system. Verify medical history, health status, and healthcare provider information. Requires document type (CC, CE, PPT) and document number.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://ai.verifik.co/api/co/inpec",
+          "provider": "Verifik AI",
+          "cost": "90000000000000 atomic units token",
+          "capability": "Look up penitentiary records and incarceration history.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        }
+      ]
+    },
+    {
+      "id": "search_scrape",
+      "label": "Search, crawl, scrape",
+      "color": "#147784",
+      "count": 1491,
+      "provider_count": 340,
+      "share": 0.11030554117037804,
+      "top_providers": [
+        {
+          "name": "DataBR — API de Dados Públicos Brasileiros",
+          "count": 117
+        },
+        {
+          "name": "https://gg402.vercel.app",
+          "count": 82
+        },
+        {
+          "name": "StableSocial",
+          "count": 58
+        },
+        {
+          "name": "StableTravel",
+          "count": 51
+        },
+        {
+          "name": "Surf Twitter",
+          "count": 50
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://databr.api.br/v1/empresas/00000000000191/duediligence",
+          "provider": "DataBR — API de Dados Públicos Brasileiros",
+          "cost": "0.075 USDC",
+          "capability": "Due diligence empresarial completa — CNPJ + CEIS/CNEP + processos judiciais + licitações + ambiental (multi-fonte)",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://databr.api.br/v1/ambiental/embargos",
+          "provider": "DataBR — API de Dados Públicos Brasileiros",
+          "cost": "0.005 USDC",
+          "capability": "Áreas embargadas por desmatamento ilegal — localização, data e infração (IBAMA - Instituto Brasileiro do Meio Ambiente)",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://databr.api.br/v1/rede/00000000000191/influencia",
+          "provider": "DataBR — API de Dados Públicos Brasileiros",
+          "cost": "0.05 USDC",
+          "capability": "Rede de influência societária — grafo de sócios, empresas conectadas e participações cruzadas",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://war-tracker.com/api/v1/vessels/9217981/position",
+          "provider": "War-Tracker — Unbiased, Uncensored, Live War Tracker Map | Real-Time OSINT Conflict Map",
+          "cost": "0.001 USDC",
+          "capability": "Latest AIS position for one vessel by IMO. Returns lat/lon (WGS84), speed over ground (`sog`, knots), course over ground (`cog`, degrees true 0-360), AIS destination string (free-form, operator-entered), captured-at UTC, and `age_seconds` since the ping was received.\n\nFree for browsers, AI-search crawlers, and link-preview bots; paid via x402 for training-crawler UAs (GPTBot, ClaudeBot, CCBot, …). AIS pings arrive every 1-180 s depending on vessel speed and satellite/terrestrial coverage —…",
+          "source": "https://www.x402scan.com/server/5fabd45f-be84-4001-b869-b370e958f7aa"
+        },
+        {
+          "route": "https://war-tracker.com/event-type/drone-strike",
+          "provider": "War-Tracker — Unbiased, Uncensored, Live War Tracker Map | Real-Time OSINT Conflict Map",
+          "cost": "0.001 USDC",
+          "capability": "Event-type hub page at /event-type/{slug}. Aggregates events matching one classification slug (e.g. drone-strike, airstrike, skirmish). HTML with embedded CollectionPage + Dataset JSON-LD pointing back at /api/v1/events?event_type={slug}.",
+          "source": "https://www.x402scan.com/server/5fabd45f-be84-4001-b869-b370e958f7aa"
+        },
+        {
+          "route": "https://api.shippingrates.org/api/dd/calculate",
+          "provider": "FreightGate — Shipping Intelligence API | Demurrage & Detention Rates via x402",
+          "cost": "0.1 USDC",
+          "capability": "Calculate demurrage & detention costs for a shipping line, country, container type, and number of days. Returns slab breakdown with free days, per-diem rates, and total cost.",
+          "source": "https://www.x402scan.com/server/cfcc75f6-2323-4afa-b90a-15a6aab460c3"
+        },
+        {
+          "route": "https://stableenrich.dev/api/clado/contacts-enrich",
+          "provider": "StableEnrich",
+          "cost": "0.2 USDC",
+          "capability": "Clado Contacts Enrichment - Enrich contact info from LinkedIn URL, email, or phone",
+          "source": "https://www.x402scan.com/server/b8a06bde-b6e8-4a10-b4e0-cc6a25fb9efb"
+        }
+      ]
+    },
+    {
+      "id": "onchain_finance",
+      "label": "Onchain and finance",
+      "color": "#167a5a",
+      "count": 5063,
+      "provider_count": 837,
+      "share": 0.37456536213656877,
+      "top_providers": [
+        {
+          "name": "https://services.eruditepay.com",
+          "count": 999
+        },
+        {
+          "name": "https://x402.eruditepay.com",
+          "count": 298
+        },
+        {
+          "name": "EruditePay Blockchain Intelligence API",
+          "count": 207
+        },
+        {
+          "name": "httpay.xyz — 307 Pay-Per-Call APIs via x402 on Base | No API Keys",
+          "count": 178
+        },
+        {
+          "name": "Carbon &amp; Cashmere — Crypto Intelligence Infrastructure",
+          "count": 162
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://x402.aurelianflo.com/api/ofac-wallet-screen/:address",
+          "provider": "AurelianFlo — Compliance APIs for the agent era",
+          "cost": "0.01 USDC",
+          "capability": "Exact-match OFAC SDN wallet screening for sanctioned digital currency addresses. Screens one wallet address against Treasury's public SDN advanced XML and returns hit or clear status, asset coverage, sanctioned entity metadata, sanctions programs, list source, listing date, and a manual-review signal for onchain payment and treasury controls.",
+          "source": "https://www.x402scan.com/server/ba7dfc19-17d1-4c3e-b298-6861f879ceba"
+        },
+        {
+          "route": "https://api.carbon-cashmere.de/v1/proven-track-record",
+          "provider": "Carbon &amp; Cashmere — Crypto Intelligence Infrastructure",
+          "cost": "0.5 USDC",
+          "capability": "Verifiable prop-firm trading results from our own ML-driven strategy: passed $100k FTMO challenge 2026-04-17 with +5.04% return in 5 days, 16 BTC-long trades, 81.25% win rate. Full transparency â trade-level data (entry/exit prices, pnl, exit reasons, ML confidence, regime-at-entry), aggregate statistics (profit factor, max drawdown, avg duration, win/loss streaks, exit-reason breakdown), and broker reconciliation. Data source: cTrader WebSocket (15min-fresh) + internal decision-tracker. First and only x402 service offering verifiable prop-firm track record as research data â not investment advice.",
+          "source": "https://www.x402scan.com/server/deaef2d7-e3ce-4c80-8f7d-3dc82765166f"
+        },
+        {
+          "route": "https://blockrun.ai/api/v1/defillama/prices/%7Bcoins%7D",
+          "provider": "BlockRun — Pay-per-call AI gateway",
+          "cost": "0.001 USDC",
+          "capability": "Token price lookup. Pass coin identifiers as `/v1/defillama/prices/{coins}` (e.g. `coingecko:bitcoin`, `ethereum:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`). Supports comma-separated lists.",
+          "source": "https://www.x402scan.com/server/b85dcf0f-d4a9-47ce-9d0b-6ec70e2844e0"
+        },
+        {
+          "route": "https://blockrun.ai/api/v1/defillama/yields",
+          "provider": "BlockRun — Pay-per-call AI gateway",
+          "cost": "0.005 USDC",
+          "capability": "Every tracked yield pool across DeFi (lending, LPs, staking, vaults) with current APY/TVL.",
+          "source": "https://www.x402scan.com/server/b85dcf0f-d4a9-47ce-9d0b-6ec70e2844e0"
+        },
+        {
+          "route": "https://blockrun.ai/api/v1/pm/polymarket/wallet/identities",
+          "provider": "BlockRun — Pay-per-call AI gateway",
+          "cost": "0.005 USDC",
+          "capability": "Bulk identity lookup for up to 200 wallet addresses (POST body: {addresses: [..]})",
+          "source": "https://www.x402scan.com/server/b85dcf0f-d4a9-47ce-9d0b-6ec70e2844e0"
+        },
+        {
+          "route": "https://blockrun.ai/api/v1/pm/polymarket/wallets/profiles",
+          "provider": "BlockRun — Pay-per-call AI gateway",
+          "cost": "0.005 USDC",
+          "capability": "Batch retrieve wallet profiles for multiple addresses",
+          "source": "https://www.x402scan.com/server/b85dcf0f-d4a9-47ce-9d0b-6ec70e2844e0"
+        },
+        {
+          "route": "https://blockrun.ai/api/v1/surf/market/price",
+          "provider": "BlockRun — Pay-per-call AI gateway",
+          "cost": "0.001 USDC",
+          "capability": "Token price history.",
+          "source": "https://www.x402scan.com/server/b85dcf0f-d4a9-47ce-9d0b-6ec70e2844e0"
+        }
+      ]
+    },
+    {
+      "id": "trust_risk",
+      "label": "Trust, risk, verification",
+      "color": "#b66a15",
+      "count": 607,
+      "provider_count": 95,
+      "share": 0.04490641414515055,
+      "top_providers": [
+        {
+          "name": "Strale — Trust and Quality Infrastructure for AI Agents",
+          "count": 342
+        },
+        {
+          "name": "https://gg402.vercel.app",
+          "count": 42
+        },
+        {
+          "name": "Verifik AI",
+          "count": 26
+        },
+        {
+          "name": "voidly — network intelligence built on trust",
+          "count": 18
+        },
+        {
+          "name": "https://x402-gateway-production-1b84.up.railway.app",
+          "count": 11
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://ai.verifik.co/api/br/background-check",
+          "provider": "Verifik AI",
+          "cost": "90000000000000 atomic units token",
+          "capability": "Brazil individual background screening using CPF and date of birth. A successful response includes identity-related fields and, when the data provider supplies it, a base64-encoded PDF report. Intended for employment screening, due diligence, and compliance; handle the PDF and metadata under your own legal and retention rules.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://property-risk-passport-api.lifebite-app.workers.dev/v1/property-risk-full",
+          "provider": "Property Risk Passport API | Address due diligence for agents",
+          "cost": "0.001 USDC",
+          "capability": "Evaluate a US property address for parcel match, FEMA flood zone, flood proximity, taxing entities, school district, permit history, zoning/land-use context, insurance red flags, due-diligence risk score, quality score, recommended next steps, and official source links.",
+          "source": "https://www.x402scan.com/server/fc38c2ef-dde7-4a4f-9da6-e13b103fc944"
+        },
+        {
+          "route": "https://x402-cybercentry-erc-8004-agent-verification.up.railway.app/verify",
+          "provider": "Cybercentry ERC-8004 Agent Verification - x402",
+          "cost": "0.1 USDC",
+          "capability": "Verify AI agent identity, authenticity and risk using the Cybercentry ERC-8004 Agent Verification (CEAV) API. Returns on-chain verification results for AI agents using the ERC-8004 standard",
+          "source": "https://www.x402scan.com/server/6cda042c-aad2-41fb-a6af-cd6934af6cf4"
+        },
+        {
+          "route": "https://api.beezshield.com/contracts/risk-score",
+          "provider": "BeezShield | Pre-execution decision engine for agents",
+          "cost": "0.02 USDC",
+          "capability": "BeezShield delivers Machine Trust Infrastructure with Sentinel Alpha, a pre-execution decision engine for agents on Base with x402 lane pricing and ERC-8004 identity proof.",
+          "source": "https://www.x402scan.com/server/54df6029-9247-458e-a5f0-6f709c0d20fb"
+        },
+        {
+          "route": "https://legal.x4api.com/v1/analyze",
+          "provider": "https://legal.x4api.com",
+          "cost": "30000 atomic units token",
+          "capability": "Analyze contract clauses for key terms, obligations, red flags, and risk levels",
+          "source": "https://www.x402scan.com/server/e77594b0-4eb0-4f6c-9fe0-ae138ede5246"
+        },
+        {
+          "route": "https://hello-world-x402.vercel.app/hello",
+          "provider": "https://hello-world-x402.vercel.app",
+          "cost": "0.001 USDC",
+          "capability": "Returns \"Hello World\" after payment verification",
+          "source": "https://www.x402scan.com/server/ad548594-5265-493d-b542-73f90156d137"
+        },
+        {
+          "route": "https://gpartin--waveguard-api-fastapi-app.modal.run/v1/scan",
+          "provider": "https://gpartin--waveguard-api-fastapi-app.modal.run",
+          "cost": "0.001 USDC",
+          "capability": "WaveGuard anomaly-detection scan — physics-based data integrity verification for ticker feeds, sensor streams, and structured data.",
+          "source": "https://www.x402scan.com/server/adc3a554-44db-4f7c-89a4-933249f08fb6"
+        }
+      ]
+    },
+    {
+      "id": "media_generation",
+      "label": "Media generation",
+      "color": "#5b4aa0",
+      "count": 675,
+      "provider_count": 131,
+      "share": 0.04993711622401421,
+      "top_providers": [
+        {
+          "name": "https://gg402.vercel.app",
+          "count": 276
+        },
+        {
+          "name": "StableStudio",
+          "count": 50
+        },
+        {
+          "name": "Dopamint | The 1st AI prompt-to-NFT Marketplace on Base",
+          "count": 32
+        },
+        {
+          "name": "Obolos - x402 Micropayments API",
+          "count": 30
+        },
+        {
+          "name": "Venice API Docs",
+          "count": 23
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://blockrun.ai/api/v1/audio/generations",
+          "provider": "BlockRun — Pay-per-call AI gateway",
+          "cost": "0.105 USDC",
+          "capability": "AI music generation API - pay per track with USDC on Base",
+          "source": "https://www.x402scan.com/server/b85dcf0f-d4a9-47ce-9d0b-6ec70e2844e0"
+        },
+        {
+          "route": "https://sol.blockrun.ai/api/v1/images/generations",
+          "provider": "https://sol.blockrun.ai",
+          "cost": "40000 atomic units token",
+          "capability": "AI image generation API - pay per image with USDC on Solana",
+          "source": "https://www.x402scan.com/server/239470e8-8384-4783-8448-b7365d80fc43"
+        },
+        {
+          "route": "https://sol.blockrun.ai/api/v1/images/image2image",
+          "provider": "https://sol.blockrun.ai",
+          "cost": "20000 atomic units token",
+          "capability": "AI image editing API - edit images with USDC on Solana",
+          "source": "https://www.x402scan.com/server/239470e8-8384-4783-8448-b7365d80fc43"
+        },
+        {
+          "route": "https://stablestudio.io/api/upload",
+          "provider": "StableStudio",
+          "cost": "0.01 USDC",
+          "capability": "Get a client token for direct upload to Vercel Blob",
+          "source": "https://www.x402scan.com/server/9d0738fb-658b-479a-929b-cec1eedd9ead"
+        },
+        {
+          "route": "https://stablestudio.io/api/generate/flux-2-pro/edit",
+          "provider": "StableStudio",
+          "cost": "10 USDC",
+          "capability": "edit with Flux 2 Pro",
+          "source": "https://www.x402scan.com/server/9d0738fb-658b-479a-929b-cec1eedd9ead"
+        },
+        {
+          "route": "https://stablestudio.io/api/generate/flux-2-pro/generate",
+          "provider": "StableStudio",
+          "cost": "10 USDC",
+          "capability": "generate with Flux 2 Pro",
+          "source": "https://www.x402scan.com/server/9d0738fb-658b-479a-929b-cec1eedd9ead"
+        },
+        {
+          "route": "https://stablestudio.io/api/generate/gpt-image-1.5/edit",
+          "provider": "StableStudio",
+          "cost": "10 USDC",
+          "capability": "edit with GPT Image 1.5",
+          "source": "https://www.x402scan.com/server/9d0738fb-658b-479a-929b-cec1eedd9ead"
+        }
+      ]
+    },
+    {
+      "id": "communication_action",
+      "label": "Communication and action",
+      "color": "#b63b42",
+      "count": 358,
+      "provider_count": 59,
+      "share": 0.026485166826958645,
+      "top_providers": [
+        {
+          "name": "AgentOS — Infrastructure for Autonomous AI Agents",
+          "count": 68
+        },
+        {
+          "name": "AgentMail | Email Inbox API for AI Agents",
+          "count": 51
+        },
+        {
+          "name": "https://gg402.vercel.app",
+          "count": 28
+        },
+        {
+          "name": "LowPaymentFee | Premium API Directory",
+          "count": 23
+        },
+        {
+          "name": "StableDesign",
+          "count": 23
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://api.molty.cash/a2a",
+          "provider": "molty.cash — USDC payments for agents and humans",
+          "cost": "0.02 USDC",
+          "capability": "Create USDC-funded tasks for AI agents and humans to complete. Supports social promotion across X, Instagram, TikTok, YouTube, Reddit, Substack and any custom task with proof-based payout. Workers pick gigs, deliver proof, get paid automatically.",
+          "source": "https://www.x402scan.com/server/701b5dfd-59a7-45ad-9463-f5d73723fcc4"
+        },
+        {
+          "route": "https://stableemail.dev/api/inbox/buy",
+          "provider": "StableEmail",
+          "cost": "1 USDC",
+          "capability": "Buy an inbox on stableemail.dev ($1, 30 days). forwardTo is optional — omit it to use as a programmatic mailbox via the messages API (retainMessages enabled automatically). Message content and attachments are retained for 90 days.",
+          "source": "https://www.x402scan.com/server/7c37fc42-c725-4232-9e4e-106db4872375"
+        },
+        {
+          "route": "https://stableemail.dev/api/inbox/topup",
+          "provider": "StableEmail",
+          "cost": "1 USDC",
+          "capability": "Top up a forwarding inbox for 30 days ($1)",
+          "source": "https://www.x402scan.com/server/7c37fc42-c725-4232-9e4e-106db4872375"
+        },
+        {
+          "route": "https://stableemail.dev/api/inbox/topup/quarter",
+          "provider": "StableEmail",
+          "cost": "2.5 USDC",
+          "capability": "Top up a forwarding inbox for 90 days ($2.50, save 17%)",
+          "source": "https://www.x402scan.com/server/7c37fc42-c725-4232-9e4e-106db4872375"
+        },
+        {
+          "route": "https://stableemail.dev/api/inbox/topup/year",
+          "provider": "StableEmail",
+          "cost": "8 USDC",
+          "capability": "Top up a forwarding inbox for 365 days ($8, save 34%)",
+          "source": "https://www.x402scan.com/server/7c37fc42-c725-4232-9e4e-106db4872375"
+        },
+        {
+          "route": "https://stableemail.dev/api/subdomain/buy",
+          "provider": "StableEmail",
+          "cost": "5 USDC",
+          "capability": "Purchase a custom email subdomain on stableemail.dev ($5)",
+          "source": "https://www.x402scan.com/server/7c37fc42-c725-4232-9e4e-106db4872375"
+        },
+        {
+          "route": "https://stableemail.dev/api/inbox/messages/read",
+          "provider": "StableEmail",
+          "cost": "0.001 USDC",
+          "capability": "Read a single inbox message ($0.001). Returns text, HTML, and attachment download URLs (1hr expiry). Message content available for 90 days from receipt.",
+          "source": "https://www.x402scan.com/server/7c37fc42-c725-4232-9e4e-106db4872375"
+        }
+      ]
+    },
+    {
+      "id": "data_enrichment",
+      "label": "Data enrichment",
+      "color": "#475569",
+      "count": 844,
+      "provider_count": 162,
+      "share": 0.06243989050824887,
+      "top_providers": [
+        {
+          "name": "EruditePay Blockchain Intelligence API",
+          "count": 151
+        },
+        {
+          "name": "https://gg402.vercel.app",
+          "count": 148
+        },
+        {
+          "name": "Messari API — The Institutional Standard for Crypto Data",
+          "count": 47
+        },
+        {
+          "name": "Erudite Data Platform — Market Intelligence API",
+          "count": 23
+        },
+        {
+          "name": "Convrgent — Personality Intelligence Platform for AI Agents | 45 API Endpoints, 11 Frameworks",
+          "count": 20
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://mpp.hyreagent.fun/base/lp/meteora/pools",
+          "provider": "HYRE Agent — AI-Enhanced DeFi Data API",
+          "cost": "0.01 USDC",
+          "capability": "Pay-per-call DeFi intelligence for autonomous agents. 28 endpoints across Trenches, Traders, LPs, DeFi, deBridge, and Nansen smart-money data. Multi-chain x402 on Solana, Base, SKALE + MPP on Tempo. No API keys — payment is the only gate.",
+          "source": "https://www.x402scan.com/server/eee5895d-af89-4a03-9fa0-cbb476eb962d"
+        },
+        {
+          "route": "https://mpp.hyreagent.fun/defi/tvl",
+          "provider": "HYRE Agent — AI-Enhanced DeFi Data API",
+          "cost": "0.001 USDC",
+          "capability": "Pay-per-call DeFi intelligence for autonomous agents. 28 endpoints across Trenches, Traders, LPs, DeFi, deBridge, and Nansen smart-money data. Multi-chain x402 on Solana, Base, SKALE + MPP on Tempo. No API keys — payment is the only gate.",
+          "source": "https://www.x402scan.com/server/eee5895d-af89-4a03-9fa0-cbb476eb962d"
+        },
+        {
+          "route": "https://mpp.hyreagent.fun/trenches/graduating",
+          "provider": "HYRE Agent — AI-Enhanced DeFi Data API",
+          "cost": "0.003 USDC",
+          "capability": "Pay-per-call DeFi intelligence for autonomous agents. 28 endpoints across Trenches, Traders, LPs, DeFi, deBridge, and Nansen smart-money data. Multi-chain x402 on Solana, Base, SKALE + MPP on Tempo. No API keys — payment is the only gate.",
+          "source": "https://www.x402scan.com/server/eee5895d-af89-4a03-9fa0-cbb476eb962d"
+        },
+        {
+          "route": "https://mpp.hyreagent.fun/base/ask",
+          "provider": "HYRE Agent — AI-Enhanced DeFi Data API",
+          "cost": "0.25 USDC",
+          "capability": "Pay-per-call DeFi intelligence for autonomous agents. 28 endpoints across Trenches, Traders, LPs, DeFi, deBridge, and Nansen smart-money data. Multi-chain x402 on Solana, Base, SKALE + MPP on Tempo. No API keys — payment is the only gate.",
+          "source": "https://www.x402scan.com/server/eee5895d-af89-4a03-9fa0-cbb476eb962d"
+        },
+        {
+          "route": "https://mpp.hyreagent.fun/base/lp/meteora/pools/recommend",
+          "provider": "HYRE Agent — AI-Enhanced DeFi Data API",
+          "cost": "0.08 USDC",
+          "capability": "Pay-per-call DeFi intelligence for autonomous agents. 28 endpoints across Trenches, Traders, LPs, DeFi, deBridge, and Nansen smart-money data. Multi-chain x402 on Solana, Base, SKALE + MPP on Tempo. No API keys — payment is the only gate.",
+          "source": "https://www.x402scan.com/server/eee5895d-af89-4a03-9fa0-cbb476eb962d"
+        },
+        {
+          "route": "https://mpp.hyreagent.fun/base/lp/meteora/pools/strategy",
+          "provider": "HYRE Agent — AI-Enhanced DeFi Data API",
+          "cost": "0.2 USDC",
+          "capability": "Pay-per-call DeFi intelligence for autonomous agents. 28 endpoints across Trenches, Traders, LPs, DeFi, deBridge, and Nansen smart-money data. Multi-chain x402 on Solana, Base, SKALE + MPP on Tempo. No API keys — payment is the only gate.",
+          "source": "https://www.x402scan.com/server/eee5895d-af89-4a03-9fa0-cbb476eb962d"
+        },
+        {
+          "route": "https://mpp.hyreagent.fun/base/trenches/graduating",
+          "provider": "HYRE Agent — AI-Enhanced DeFi Data API",
+          "cost": "0.03 USDC",
+          "capability": "Pay-per-call DeFi intelligence for autonomous agents. 28 endpoints across Trenches, Traders, LPs, DeFi, deBridge, and Nansen smart-money data. Multi-chain x402 on Solana, Base, SKALE + MPP on Tempo. No API keys — payment is the only gate.",
+          "source": "https://www.x402scan.com/server/eee5895d-af89-4a03-9fa0-cbb476eb962d"
+        }
+      ]
+    },
+    {
+      "id": "long_tail_tools",
+      "label": "Long-tail utility tools",
+      "color": "#64748b",
+      "count": 1375,
+      "provider_count": 318,
+      "share": 0.10172375527114004,
+      "top_providers": [
+        {
+          "name": "https://gg402.vercel.app",
+          "count": 363
+        },
+        {
+          "name": "Quicknode x402",
+          "count": 266
+        },
+        {
+          "name": "LowPaymentFee | Premium API Directory",
+          "count": 56
+        },
+        {
+          "name": "WURK API - x402 Micropayments",
+          "count": 34
+        },
+        {
+          "name": "https://x402-gateway-production-1b84.up.railway.app",
+          "count": 31
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://stabletravel.dev/api/flightaware/flights/id/track",
+          "provider": "StableTravel",
+          "cost": "0.024 USDC",
+          "capability": "Get the flight track (position history) for a flight",
+          "source": "https://www.x402scan.com/server/166fd2f6-6d6f-4bda-9c7c-3cb8e9cf417e"
+        },
+        {
+          "route": "https://gotobi.hugen.tokyo/gotobi/next",
+          "provider": "https://gotobi.hugen.tokyo",
+          "cost": "0.001 USDC",
+          "capability": "Get the next upcoming Japanese FX gotobi day and days until it. Accounts for Japanese public holidays.",
+          "source": "https://www.x402scan.com/server/a3226174-2c8a-4d3b-b316-3c799c6b3fd2"
+        },
+        {
+          "route": "https://gotobi.hugen.tokyo/gotobi/today",
+          "provider": "https://gotobi.hugen.tokyo",
+          "cost": "0.001 USDC",
+          "capability": "Check if today is a Japanese FX gotobi day (五十日). Gotobi days = 5th, 10th, 15th, 20th, 25th, last day of month. Non-business days (weekends + Japanese public holidays) shift to preceding business day.",
+          "source": "https://www.x402scan.com/server/a3226174-2c8a-4d3b-b316-3c799c6b3fd2"
+        },
+        {
+          "route": "https://sol.blockrun.ai/api/v1/chat/completions",
+          "provider": "https://sol.blockrun.ai",
+          "cost": "1000 atomic units token",
+          "capability": "AI chat completions API - pay per request with USDC on Solana",
+          "source": "https://www.x402scan.com/server/239470e8-8384-4783-8448-b7365d80fc43"
+        },
+        {
+          "route": "https://api.neynar.com/v2/farcaster/user/bulk",
+          "provider": "Neynar",
+          "cost": "0.001 USDC",
+          "capability": "Complete Farcaster developer platform",
+          "source": "https://www.x402scan.com/server/fe272202-7c8a-4eb3-9859-fce7bbd6d6a2"
+        },
+        {
+          "route": "https://api.neynar.com/v2/farcaster/user/bulk/",
+          "provider": "Neynar",
+          "cost": "0.001 USDC",
+          "capability": "Complete Farcaster developer platform",
+          "source": "https://www.x402scan.com/server/fe272202-7c8a-4eb3-9859-fce7bbd6d6a2"
+        },
+        {
+          "route": "http://x402.evalengine.ai/api/archive-tweet",
+          "provider": "http://x402.evalengine.ai",
+          "cost": "0.02 USDC",
+          "capability": "Archive/store a X/Twitter tweet on Chromia's FileHub for long term storage",
+          "source": "https://www.x402scan.com/server/465fa2ae-6365-41d3-9f8e-b71b67a2d34e"
+        }
+      ]
+    }
+  ],
+  "provider_shapes": [
+    {
+      "provider": "https://gg402.vercel.app",
+      "count": 1031,
+      "distinct_routes": 1031,
+      "top_categories": [
+        {
+          "name": "Long-tail utility tools",
+          "count": 363
+        },
+        {
+          "name": "Media generation",
+          "count": 276
+        },
+        {
+          "name": "Data enrichment",
+          "count": 148
+        },
+        {
+          "name": "Search, crawl, scrape",
+          "count": 82
+        }
+      ],
+      "common_costs": [
+        {
+          "name": "0.01 USDC",
+          "count": 1022
+        },
+        {
+          "name": "0.25 USDC",
+          "count": 6
+        },
+        {
+          "name": "0.002 USDC",
+          "count": 1
+        },
+        {
+          "name": "0.1 USDC",
+          "count": 1
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://gg402.vercel.app/accent_detector",
+          "cost": "0.01 USDC",
+          "capability": "Analyzes written text to detect regional language variations, accents, or dialects, providing insights on cultural influences and translation suggestions.",
+          "source": "https://www.x402scan.com/server/3257e90c-5a73-4a07-8b14-4d094904bc21"
+        },
+        {
+          "route": "https://gg402.vercel.app/accent_training_coach",
+          "cost": "0.01 USDC",
+          "capability": "Provides accent reduction or adoption training in target languages, including phonetic breakdowns, practice phrases, and audio-like descriptions for pronunciation improvement.",
+          "source": "https://www.x402scan.com/server/3257e90c-5a73-4a07-8b14-4d094904bc21"
+        },
+        {
+          "route": "https://gg402.vercel.app/accessibility_audit",
+          "cost": "0.01 USDC",
+          "capability": "Evaluates websites, apps, or documents for accessibility compliance, identifying issues for users with disabilities and suggesting fixes.",
+          "source": "https://www.x402scan.com/server/3257e90c-5a73-4a07-8b14-4d094904bc21"
+        },
+        {
+          "route": "https://gg402.vercel.app/accessibility_auditor",
+          "cost": "0.01 USDC",
+          "capability": "Audits websites, apps, or content for accessibility compliance (e.g., WCAG standards) and suggests improvements for users with disabilities.",
+          "source": "https://www.x402scan.com/server/3257e90c-5a73-4a07-8b14-4d094904bc21"
+        },
+        {
+          "route": "https://gg402.vercel.app/accessibility_image_descriptor",
+          "cost": "0.01 USDC",
+          "capability": "Analyzes images and generates detailed textual descriptions for visually impaired users, enhancing accessibility in digital content and social media.",
+          "source": "https://www.x402scan.com/server/3257e90c-5a73-4a07-8b14-4d094904bc21"
+        }
+      ]
+    },
+    {
+      "provider": "https://services.eruditepay.com",
+      "count": 1011,
+      "distinct_routes": 1011,
+      "top_categories": [
+        {
+          "name": "Onchain and finance",
+          "count": 999
+        },
+        {
+          "name": "Search, crawl, scrape",
+          "count": 8
+        },
+        {
+          "name": "Trust, risk, verification",
+          "count": 2
+        },
+        {
+          "name": "Agent runtime primitives",
+          "count": 2
+        }
+      ],
+      "common_costs": [
+        {
+          "name": "3 USDC",
+          "count": 412
+        },
+        {
+          "name": "15 USDC",
+          "count": 250
+        },
+        {
+          "name": "60 USDC",
+          "count": 150
+        },
+        {
+          "name": "500 USDC",
+          "count": 98
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://services.eruditepay.com/api/audit/deep",
+          "cost": "2 USDC",
+          "capability": "Deep smart contract security scan using Slither + Mythril + Solhint. Submit Solidity source code as text body.",
+          "source": "https://www.x402scan.com/server/65cf8c3f-d7fd-41fc-bb6e-b9a1c8e6b659"
+        },
+        {
+          "route": "https://services.eruditepay.com/api/audit/full",
+          "cost": "5 USDC",
+          "capability": "Full automated smart contract audit using Slither + Mythril + Solhint + Aderyn. Complete vulnerability report with severity ratings. For comprehensive human review visit eruditeaudit.com",
+          "source": "https://www.x402scan.com/server/65cf8c3f-d7fd-41fc-bb6e-b9a1c8e6b659"
+        },
+        {
+          "route": "https://services.eruditepay.com/api/audit/quick",
+          "cost": "0.5 USDC",
+          "capability": "Quick smart contract security scan using Slither. Submit Solidity source code as text body. Returns JSON vulnerability report.",
+          "source": "https://www.x402scan.com/server/65cf8c3f-d7fd-41fc-bb6e-b9a1c8e6b659"
+        },
+        {
+          "route": "https://services.eruditepay.com/api/crypto/history/[symbol]",
+          "cost": "0.01 USDC",
+          "capability": "Get 30-day price history for any cryptocurrency",
+          "source": "https://www.x402scan.com/server/65cf8c3f-d7fd-41fc-bb6e-b9a1c8e6b659"
+        },
+        {
+          "route": "https://services.eruditepay.com/api/crypto/market/[symbol]",
+          "cost": "0.005 USDC",
+          "capability": "Get market data for any crypto - market cap, volume, supply, rank",
+          "source": "https://www.x402scan.com/server/65cf8c3f-d7fd-41fc-bb6e-b9a1c8e6b659"
+        }
+      ]
+    },
+    {
+      "provider": "Verifik AI",
+      "count": 384,
+      "distinct_routes": 262,
+      "top_categories": [
+        {
+          "name": "Agent runtime primitives",
+          "count": 349
+        },
+        {
+          "name": "Trust, risk, verification",
+          "count": 26
+        },
+        {
+          "name": "Data enrichment",
+          "count": 4
+        },
+        {
+          "name": "Communication and action",
+          "count": 3
+        }
+      ],
+      "common_costs": [
+        {
+          "name": "0.3 USDC",
+          "count": 186
+        },
+        {
+          "name": "140000000000000 atomic units token",
+          "count": 56
+        },
+        {
+          "name": "90000000000000 atomic units token",
+          "count": 47
+        },
+        {
+          "name": "0.4 USDC",
+          "count": 22
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://ai.verifik.co/api/ar/cedula",
+          "cost": "140000000000000 atomic units token",
+          "capability": "Verify an Argentine identity using documentType DNIAR and documentNumber. Returns identity fields to support KYC and compliance.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://ai.verifik.co/api/ar/company",
+          "cost": "90000000000000 atomic units token",
+          "capability": "Look up an Argentine company using documentType CUIT and documentNumber. Returns registration fields to support KYB, vendor screening, and compliance.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://ai.verifik.co/api/ar/vehicle",
+          "cost": "90000000000000 atomic units token",
+          "capability": "The Argentine Vehicle Information service provides detailed information about vehicles registered in Argentina using their license plate number. This service returns comprehensive vehicle data including make, model, year, engine specifications, and registration details.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://ai.verifik.co/api/bo/cedula",
+          "cost": "140000000000000 atomic units token",
+          "capability": "Verify a Bolivian citizen using documentType CI, documentNumber, and dateOfBirth (DD/MM/YYYY). Returns identity fields to support KYC and compliance.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://ai.verifik.co/api/bo/company",
+          "cost": "90000000000000 atomic units token",
+          "capability": "Look up a Bolivian company using documentType NIT and documentNumber. Returns registration fields to support KYB, vendor screening, and compliance.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        }
+      ]
+    },
+    {
+      "provider": "EruditePay Blockchain Intelligence API",
+      "count": 358,
+      "distinct_routes": 358,
+      "top_categories": [
+        {
+          "name": "Onchain and finance",
+          "count": 207
+        },
+        {
+          "name": "Data enrichment",
+          "count": 151
+        }
+      ],
+      "common_costs": [
+        {
+          "name": "0.01 USDC",
+          "count": 332
+        },
+        {
+          "name": "0.05 USDC",
+          "count": 24
+        },
+        {
+          "name": "0.5 USDC",
+          "count": 1
+        },
+        {
+          "name": "0.1 USDC",
+          "count": 1
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://bridge.eruditepay.com/api/base/wallet/first-tx",
+          "cost": "0.01 USDC",
+          "capability": "Crypto data intelligence",
+          "source": "https://www.x402scan.com/server/6dc668f8-49c1-4b7d-90c9-0d4ea89fd79b"
+        },
+        {
+          "route": "https://bridge.eruditepay.com/api/base/wallet/pnl",
+          "cost": "0.01 USDC",
+          "capability": "Crypto data intelligence",
+          "source": "https://www.x402scan.com/server/6dc668f8-49c1-4b7d-90c9-0d4ea89fd79b"
+        },
+        {
+          "route": "https://bridge.eruditepay.com/api/base/wallet/score",
+          "cost": "0.01 USDC",
+          "capability": "Crypto data intelligence",
+          "source": "https://www.x402scan.com/server/6dc668f8-49c1-4b7d-90c9-0d4ea89fd79b"
+        },
+        {
+          "route": "https://bridge.eruditepay.com/api/base/wallet/similar",
+          "cost": "0.01 USDC",
+          "capability": "Crypto data intelligence",
+          "source": "https://www.x402scan.com/server/6dc668f8-49c1-4b7d-90c9-0d4ea89fd79b"
+        },
+        {
+          "route": "https://bridge.eruditepay.com/api/base/wallet/token-approvals",
+          "cost": "0.01 USDC",
+          "capability": "Crypto data intelligence",
+          "source": "https://www.x402scan.com/server/6dc668f8-49c1-4b7d-90c9-0d4ea89fd79b"
+        }
+      ]
+    },
+    {
+      "provider": "Strale — Trust and Quality Infrastructure for AI Agents",
+      "count": 343,
+      "distinct_routes": 343,
+      "top_categories": [
+        {
+          "name": "Trust, risk, verification",
+          "count": 342
+        },
+        {
+          "name": "Search, crawl, scrape",
+          "count": 1
+        }
+      ],
+      "common_costs": [
+        {
+          "name": "0.005 USDC",
+          "count": 141
+        },
+        {
+          "name": "0.02 USDC",
+          "count": 38
+        },
+        {
+          "name": "0.01 USDC",
+          "count": 38
+        },
+        {
+          "name": "0.15 USDC",
+          "count": 38
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://api.strale.io/x402/accessibility-audit",
+          "cost": "0.03 USDC",
+          "capability": "Company data, compliance checks, financial validation. Structured JSON with audit trails. Every capability independently quality-scored.",
+          "source": "https://www.x402scan.com/server/d7f288aa-e6b4-433d-a324-0842f3a75186"
+        },
+        {
+          "route": "https://api.strale.io/x402/address-geocode",
+          "cost": "0.005 USDC",
+          "capability": "Company data, compliance checks, financial validation. Structured JSON with audit trails. Every capability independently quality-scored.",
+          "source": "https://www.x402scan.com/server/d7f288aa-e6b4-433d-a324-0842f3a75186"
+        },
+        {
+          "route": "https://api.strale.io/x402/address-parse",
+          "cost": "0.005 USDC",
+          "capability": "Company data, compliance checks, financial validation. Structured JSON with audit trails. Every capability independently quality-scored.",
+          "source": "https://www.x402scan.com/server/d7f288aa-e6b4-433d-a324-0842f3a75186"
+        },
+        {
+          "route": "https://api.strale.io/x402/address-validate",
+          "cost": "0.005 USDC",
+          "capability": "Company data, compliance checks, financial validation. Structured JSON with audit trails. Every capability independently quality-scored.",
+          "source": "https://www.x402scan.com/server/d7f288aa-e6b4-433d-a324-0842f3a75186"
+        },
+        {
+          "route": "https://api.strale.io/x402/adverse-media-check",
+          "cost": "0.02 USDC",
+          "capability": "Company data, compliance checks, financial validation. Structured JSON with audit trails. Every capability independently quality-scored.",
+          "source": "https://www.x402scan.com/server/d7f288aa-e6b4-433d-a324-0842f3a75186"
+        }
+      ]
+    },
+    {
+      "provider": "https://x402.eruditepay.com",
+      "count": 328,
+      "distinct_routes": 328,
+      "top_categories": [
+        {
+          "name": "Onchain and finance",
+          "count": 298
+        },
+        {
+          "name": "Long-tail utility tools",
+          "count": 14
+        },
+        {
+          "name": "Search, crawl, scrape",
+          "count": 12
+        },
+        {
+          "name": "Communication and action",
+          "count": 2
+        }
+      ],
+      "common_costs": [
+        {
+          "name": "0.005 USDC",
+          "count": 124
+        },
+        {
+          "name": "0.003 USDC",
+          "count": 104
+        },
+        {
+          "name": "0.001 USDC",
+          "count": 49
+        },
+        {
+          "name": "0.03 USDC",
+          "count": 23
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://x402.eruditepay.com/api/base/wallet/first-tx",
+          "cost": "0.005 USDC",
+          "capability": "First ever transaction for a Base wallet (account birthday)",
+          "source": "https://www.x402scan.com/server/2284e308-28e1-4daa-baeb-815e4e32b40d"
+        },
+        {
+          "route": "https://x402.eruditepay.com/api/base/wallet/pnl",
+          "cost": "0.005 USDC",
+          "capability": "Estimated profit/loss for a Base wallet from token transfer history",
+          "source": "https://www.x402scan.com/server/2284e308-28e1-4daa-baeb-815e4e32b40d"
+        },
+        {
+          "route": "https://x402.eruditepay.com/api/base/wallet/score",
+          "cost": "0.005 USDC",
+          "capability": "Base wallet quality score based on age, TX count, token diversity, and volume",
+          "source": "https://www.x402scan.com/server/2284e308-28e1-4daa-baeb-815e4e32b40d"
+        },
+        {
+          "route": "https://x402.eruditepay.com/api/base/wallet/similar",
+          "cost": "0.005 USDC",
+          "capability": "Find Base wallets with similar token holdings using Jaccard similarity",
+          "source": "https://www.x402scan.com/server/2284e308-28e1-4daa-baeb-815e4e32b40d"
+        },
+        {
+          "route": "https://x402.eruditepay.com/api/base/wallet/token-approvals",
+          "cost": "0.005 USDC",
+          "capability": "Active ERC20 token approvals for a Base wallet (security risk check)",
+          "source": "https://www.x402scan.com/server/2284e308-28e1-4daa-baeb-815e4e32b40d"
+        }
+      ]
+    },
+    {
+      "provider": "Quicknode x402",
+      "count": 270,
+      "distinct_routes": 135,
+      "top_categories": [
+        {
+          "name": "Long-tail utility tools",
+          "count": 266
+        },
+        {
+          "name": "Onchain and finance",
+          "count": 4
+        }
+      ],
+      "common_costs": [
+        {
+          "name": "10 USDC",
+          "count": 135
+        },
+        {
+          "name": "0.01 USDC",
+          "count": 135
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://x402.quicknode.com/0g-galileo",
+          "cost": "10 USDC",
+          "capability": "Payment for credits to access Quicknode Core API",
+          "source": "https://www.x402scan.com/server/a5751f72-3d18-4a10-a28f-51f6e4f6bb60"
+        },
+        {
+          "route": "https://x402.quicknode.com/0g-galileo",
+          "cost": "0.01 USDC",
+          "capability": "Payment for credits to access Quicknode Core API",
+          "source": "https://www.x402scan.com/server/a5751f72-3d18-4a10-a28f-51f6e4f6bb60"
+        },
+        {
+          "route": "https://x402.quicknode.com/0g-mainnet",
+          "cost": "10 USDC",
+          "capability": "Payment for credits to access Quicknode Core API",
+          "source": "https://www.x402scan.com/server/a5751f72-3d18-4a10-a28f-51f6e4f6bb60"
+        },
+        {
+          "route": "https://x402.quicknode.com/0g-mainnet",
+          "cost": "0.01 USDC",
+          "capability": "Payment for credits to access Quicknode Core API",
+          "source": "https://www.x402scan.com/server/a5751f72-3d18-4a10-a28f-51f6e4f6bb60"
+        },
+        {
+          "route": "https://x402.quicknode.com/abstract-mainnet",
+          "cost": "10 USDC",
+          "capability": "Payment for credits to access Quicknode Core API",
+          "source": "https://www.x402scan.com/server/a5751f72-3d18-4a10-a28f-51f6e4f6bb60"
+        }
+      ]
+    },
+    {
+      "provider": "Carbon &amp; Cashmere — Crypto Intelligence Infrastructure",
+      "count": 197,
+      "distinct_routes": 197,
+      "top_categories": [
+        {
+          "name": "Onchain and finance",
+          "count": 162
+        },
+        {
+          "name": "Agent runtime primitives",
+          "count": 21
+        },
+        {
+          "name": "Data enrichment",
+          "count": 14
+        }
+      ],
+      "common_costs": [
+        {
+          "name": "0.05 USDC",
+          "count": 34
+        },
+        {
+          "name": "0.01 USDC",
+          "count": 33
+        },
+        {
+          "name": "0.12 USDC",
+          "count": 25
+        },
+        {
+          "name": "0.1 USDC",
+          "count": 21
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://api.carbon-cashmere.de/v1/ai/assistant",
+          "cost": "0.1 USDC",
+          "capability": "AI-powered crypto trading assistant â ask any market question and get an answer grounded in live data. Powered by Claude AI with 34 real-time data sources. AI agent API for natural language market intelligence and conversational trading analysis.",
+          "source": "https://www.x402scan.com/server/deaef2d7-e3ce-4c80-8f7d-3dc82765166f"
+        },
+        {
+          "route": "https://api.carbon-cashmere.de/v1/analytics-bundle/%7Bcoin%7D",
+          "cost": "0.35 USDC",
+          "capability": "Aggregated analytics bundle combining 4 L2 endpoints in one call: technical indicators (RSI/MACD/BB/ADX/ATR/Stoch/CCI extended set), multi-method anomaly detection, derivatives analytics (funding-z/basis/OI-regime/GEX slots), and factor decomposition (momentum/carry/crowding/vol with composite). Bundle price 0.35 USD vs 0.43 USD separate (~19% discount). Partial-failure-tolerant: failed components return null with error reporting in _meta.errors. Informational research data â not investment advice.",
+          "source": "https://www.x402scan.com/server/deaef2d7-e3ce-4c80-8f7d-3dc82765166f"
+        },
+        {
+          "route": "https://api.carbon-cashmere.de/v1/analytics-bundle/BTC",
+          "cost": "0.35 USDC",
+          "capability": "Aggregated analytics bundle combining 4 L2 endpoints in one call: technical indicators (RSI/MACD/BB/ADX/ATR/Stoch/CCI extended set), multi-method anomaly detection, derivatives analytics (funding-z/basis/OI-regime/GEX slots), and factor decomposition (momentum/carry/crowding/vol with composite). Bundle price 0.35 USD vs 0.43 USD separate (~19% discount). Partial-failure-tolerant: failed components return null with error reporting in _meta.errors. Informational research data â not investment advice.",
+          "source": "https://www.x402scan.com/server/deaef2d7-e3ce-4c80-8f7d-3dc82765166f"
+        },
+        {
+          "route": "https://api.carbon-cashmere.de/v1/analytics-bundle/ETH",
+          "cost": "0.35 USDC",
+          "capability": "Aggregated analytics bundle combining 4 L2 endpoints in one call: technical indicators (RSI/MACD/BB/ADX/ATR/Stoch/CCI extended set), multi-method anomaly detection, derivatives analytics (funding-z/basis/OI-regime/GEX slots), and factor decomposition (momentum/carry/crowding/vol with composite). Bundle price 0.35 USD vs 0.43 USD separate (~19% discount). Partial-failure-tolerant: failed components return null with error reporting in _meta.errors. Informational research data â not investment advice.",
+          "source": "https://www.x402scan.com/server/deaef2d7-e3ce-4c80-8f7d-3dc82765166f"
+        },
+        {
+          "route": "https://api.carbon-cashmere.de/v1/analytics-bundle/SOL",
+          "cost": "0.35 USDC",
+          "capability": "Aggregated analytics bundle combining 4 L2 endpoints in one call: technical indicators (RSI/MACD/BB/ADX/ATR/Stoch/CCI extended set), multi-method anomaly detection, derivatives analytics (funding-z/basis/OI-regime/GEX slots), and factor decomposition (momentum/carry/crowding/vol with composite). Bundle price 0.35 USD vs 0.43 USD separate (~19% discount). Partial-failure-tolerant: failed components return null with error reporting in _meta.errors. Informational research data â not investment advice.",
+          "source": "https://www.x402scan.com/server/deaef2d7-e3ce-4c80-8f7d-3dc82765166f"
+        }
+      ]
+    },
+    {
+      "provider": "httpay.xyz — 307 Pay-Per-Call APIs via x402 on Base | No API Keys",
+      "count": 180,
+      "distinct_routes": 180,
+      "top_categories": [
+        {
+          "name": "Onchain and finance",
+          "count": 178
+        },
+        {
+          "name": "Search, crawl, scrape",
+          "count": 2
+        }
+      ],
+      "common_costs": [
+        {
+          "name": "0.001 USDC",
+          "count": 80
+        },
+        {
+          "name": "0.005 USDC",
+          "count": 27
+        },
+        {
+          "name": "0.01 USDC",
+          "count": 25
+        },
+        {
+          "name": "0.002 USDC",
+          "count": 20
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://httpay.xyz/api/agent-directory",
+          "cost": "0.01 USDC",
+          "capability": "307 pay-per-call APIs (287 native + Universal Gateway proxying 37 services) powered by x402 and USDC on Base. Token intelligence, DeFi yields, MEV risk, AI tools, web scraping. No API keys, no subscriptions — pay $0.001–$0.05 per call.",
+          "source": "https://www.x402scan.com/server/516aa834-3222-4b14-b68b-04f4ea06223a"
+        },
+        {
+          "route": "https://httpay.xyz/api/agent-directory-curated",
+          "cost": "0.03 USDC",
+          "capability": "307 pay-per-call APIs (287 native + Universal Gateway proxying 37 services) powered by x402 and USDC on Base. Token intelligence, DeFi yields, MEV risk, AI tools, web scraping. No API keys, no subscriptions — pay $0.001–$0.05 per call.",
+          "source": "https://www.x402scan.com/server/516aa834-3222-4b14-b68b-04f4ea06223a"
+        },
+        {
+          "route": "https://httpay.xyz/api/agent-jobs/open",
+          "cost": "0.005 USDC",
+          "capability": "307 pay-per-call APIs (287 native + Universal Gateway proxying 37 services) powered by x402 and USDC on Base. Token intelligence, DeFi yields, MEV risk, AI tools, web scraping. No API keys, no subscriptions — pay $0.001–$0.05 per call.",
+          "source": "https://www.x402scan.com/server/516aa834-3222-4b14-b68b-04f4ea06223a"
+        },
+        {
+          "route": "https://httpay.xyz/api/alpha-report",
+          "cost": "0.05 USDC",
+          "capability": "307 pay-per-call APIs (287 native + Universal Gateway proxying 37 services) powered by x402 and USDC on Base. Token intelligence, DeFi yields, MEV risk, AI tools, web scraping. No API keys, no subscriptions — pay $0.001–$0.05 per call.",
+          "source": "https://www.x402scan.com/server/516aa834-3222-4b14-b68b-04f4ea06223a"
+        },
+        {
+          "route": "https://httpay.xyz/api/approval-risk-auditor",
+          "cost": "0.005 USDC",
+          "capability": "307 pay-per-call APIs (287 native + Universal Gateway proxying 37 services) powered by x402 and USDC on Base. Token intelligence, DeFi yields, MEV risk, AI tools, web scraping. No API keys, no subscriptions — pay $0.001–$0.05 per call.",
+          "source": "https://www.x402scan.com/server/516aa834-3222-4b14-b68b-04f4ea06223a"
+        }
+      ]
+    },
+    {
+      "provider": "XActions — Free AI-Powered X/Twitter Automation Tools | Mass Unfollow, Auto-Follow & More",
+      "count": 166,
+      "distinct_routes": 166,
+      "top_categories": [
+        {
+          "name": "Agent runtime primitives",
+          "count": 166
+        }
+      ],
+      "common_costs": [
+        {
+          "name": "0.005 USDC",
+          "count": 41
+        },
+        {
+          "name": "0.01 USDC",
+          "count": 37
+        },
+        {
+          "name": "0.002 USDC",
+          "count": 26
+        },
+        {
+          "name": "0.02 USDC",
+          "count": 19
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://xactions.app/api/ai/action/auto-comment",
+          "cost": "0.02 USDC",
+          "capability": "XActions AI API â action:auto-comment",
+          "source": "https://www.x402scan.com/server/33c82686-41ee-44d2-b914-c9be19232a17"
+        },
+        {
+          "route": "https://xactions.app/api/ai/action/auto-follow",
+          "cost": "0.03 USDC",
+          "capability": "XActions AI API â action:auto-follow",
+          "source": "https://www.x402scan.com/server/33c82686-41ee-44d2-b914-c9be19232a17"
+        },
+        {
+          "route": "https://xactions.app/api/ai/action/auto-like",
+          "cost": "0.02 USDC",
+          "capability": "XActions AI API â action:auto-like",
+          "source": "https://www.x402scan.com/server/33c82686-41ee-44d2-b914-c9be19232a17"
+        },
+        {
+          "route": "https://xactions.app/api/ai/action/auto-retweet",
+          "cost": "0.02 USDC",
+          "capability": "XActions AI API â action:auto-retweet",
+          "source": "https://www.x402scan.com/server/33c82686-41ee-44d2-b914-c9be19232a17"
+        },
+        {
+          "route": "https://xactions.app/api/ai/action/bulk-execute",
+          "cost": "0.05 USDC",
+          "capability": "XActions AI API â action:bulk-execute",
+          "source": "https://www.x402scan.com/server/33c82686-41ee-44d2-b914-c9be19232a17"
+        }
+      ]
+    },
+    {
+      "provider": "WURK API - x402 Micropayments",
+      "count": 144,
+      "distinct_routes": 144,
+      "top_categories": [
+        {
+          "name": "Onchain and finance",
+          "count": 62
+        },
+        {
+          "name": "Long-tail utility tools",
+          "count": 34
+        },
+        {
+          "name": "Agent runtime primitives",
+          "count": 23
+        },
+        {
+          "name": "Communication and action",
+          "count": 11
+        }
+      ],
+      "common_costs": [
+        {
+          "name": "2.5 USDC",
+          "count": 22
+        },
+        {
+          "name": "2500000 atomic units token",
+          "count": 20
+        },
+        {
+          "name": "1 USDC",
+          "count": 12
+        },
+        {
+          "name": "1000000 atomic units token",
+          "count": 12
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://wurkapi.fun/api/x402/base/hello-world",
+          "cost": "0.01 USDC",
+          "capability": "Hello World",
+          "source": "https://www.x402scan.com/server/687b3a58-2347-454f-818b-2cf1b58e7a69"
+        },
+        {
+          "route": "https://wurkapi.fun/api/x402/base/hello-world-2",
+          "cost": "0.01 USDC",
+          "capability": "Hello World 2 (param required)",
+          "source": "https://www.x402scan.com/server/687b3a58-2347-454f-818b-2cf1b58e7a69"
+        },
+        {
+          "route": "https://wurkapi.fun/api/x402/base/wait-1m",
+          "cost": "0.01 USDC",
+          "capability": "Decentralized engagement services powered by x402 micropayments. Likes, reposts, comments on X, Instagram, YouTube, and more.",
+          "source": "https://www.x402scan.com/server/687b3a58-2347-454f-818b-2cf1b58e7a69"
+        },
+        {
+          "route": "https://wurkapi.fun/api/x402/base/wait-2m",
+          "cost": "0.01 USDC",
+          "capability": "Timeout test endpoint (wait-2m)",
+          "source": "https://www.x402scan.com/server/687b3a58-2347-454f-818b-2cf1b58e7a69"
+        },
+        {
+          "route": "https://wurkapi.fun/api/x402/base/wait-5m",
+          "cost": "0.01 USDC",
+          "capability": "Timeout test endpoint (wait-5m)",
+          "source": "https://www.x402scan.com/server/687b3a58-2347-454f-818b-2cf1b58e7a69"
+        }
+      ]
+    },
+    {
+      "provider": "402.bot | Recipes and token-efficient x402 workflows for AI agents",
+      "count": 139,
+      "distinct_routes": 139,
+      "top_categories": [
+        {
+          "name": "Agent runtime primitives",
+          "count": 120
+        },
+        {
+          "name": "Onchain and finance",
+          "count": 11
+        },
+        {
+          "name": "Search, crawl, scrape",
+          "count": 7
+        },
+        {
+          "name": "Data enrichment",
+          "count": 1
+        }
+      ],
+      "common_costs": [
+        {
+          "name": "0.0075 USDC",
+          "count": 68
+        },
+        {
+          "name": "0.01 USDC",
+          "count": 44
+        },
+        {
+          "name": "0.005 USDC",
+          "count": 25
+        },
+        {
+          "name": "0.0025 USDC",
+          "count": 2
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://api.402.bot/upstreams/allium/v1/wallet/balances/probe",
+          "cost": "0.0075 USDC",
+          "capability": "Allium Wallet Balances Raw: Proxy raw Base wallet balances through 402.bot with normalized token metadata. Useful for balance snapshots, token inventory exports, treasury views, and portfolio audits. Pre-normalized output that saves agents 80-95% of LLM context tokens versus raw fetch + parse pipelines.",
+          "source": "https://www.x402scan.com/server/1a6114fa-58e8-4425-9328-708973944172"
+        },
+        {
+          "route": "https://api.402.bot/upstreams/allium/v1/wallet/counterparties/probe",
+          "cost": "0.0075 USDC",
+          "capability": "Allium Wallet Counterparties: Return aggregated inbound, outbound, and mixed counterparty summaries for a Base wallet. Useful for wallet clustering, relationship mapping, counterparty analysis, and investigations. Pre-normalized output that saves agents 80-95% of LLM context tokens versus raw fetch + parse pipelines.",
+          "source": "https://www.x402scan.com/server/1a6114fa-58e8-4425-9328-708973944172"
+        },
+        {
+          "route": "https://api.402.bot/upstreams/allium/v1/wallet/labels/probe",
+          "cost": "0.005 USDC",
+          "capability": "Allium Wallet Labels: Return grouped wallet label summaries and associated counterparties for one Base wallet. Useful for address labeling, entity hints, wallet investigations, and enrichment workflows. Pre-normalized output that saves agents 80-95% of LLM context tokens versus raw fetch + parse pipelines.",
+          "source": "https://www.x402scan.com/server/1a6114fa-58e8-4425-9328-708973944172"
+        },
+        {
+          "route": "https://api.402.bot/upstreams/allium/v1/wallet/transactions/probe",
+          "cost": "0.005 USDC",
+          "capability": "Allium Wallet Transactions Raw: Proxy raw Base wallet transfers through 402.bot with normalized transaction rows. Useful for wallet backfills, transaction exports, transfer analysis, and Base activity review. Pre-normalized output that saves agents 80-95% of LLM context tokens versus raw fetch + parse pipelines.",
+          "source": "https://www.x402scan.com/server/1a6114fa-58e8-4425-9328-708973944172"
+        },
+        {
+          "route": "https://api.402.bot/v1/alchemist/fetch-transform/4byte-signature-lookup/probe",
+          "cost": "0.005 USDC",
+          "capability": "4byte Signature Lookup: Resolve an EVM selector into candidate function signatures from 4byte.directory. Useful for selector decoding, calldata inspection, ABI triage, and contract reverse engineering. Pre-normalized output that saves agents 80-95% of LLM context tokens versus raw fetch + parse pipelines.",
+          "source": "https://www.x402scan.com/server/1a6114fa-58e8-4425-9328-708973944172"
+        }
+      ]
+    },
+    {
+      "provider": "DataBR — API de Dados Públicos Brasileiros",
+      "count": 132,
+      "distinct_routes": 132,
+      "top_categories": [
+        {
+          "name": "Search, crawl, scrape",
+          "count": 117
+        },
+        {
+          "name": "Data enrichment",
+          "count": 14
+        },
+        {
+          "name": "Agent runtime primitives",
+          "count": 1
+        }
+      ],
+      "common_costs": [
+        {
+          "name": "0.003 USDC",
+          "count": 83
+        },
+        {
+          "name": "0.005 USDC",
+          "count": 24
+        },
+        {
+          "name": "0.007 USDC",
+          "count": 7
+        },
+        {
+          "name": "0.01 USDC",
+          "count": 7
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://databr.api.br/v1/ambiental/desmatamento",
+          "cost": "0.005 USDC",
+          "capability": "DETER - alertas de desmatamento em tempo real na Amazônia Legal, área e município (INPE - Instituto Nacional de Pesquisas Espaciais)",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://databr.api.br/v1/ambiental/embargos",
+          "cost": "0.005 USDC",
+          "capability": "Áreas embargadas por desmatamento ilegal — localização, data e infração (IBAMA - Instituto Brasileiro do Meio Ambiente)",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://databr.api.br/v1/ambiental/empresa/00000000000191/esg",
+          "cost": "0.03 USDC",
+          "capability": "Score ESG de empresa — indicadores ambientais (embargos, desmatamento), sociais e de governança",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://databr.api.br/v1/ambiental/prodes",
+          "cost": "0.005 USDC",
+          "capability": "PRODES - desmatamento anual consolidado na Amazônia, taxa e incremento por estado (INPE - Instituto Nacional de Pesquisas Espaciais)",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://databr.api.br/v1/ambiental/risco/3550308",
+          "cost": "0.007 USDC",
+          "capability": "Risco ambiental por município — alertas DETER, desmatamento PRODES e embargos IBAMA consolidados",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        }
+      ]
+    },
+    {
+      "provider": "Arch Tools - The First API Platform AI Agents Can Pay Autonomously",
+      "count": 122,
+      "distinct_routes": 61,
+      "top_categories": [
+        {
+          "name": "Agent runtime primitives",
+          "count": 88
+        },
+        {
+          "name": "Media generation",
+          "count": 16
+        },
+        {
+          "name": "Search, crawl, scrape",
+          "count": 16
+        },
+        {
+          "name": "Onchain and finance",
+          "count": 2
+        }
+      ],
+      "common_costs": [
+        {
+          "name": "7000 atomic units Solana",
+          "count": 23
+        },
+        {
+          "name": "17000 atomic units Solana",
+          "count": 15
+        },
+        {
+          "name": "35000 atomic units Solana",
+          "count": 14
+        },
+        {
+          "name": "2000 atomic units Tether USD",
+          "count": 13
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://archtools.dev/v1/tools/ai-generate",
+          "cost": "70000 atomic units Solana",
+          "capability": "Arch Tools — ai-generate (native SOL) / Arch Tools — ai-generate (USDT on Base)",
+          "source": "https://www.x402scan.com/server/f1e97a87-3258-4d52-853b-a35238bf3fd8"
+        },
+        {
+          "route": "https://archtools.dev/v1/tools/ai-generate",
+          "cost": "20000 atomic units Tether USD",
+          "capability": "Arch Tools — ai-generate (native SOL) / Arch Tools — ai-generate (USDT on Base)",
+          "source": "https://www.x402scan.com/server/f1e97a87-3258-4d52-853b-a35238bf3fd8"
+        },
+        {
+          "route": "https://archtools.dev/v1/tools/ai-oracle",
+          "cost": "140000 atomic units Solana",
+          "capability": "Arch Tools — ai-oracle (native SOL) / Arch Tools — ai-oracle (USDT on Base)",
+          "source": "https://www.x402scan.com/server/f1e97a87-3258-4d52-853b-a35238bf3fd8"
+        },
+        {
+          "route": "https://archtools.dev/v1/tools/ai-oracle",
+          "cost": "25000 atomic units Tether USD",
+          "capability": "Arch Tools — ai-oracle (native SOL) / Arch Tools — ai-oracle (USDT on Base)",
+          "source": "https://www.x402scan.com/server/f1e97a87-3258-4d52-853b-a35238bf3fd8"
+        },
+        {
+          "route": "https://archtools.dev/v1/tools/barcode-generate",
+          "cost": "7000 atomic units Solana",
+          "capability": "Arch Tools — barcode-generate (native SOL) / Arch Tools — barcode-generate (USDT on Base)",
+          "source": "https://www.x402scan.com/server/f1e97a87-3258-4d52-853b-a35238bf3fd8"
+        }
+      ]
+    },
+    {
+      "provider": "LowPaymentFee | Premium API Directory",
+      "count": 113,
+      "distinct_routes": 113,
+      "top_categories": [
+        {
+          "name": "Long-tail utility tools",
+          "count": 56
+        },
+        {
+          "name": "Onchain and finance",
+          "count": 34
+        },
+        {
+          "name": "Communication and action",
+          "count": 23
+        }
+      ],
+      "common_costs": [
+        {
+          "name": "0.02 USDC",
+          "count": 113
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://lowpaymentfee.com/api/v1/inbox/160",
+          "cost": "0.02 USDC",
+          "capability": "Premium API Access",
+          "source": "https://www.x402scan.com/server/510bcff9-0d3c-4853-bcf3-04a0f83fb6da"
+        },
+        {
+          "route": "https://lowpaymentfee.com/api/v1/inbox/165",
+          "cost": "0.02 USDC",
+          "capability": "Premium API Access",
+          "source": "https://www.x402scan.com/server/510bcff9-0d3c-4853-bcf3-04a0f83fb6da"
+        },
+        {
+          "route": "https://lowpaymentfee.com/api/v1/inbox/169",
+          "cost": "0.02 USDC",
+          "capability": "Premium API Access",
+          "source": "https://www.x402scan.com/server/510bcff9-0d3c-4853-bcf3-04a0f83fb6da"
+        },
+        {
+          "route": "https://lowpaymentfee.com/api/v1/inbox/173",
+          "cost": "0.02 USDC",
+          "capability": "Premium API Access",
+          "source": "https://www.x402scan.com/server/510bcff9-0d3c-4853-bcf3-04a0f83fb6da"
+        },
+        {
+          "route": "https://lowpaymentfee.com/api/v1/inbox/175",
+          "cost": "0.02 USDC",
+          "capability": "Premium API Access",
+          "source": "https://www.x402scan.com/server/510bcff9-0d3c-4853-bcf3-04a0f83fb6da"
+        }
+      ]
+    },
+    {
+      "provider": "StableCrypto",
+      "count": 105,
+      "distinct_routes": 105,
+      "top_categories": [
+        {
+          "name": "Onchain and finance",
+          "count": 105
+        }
+      ],
+      "common_costs": [
+        {
+          "name": "0.01 USDC",
+          "count": 105
+        }
+      ],
+      "sample_routes": [
+        {
+          "route": "https://stablecrypto.dev/api/alchemy/node/rpc",
+          "cost": "0.01 USDC",
+          "capability": "Generic JSON-RPC passthrough for standard Ethereum methods (eth_blockNumber, eth_getBalance, etc.)",
+          "source": "https://www.x402scan.com/server/1c0eb52e-c8b8-4005-93d3-5c4d95b2162b"
+        },
+        {
+          "route": "https://stablecrypto.dev/api/alchemy/portfolio/nft-collections",
+          "cost": "0.01 USDC",
+          "capability": "Get portfolio NFT collections",
+          "source": "https://www.x402scan.com/server/1c0eb52e-c8b8-4005-93d3-5c4d95b2162b"
+        },
+        {
+          "route": "https://stablecrypto.dev/api/alchemy/portfolio/nfts",
+          "cost": "0.01 USDC",
+          "capability": "Get portfolio NFT balances",
+          "source": "https://www.x402scan.com/server/1c0eb52e-c8b8-4005-93d3-5c4d95b2162b"
+        },
+        {
+          "route": "https://stablecrypto.dev/api/alchemy/portfolio/token-balances",
+          "cost": "0.01 USDC",
+          "capability": "Get portfolio token balances",
+          "source": "https://www.x402scan.com/server/1c0eb52e-c8b8-4005-93d3-5c4d95b2162b"
+        },
+        {
+          "route": "https://stablecrypto.dev/api/alchemy/portfolio/tokens",
+          "cost": "0.01 USDC",
+          "capability": "Get portfolio token balances with values",
+          "source": "https://www.x402scan.com/server/1c0eb52e-c8b8-4005-93d3-5c4d95b2162b"
+        }
+      ]
+    }
+  ],
+  "interesting_routes": [
+    {
+      "route": "https://ai.verifik.co/api/usa/ssn",
+      "route_name": "ssn",
+      "provider": "Verifik AI",
+      "cost": "140000000000000 atomic units token",
+      "category": "Agent runtime primitives",
+      "capability": "Validate a U.S. Social Security Number (SSN). Pass the SSN as the documentNumber query parameter (formatted as on the document).",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+    },
+    {
+      "route": "https://ai.verifik.co/api/fbi",
+      "route_name": "fbi",
+      "provider": "Verifik AI",
+      "cost": "140000000000000 atomic units token",
+      "category": "Agent runtime primitives",
+      "capability": "Comprehensive background check using FBI (Federal Bureau of Investigation) databases. Search by full name OR document number with document type. Verify individuals against federal criminal records.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+    },
+    {
+      "route": "https://ai.verifik.co/api/interpol",
+      "route_name": "interpol",
+      "provider": "Verifik AI",
+      "cost": "140000000000000 atomic units token",
+      "category": "Agent runtime primitives",
+      "capability": "International background check using Interpol databases. Search by full name OR document number with document type. Verify individuals against international criminal records and wanted lists.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+    },
+    {
+      "route": "https://ai.verifik.co/api/dea",
+      "route_name": "dea",
+      "provider": "Verifik AI",
+      "cost": "140000000000000 atomic units token",
+      "category": "Agent runtime primitives",
+      "capability": "Comprehensive background check service using DEA (Drug Enforcement Administration) databases. Search by full name OR document number with document type. Verify individuals against international drug enforcement records.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+    },
+    {
+      "route": "https://ai.verifik.co/api/face-recognition/liveness",
+      "route_name": "liveness",
+      "provider": "Verifik AI",
+      "cost": "150000000000000 atomic units token",
+      "category": "Agent runtime primitives",
+      "capability": "Detects whether a submitted face image comes from a live person or a spoof (photo, screen replay, printed copy). Returns a liveness score and a pass/fail outcome based on a minimum score threshold.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+    },
+    {
+      "route": "https://ai.verifik.co/api/co/cedula/rethus",
+      "route_name": "rethus",
+      "provider": "Verifik AI",
+      "cost": "140000000000000 atomic units token",
+      "category": "Agent runtime primitives",
+      "capability": "Access Colombian health records through Rethus system. Verify medical history, health status, and healthcare provider information. Requires document type (CC, CE, PPT) and document number.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+    },
+    {
+      "route": "https://ai.verifik.co/api/br/background-check",
+      "route_name": "background-check",
+      "provider": "Verifik AI",
+      "cost": "90000000000000 atomic units token",
+      "category": "Trust, risk, verification",
+      "capability": "Brazil individual background screening using CPF and date of birth. A successful response includes identity-related fields and, when the data provider supplies it, a base64-encoded PDF report. Intended for employment screening, due diligence, and compliance; handle the PDF and metadata under your own legal and retention rules.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+    },
+    {
+      "route": "https://ai.verifik.co/api/co/inpec",
+      "route_name": "inpec",
+      "provider": "Verifik AI",
+      "cost": "90000000000000 atomic units token",
+      "category": "Agent runtime primitives",
+      "capability": "Look up penitentiary records and incarceration history.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+    },
+    {
+      "route": "https://x402.aurelianflo.com/api/workflows/compliance/edd-report",
+      "route_name": "edd-report",
+      "provider": "AurelianFlo — Compliance APIs for the agent era",
+      "cost": "0.25 USDC",
+      "category": "Agent runtime primitives",
+      "capability": "Generate an enhanced due diligence memo for a wallet set using exact-match OFAC SDN digital currency address screening, status labels for compliance review, case metadata, and JSON, PDF, or DOCX output.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/ba7dfc19-17d1-4c3e-b298-6861f879ceba"
+    },
+    {
+      "route": "https://ai.verifik.co/api/co/rama/procesos",
+      "route_name": "procesos",
+      "provider": "Verifik AI",
+      "cost": "140000000000000 atomic units token",
+      "category": "Agent runtime primitives",
+      "capability": "Search for judicial processes using document number across Colombian courts.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+    },
+    {
+      "route": "https://x402.aurelianflo.com/api/ofac-wallet-screen/:address",
+      "route_name": ":address",
+      "provider": "AurelianFlo — Compliance APIs for the agent era",
+      "cost": "0.01 USDC",
+      "category": "Onchain and finance",
+      "capability": "Exact-match OFAC SDN wallet screening for sanctioned digital currency addresses. Screens one wallet address against Treasury's public SDN advanced XML and returns hit or clear status, asset coverage, sanctioned entity metadata, sanctions programs, list source, listing date, and a manual-review signal for onchain payment and treasury controls.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/ba7dfc19-17d1-4c3e-b298-6861f879ceba"
+    },
+    {
+      "route": "https://databr.api.br/v1/empresas/00000000000191/duediligence",
+      "route_name": "duediligence",
+      "provider": "DataBR — API de Dados Públicos Brasileiros",
+      "cost": "0.075 USDC",
+      "category": "Search, crawl, scrape",
+      "capability": "Due diligence empresarial completa — CNPJ + CEIS/CNEP + processos judiciais + licitações + ambiental (multi-fonte)",
+      "why_interesting": "Representative of a route cluster that agents could buy as a small task ingredient.",
+      "caveat": "listed route metadata only",
+      "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+    },
+    {
+      "route": "https://databr.api.br/v1/ambiental/embargos",
+      "route_name": "embargos",
+      "provider": "DataBR — API de Dados Públicos Brasileiros",
+      "cost": "0.005 USDC",
+      "category": "Search, crawl, scrape",
+      "capability": "Áreas embargadas por desmatamento ilegal — localização, data e infração (IBAMA - Instituto Brasileiro do Meio Ambiente)",
+      "why_interesting": "Shows how far into the long tail per-call APIs can go.",
+      "caveat": "listed route metadata only",
+      "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+    },
+    {
+      "route": "https://databr.api.br/v1/rede/00000000000191/influencia",
+      "route_name": "influencia",
+      "provider": "DataBR — API de Dados Públicos Brasileiros",
+      "cost": "0.05 USDC",
+      "category": "Search, crawl, scrape",
+      "capability": "Rede de influência societária — grafo de sócios, empresas conectadas e participações cruzadas",
+      "why_interesting": "Representative of a route cluster that agents could buy as a small task ingredient.",
+      "caveat": "listed route metadata only",
+      "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+    },
+    {
+      "route": "https://war-tracker.com/api/v1/vessels/9217981/position",
+      "route_name": "position",
+      "provider": "War-Tracker — Unbiased, Uncensored, Live War Tracker Map | Real-Time OSINT Conflict Map",
+      "cost": "0.001 USDC",
+      "category": "Search, crawl, scrape",
+      "capability": "Latest AIS position for one vessel by IMO. Returns lat/lon (WGS84), speed over ground (`sog`, knots), course over ground (`cog`, degrees true 0-360), AIS destination string (free-form, operator-entered), captured-at UTC, and `age_seconds` since the ping was received.\n\nFree for browsers, AI-search crawlers, and link-preview bots; paid via x402 for training-crawler UAs (GPTBot, ClaudeBot, CCBot, …). AIS pings arrive every 1-180 s depending on vessel speed and satellite/terrestrial coverage —…",
+      "why_interesting": "Media route that could compose with search, storage, or delivery routes.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/5fabd45f-be84-4001-b869-b370e958f7aa"
+    },
+    {
+      "route": "https://war-tracker.com/event-type/drone-strike",
+      "route_name": "drone-strike",
+      "provider": "War-Tracker — Unbiased, Uncensored, Live War Tracker Map | Real-Time OSINT Conflict Map",
+      "cost": "0.001 USDC",
+      "category": "Search, crawl, scrape",
+      "capability": "Event-type hub page at /event-type/{slug}. Aggregates events matching one classification slug (e.g. drone-strike, airstrike, skirmish). HTML with embedded CollectionPage + Dataset JSON-LD pointing back at /api/v1/events?event_type={slug}.",
+      "why_interesting": "Media route that could compose with search, storage, or delivery routes.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/5fabd45f-be84-4001-b869-b370e958f7aa"
+    },
+    {
+      "route": "https://stabletravel.dev/api/flightaware/flights/id/track",
+      "route_name": "track",
+      "provider": "StableTravel",
+      "cost": "0.024 USDC",
+      "category": "Long-tail utility tools",
+      "capability": "Get the flight track (position history) for a flight",
+      "why_interesting": "Shows how far into the long tail per-call APIs can go.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/166fd2f6-6d6f-4bda-9c7c-3cb8e9cf417e"
+    },
+    {
+      "route": "https://coinrailz.com/api/satellite/fire-alerts",
+      "route_name": "fire-alerts",
+      "provider": "Coin Railz - x402 Autonomous AI Payments & Crypto Exchange",
+      "cost": "50000 atomic units Coin Railz - Active Fire Alerts",
+      "category": "Agent runtime primitives",
+      "capability": "Real-time wildfire and thermal anomaly detection from NASA FIRMS",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/82974061-62e9-4773-9641-c93f49984a77"
+    },
+    {
+      "route": "https://api.shippingrates.org/api/dd/calculate",
+      "route_name": "calculate",
+      "provider": "FreightGate — Shipping Intelligence API | Demurrage & Detention Rates via x402",
+      "cost": "0.1 USDC",
+      "category": "Search, crawl, scrape",
+      "capability": "Calculate demurrage & detention costs for a shipping line, country, container type, and number of days. Returns slab breakdown with free days, per-diem rates, and total cost.",
+      "why_interesting": "Representative of a route cluster that agents could buy as a small task ingredient.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/cfcc75f6-2323-4afa-b90a-15a6aab460c3"
+    },
+    {
+      "route": "https://xactions.app/api/ai/action/unfollow-everyone",
+      "route_name": "unfollow-everyone",
+      "provider": "XActions — Free AI-Powered X/Twitter Automation Tools | Mass Unfollow, Auto-Follow & More",
+      "cost": "0.1 USDC",
+      "category": "Agent runtime primitives",
+      "capability": "XActions AI API â action:unfollow-everyone",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/33c82686-41ee-44d2-b914-c9be19232a17"
+    },
+    {
+      "route": "https://api.402.bot/v1/recipes/polymarket-activity-digest/probe",
+      "route_name": "probe",
+      "provider": "402.bot | Recipes and token-efficient x402 workflows for AI agents",
+      "cost": "0.0075 USDC",
+      "category": "Agent runtime primitives",
+      "capability": "Polymarket Activity Digest: Turn recent Polymarket activity into a short digest with buy/sell bias and watch items. Use the public Polymarket analytics surface to summarize recent trade flow, directional bias, notable markets, and follow-ups for one wallet. Deterministic recipe run that avoids repeated scraping, cleanup, and prompt packing.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/1a6114fa-58e8-4425-9328-708973944172"
+    },
+    {
+      "route": "https://xactions.app/api/ai/messages/send",
+      "route_name": "send",
+      "provider": "XActions — Free AI-Powered X/Twitter Automation Tools | Mass Unfollow, Auto-Follow & More",
+      "cost": "0.01 USDC",
+      "category": "Agent runtime primitives",
+      "capability": "XActions AI API â messages:send",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/33c82686-41ee-44d2-b914-c9be19232a17"
+    },
+    {
+      "route": "https://api.carbon-cashmere.de/v1/proven-track-record",
+      "route_name": "proven-track-record",
+      "provider": "Carbon &amp; Cashmere — Crypto Intelligence Infrastructure",
+      "cost": "0.5 USDC",
+      "category": "Onchain and finance",
+      "capability": "Verifiable prop-firm trading results from our own ML-driven strategy: passed $100k FTMO challenge 2026-04-17 with +5.04% return in 5 days, 16 BTC-long trades, 81.25% win rate. Full transparency â trade-level data (entry/exit prices, pnl, exit reasons, ML confidence, regime-at-entry), aggregate statistics (profit factor, max drawdown, avg duration, win/loss streaks, exit-reason breakdown), and broker reconciliation. Data source: cTrader WebSocket (15min-fresh) + internal decision-tracker. First and only x402 service offering verifiable prop-firm track record as research data â not investment advice.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/deaef2d7-e3ce-4c80-8f7d-3dc82765166f"
+    },
+    {
+      "route": "https://api.molty.cash/a2a",
+      "route_name": "a2a",
+      "provider": "molty.cash — USDC payments for agents and humans",
+      "cost": "0.02 USDC",
+      "category": "Communication and action",
+      "capability": "Create USDC-funded tasks for AI agents and humans to complete. Supports social promotion across X, Instagram, TikTok, YouTube, Reddit, Substack and any custom task with proof-based payout. Workers pick gigs, deliver proof, get paid automatically.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/701b5dfd-59a7-45ad-9463-f5d73723fcc4"
+    },
+    {
+      "route": "https://stableenrich.dev/api/clado/contacts-enrich",
+      "route_name": "contacts-enrich",
+      "provider": "StableEnrich",
+      "cost": "0.2 USDC",
+      "category": "Search, crawl, scrape",
+      "capability": "Clado Contacts Enrichment - Enrich contact info from LinkedIn URL, email, or phone",
+      "why_interesting": "Turns a paid API call into an external-world action channel.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/b8a06bde-b6e8-4a10-b4e0-cc6a25fb9efb"
+    },
+    {
+      "route": "https://stableenrich.dev/api/minerva/enrich",
+      "route_name": "enrich",
+      "provider": "StableEnrich",
+      "cost": "0.05 USDC",
+      "category": "Search, crawl, scrape",
+      "capability": "Minerva Enrich - Enrich person records with demographics, work history, education, contact info, addresses, and financial signals. Supports lookup by Minerva PID, LinkedIn URL, or name/email/phone.",
+      "why_interesting": "Turns a paid API call into an external-world action channel.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/b8a06bde-b6e8-4a10-b4e0-cc6a25fb9efb"
+    },
+    {
+      "route": "https://stableenrich.dev/api/minerva/resolve",
+      "route_name": "resolve",
+      "provider": "StableEnrich",
+      "cost": "0.02 USDC",
+      "category": "Search, crawl, scrape",
+      "capability": "Minerva Resolve - Resolve person identity to a Minerva PID and LinkedIn URL. Supports fuzzy matching and reverse lookup by email or phone only.",
+      "why_interesting": "Turns a paid API call into an external-world action channel.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/b8a06bde-b6e8-4a10-b4e0-cc6a25fb9efb"
+    },
+    {
+      "route": "https://stableenrich.dev/api/whitepages/person-search",
+      "route_name": "person-search",
+      "provider": "StableEnrich",
+      "cost": "0.44 USDC",
+      "category": "Search, crawl, scrape",
+      "capability": "Whitepages Person Search - Find people by name, phone, address",
+      "why_interesting": "Turns a paid API call into an external-world action channel.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/b8a06bde-b6e8-4a10-b4e0-cc6a25fb9efb"
+    },
+    {
+      "route": "https://blockrun.ai/api/v1/phone/numbers/buy",
+      "route_name": "buy",
+      "provider": "BlockRun — Pay-per-call AI gateway",
+      "cost": "5 USDC",
+      "category": "Agent runtime primitives",
+      "capability": "Purchase a dedicated phone number valid for 30 days. The number is bound to your wallet address. Default country is US (no regulatory friction). Other countries can be requested via the `country` parameter, but Twilio may require a Regulatory Bundle (KYC) on our account before purchase succeeds — if your country fails, contact care@blockrun.ai to enable.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/b85dcf0f-d4a9-47ce-9d0b-6ec70e2844e0"
+    },
+    {
+      "route": "https://blockrun.ai/api/v1/phone/numbers/renew",
+      "route_name": "renew",
+      "provider": "BlockRun — Pay-per-call AI gateway",
+      "cost": "5 USDC",
+      "category": "Agent runtime primitives",
+      "capability": "Extend the lease on a provisioned phone number by 30 days.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/b85dcf0f-d4a9-47ce-9d0b-6ec70e2844e0"
+    },
+    {
+      "route": "https://blockrun.ai/api/v1/voice/call",
+      "route_name": "call",
+      "provider": "BlockRun — Pay-per-call AI gateway",
+      "cost": "0.54 USDC",
+      "category": "Agent runtime primitives",
+      "capability": "Initiate an AI-powered outbound phone call via Bland.ai.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/b85dcf0f-d4a9-47ce-9d0b-6ec70e2844e0"
+    },
+    {
+      "route": "https://stableenrich.dev/api/serper/people-image-search",
+      "route_name": "people-image-search",
+      "provider": "StableEnrich",
+      "cost": "0.04 USDC",
+      "category": "Search, crawl, scrape",
+      "capability": "Serper - Google Images search tuned for people/headshots. For ambiguous people, resolve the profile slug/company/title first. LinkedIn photos may be non-public; if LinkedIn reports a default avatar or the first search fails, research the profile for alternate disambiguators and retry with public non-LinkedIn source terms.",
+      "why_interesting": "Media route that could compose with search, storage, or delivery routes.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/b8a06bde-b6e8-4a10-b4e0-cc6a25fb9efb"
+    },
+    {
+      "route": "https://blockrun.ai/api/v1/phone/lookup",
+      "route_name": "lookup",
+      "provider": "BlockRun — Pay-per-call AI gateway",
+      "cost": "0.01 USDC",
+      "category": "Agent runtime primitives",
+      "capability": "Look up carrier information and line type for a phone number.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/b85dcf0f-d4a9-47ce-9d0b-6ec70e2844e0"
+    },
+    {
+      "route": "https://blockrun.ai/api/v1/phone/numbers/list",
+      "route_name": "list",
+      "provider": "BlockRun — Pay-per-call AI gateway",
+      "cost": "0.001 USDC",
+      "category": "Agent runtime primitives",
+      "capability": "List all active phone numbers provisioned to your wallet.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/b85dcf0f-d4a9-47ce-9d0b-6ec70e2844e0"
+    },
+    {
+      "route": "https://blockrun.ai/api/v1/phone/numbers/release",
+      "route_name": "release",
+      "provider": "BlockRun — Pay-per-call AI gateway",
+      "cost": "0 USDC",
+      "category": "Agent runtime primitives",
+      "capability": "Release a provisioned phone number. The number will be returned to the Twilio pool.",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/b85dcf0f-d4a9-47ce-9d0b-6ec70e2844e0"
+    },
+    {
+      "route": "https://blockrun.ai/api/v1/audio/generations",
+      "route_name": "generations",
+      "provider": "BlockRun — Pay-per-call AI gateway",
+      "cost": "0.105 USDC",
+      "category": "Media generation",
+      "capability": "AI music generation API - pay per track with USDC on Base",
+      "why_interesting": "Directly touches agent runtime/tooling rather than generic SaaS metadata.",
+      "caveat": "accept not verified",
+      "source": "https://www.x402scan.com/server/b85dcf0f-d4a9-47ce-9d0b-6ec70e2844e0"
+    }
+  ],
+  "bundles": [
+    {
+      "title": "Diligence agent",
+      "thesis": "Buy search, then verification, then only enrich the candidates that pass.",
+      "category_ids": [
+        "search_scrape",
+        "trust_risk",
+        "data_enrichment"
+      ],
+      "route_samples": [
+        {
+          "route": "https://databr.api.br/v1/empresas/00000000000191/duediligence",
+          "provider": "DataBR — API de Dados Públicos Brasileiros",
+          "cost": "0.075 USDC",
+          "category": "Search, crawl, scrape",
+          "capability": "Due diligence empresarial completa — CNPJ + CEIS/CNEP + processos judiciais + licitações + ambiental (multi-fonte)",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://databr.api.br/v1/ambiental/embargos",
+          "provider": "DataBR — API de Dados Públicos Brasileiros",
+          "cost": "0.005 USDC",
+          "category": "Search, crawl, scrape",
+          "capability": "Áreas embargadas por desmatamento ilegal — localização, data e infração (IBAMA - Instituto Brasileiro do Meio Ambiente)",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://databr.api.br/v1/rede/00000000000191/influencia",
+          "provider": "DataBR — API de Dados Públicos Brasileiros",
+          "cost": "0.05 USDC",
+          "category": "Search, crawl, scrape",
+          "capability": "Rede de influência societária — grafo de sócios, empresas conectadas e participações cruzadas",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://ai.verifik.co/api/br/background-check",
+          "provider": "Verifik AI",
+          "cost": "90000000000000 atomic units token",
+          "category": "Trust, risk, verification",
+          "capability": "Brazil individual background screening using CPF and date of birth. A successful response includes identity-related fields and, when the data provider supplies it, a base64-encoded PDF report. Intended for employment screening, due diligence, and compliance; handle the PDF and metadata under your own legal and retention rules.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://property-risk-passport-api.lifebite-app.workers.dev/v1/property-risk-full",
+          "provider": "Property Risk Passport API | Address due diligence for agents",
+          "cost": "0.001 USDC",
+          "category": "Trust, risk, verification",
+          "capability": "Evaluate a US property address for parcel match, FEMA flood zone, flood proximity, taxing entities, school district, permit history, zoning/land-use context, insurance red flags, due-diligence risk score, quality score, recommended next steps, and official source links.",
+          "source": "https://www.x402scan.com/server/fc38c2ef-dde7-4a4f-9da6-e13b103fc944"
+        },
+        {
+          "route": "https://x402-cybercentry-erc-8004-agent-verification.up.railway.app/verify",
+          "provider": "Cybercentry ERC-8004 Agent Verification - x402",
+          "cost": "0.1 USDC",
+          "category": "Trust, risk, verification",
+          "capability": "Verify AI agent identity, authenticity and risk using the Cybercentry ERC-8004 Agent Verification (CEAV) API. Returns on-chain verification results for AI agents using the ERC-8004 standard",
+          "source": "https://www.x402scan.com/server/6cda042c-aad2-41fb-a6af-cd6934af6cf4"
+        },
+        {
+          "route": "https://mpp.hyreagent.fun/base/lp/meteora/pools",
+          "provider": "HYRE Agent — AI-Enhanced DeFi Data API",
+          "cost": "0.01 USDC",
+          "category": "Data enrichment",
+          "capability": "Pay-per-call DeFi intelligence for autonomous agents. 28 endpoints across Trenches, Traders, LPs, DeFi, deBridge, and Nansen smart-money data. Multi-chain x402 on Solana, Base, SKALE + MPP on Tempo. No API keys — payment is the only gate.",
+          "source": "https://www.x402scan.com/server/eee5895d-af89-4a03-9fa0-cbb476eb962d"
+        },
+        {
+          "route": "https://mpp.hyreagent.fun/defi/tvl",
+          "provider": "HYRE Agent — AI-Enhanced DeFi Data API",
+          "cost": "0.001 USDC",
+          "category": "Data enrichment",
+          "capability": "Pay-per-call DeFi intelligence for autonomous agents. 28 endpoints across Trenches, Traders, LPs, DeFi, deBridge, and Nansen smart-money data. Multi-chain x402 on Solana, Base, SKALE + MPP on Tempo. No API keys — payment is the only gate.",
+          "source": "https://www.x402scan.com/server/eee5895d-af89-4a03-9fa0-cbb476eb962d"
+        },
+        {
+          "route": "https://mpp.hyreagent.fun/trenches/graduating",
+          "provider": "HYRE Agent — AI-Enhanced DeFi Data API",
+          "cost": "0.003 USDC",
+          "category": "Data enrichment",
+          "capability": "Pay-per-call DeFi intelligence for autonomous agents. 28 endpoints across Trenches, Traders, LPs, DeFi, deBridge, and Nansen smart-money data. Multi-chain x402 on Solana, Base, SKALE + MPP on Tempo. No API keys — payment is the only gate.",
+          "source": "https://www.x402scan.com/server/eee5895d-af89-4a03-9fa0-cbb476eb962d"
+        }
+      ]
+    },
+    {
+      "title": "Wallet-triggered analyst",
+      "thesis": "Watch an onchain event, buy outside context, stop if risk is high.",
+      "category_ids": [
+        "onchain_finance",
+        "search_scrape",
+        "trust_risk"
+      ],
+      "route_samples": [
+        {
+          "route": "https://x402.aurelianflo.com/api/ofac-wallet-screen/:address",
+          "provider": "AurelianFlo — Compliance APIs for the agent era",
+          "cost": "0.01 USDC",
+          "category": "Onchain and finance",
+          "capability": "Exact-match OFAC SDN wallet screening for sanctioned digital currency addresses. Screens one wallet address against Treasury's public SDN advanced XML and returns hit or clear status, asset coverage, sanctioned entity metadata, sanctions programs, list source, listing date, and a manual-review signal for onchain payment and treasury controls.",
+          "source": "https://www.x402scan.com/server/ba7dfc19-17d1-4c3e-b298-6861f879ceba"
+        },
+        {
+          "route": "https://api.carbon-cashmere.de/v1/proven-track-record",
+          "provider": "Carbon &amp; Cashmere — Crypto Intelligence Infrastructure",
+          "cost": "0.5 USDC",
+          "category": "Onchain and finance",
+          "capability": "Verifiable prop-firm trading results from our own ML-driven strategy: passed $100k FTMO challenge 2026-04-17 with +5.04% return in 5 days, 16 BTC-long trades, 81.25% win rate. Full transparency â trade-level data (entry/exit prices, pnl, exit reasons, ML confidence, regime-at-entry), aggregate statistics (profit factor, max drawdown, avg duration, win/loss streaks, exit-reason breakdown), and broker reconciliation. Data source: cTrader WebSocket (15min-fresh) + internal decision-tracker. First and only x402 service offering verifiable prop-firm track record as research data â not investment advice.",
+          "source": "https://www.x402scan.com/server/deaef2d7-e3ce-4c80-8f7d-3dc82765166f"
+        },
+        {
+          "route": "https://blockrun.ai/api/v1/defillama/prices/%7Bcoins%7D",
+          "provider": "BlockRun — Pay-per-call AI gateway",
+          "cost": "0.001 USDC",
+          "category": "Onchain and finance",
+          "capability": "Token price lookup. Pass coin identifiers as `/v1/defillama/prices/{coins}` (e.g. `coingecko:bitcoin`, `ethereum:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`). Supports comma-separated lists.",
+          "source": "https://www.x402scan.com/server/b85dcf0f-d4a9-47ce-9d0b-6ec70e2844e0"
+        },
+        {
+          "route": "https://databr.api.br/v1/empresas/00000000000191/duediligence",
+          "provider": "DataBR — API de Dados Públicos Brasileiros",
+          "cost": "0.075 USDC",
+          "category": "Search, crawl, scrape",
+          "capability": "Due diligence empresarial completa — CNPJ + CEIS/CNEP + processos judiciais + licitações + ambiental (multi-fonte)",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://databr.api.br/v1/ambiental/embargos",
+          "provider": "DataBR — API de Dados Públicos Brasileiros",
+          "cost": "0.005 USDC",
+          "category": "Search, crawl, scrape",
+          "capability": "Áreas embargadas por desmatamento ilegal — localização, data e infração (IBAMA - Instituto Brasileiro do Meio Ambiente)",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://databr.api.br/v1/rede/00000000000191/influencia",
+          "provider": "DataBR — API de Dados Públicos Brasileiros",
+          "cost": "0.05 USDC",
+          "category": "Search, crawl, scrape",
+          "capability": "Rede de influência societária — grafo de sócios, empresas conectadas e participações cruzadas",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://ai.verifik.co/api/br/background-check",
+          "provider": "Verifik AI",
+          "cost": "90000000000000 atomic units token",
+          "category": "Trust, risk, verification",
+          "capability": "Brazil individual background screening using CPF and date of birth. A successful response includes identity-related fields and, when the data provider supplies it, a base64-encoded PDF report. Intended for employment screening, due diligence, and compliance; handle the PDF and metadata under your own legal and retention rules.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://property-risk-passport-api.lifebite-app.workers.dev/v1/property-risk-full",
+          "provider": "Property Risk Passport API | Address due diligence for agents",
+          "cost": "0.001 USDC",
+          "category": "Trust, risk, verification",
+          "capability": "Evaluate a US property address for parcel match, FEMA flood zone, flood proximity, taxing entities, school district, permit history, zoning/land-use context, insurance red flags, due-diligence risk score, quality score, recommended next steps, and official source links.",
+          "source": "https://www.x402scan.com/server/fc38c2ef-dde7-4a4f-9da6-e13b103fc944"
+        },
+        {
+          "route": "https://x402-cybercentry-erc-8004-agent-verification.up.railway.app/verify",
+          "provider": "Cybercentry ERC-8004 Agent Verification - x402",
+          "cost": "0.1 USDC",
+          "category": "Trust, risk, verification",
+          "capability": "Verify AI agent identity, authenticity and risk using the Cybercentry ERC-8004 Agent Verification (CEAV) API. Returns on-chain verification results for AI agents using the ERC-8004 standard",
+          "source": "https://www.x402scan.com/server/6cda042c-aad2-41fb-a6af-cd6934af6cf4"
+        }
+      ]
+    },
+    {
+      "title": "Outbound action agent",
+      "thesis": "Find a lead, verify it, then pay for one bounded outreach action.",
+      "category_ids": [
+        "search_scrape",
+        "trust_risk",
+        "communication_action"
+      ],
+      "route_samples": [
+        {
+          "route": "https://databr.api.br/v1/empresas/00000000000191/duediligence",
+          "provider": "DataBR — API de Dados Públicos Brasileiros",
+          "cost": "0.075 USDC",
+          "category": "Search, crawl, scrape",
+          "capability": "Due diligence empresarial completa — CNPJ + CEIS/CNEP + processos judiciais + licitações + ambiental (multi-fonte)",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://databr.api.br/v1/ambiental/embargos",
+          "provider": "DataBR — API de Dados Públicos Brasileiros",
+          "cost": "0.005 USDC",
+          "category": "Search, crawl, scrape",
+          "capability": "Áreas embargadas por desmatamento ilegal — localização, data e infração (IBAMA - Instituto Brasileiro do Meio Ambiente)",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://databr.api.br/v1/rede/00000000000191/influencia",
+          "provider": "DataBR — API de Dados Públicos Brasileiros",
+          "cost": "0.05 USDC",
+          "category": "Search, crawl, scrape",
+          "capability": "Rede de influência societária — grafo de sócios, empresas conectadas e participações cruzadas",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://ai.verifik.co/api/br/background-check",
+          "provider": "Verifik AI",
+          "cost": "90000000000000 atomic units token",
+          "category": "Trust, risk, verification",
+          "capability": "Brazil individual background screening using CPF and date of birth. A successful response includes identity-related fields and, when the data provider supplies it, a base64-encoded PDF report. Intended for employment screening, due diligence, and compliance; handle the PDF and metadata under your own legal and retention rules.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://property-risk-passport-api.lifebite-app.workers.dev/v1/property-risk-full",
+          "provider": "Property Risk Passport API | Address due diligence for agents",
+          "cost": "0.001 USDC",
+          "category": "Trust, risk, verification",
+          "capability": "Evaluate a US property address for parcel match, FEMA flood zone, flood proximity, taxing entities, school district, permit history, zoning/land-use context, insurance red flags, due-diligence risk score, quality score, recommended next steps, and official source links.",
+          "source": "https://www.x402scan.com/server/fc38c2ef-dde7-4a4f-9da6-e13b103fc944"
+        },
+        {
+          "route": "https://x402-cybercentry-erc-8004-agent-verification.up.railway.app/verify",
+          "provider": "Cybercentry ERC-8004 Agent Verification - x402",
+          "cost": "0.1 USDC",
+          "category": "Trust, risk, verification",
+          "capability": "Verify AI agent identity, authenticity and risk using the Cybercentry ERC-8004 Agent Verification (CEAV) API. Returns on-chain verification results for AI agents using the ERC-8004 standard",
+          "source": "https://www.x402scan.com/server/6cda042c-aad2-41fb-a6af-cd6934af6cf4"
+        },
+        {
+          "route": "https://api.molty.cash/a2a",
+          "provider": "molty.cash — USDC payments for agents and humans",
+          "cost": "0.02 USDC",
+          "category": "Communication and action",
+          "capability": "Create USDC-funded tasks for AI agents and humans to complete. Supports social promotion across X, Instagram, TikTok, YouTube, Reddit, Substack and any custom task with proof-based payout. Workers pick gigs, deliver proof, get paid automatically.",
+          "source": "https://www.x402scan.com/server/701b5dfd-59a7-45ad-9463-f5d73723fcc4"
+        },
+        {
+          "route": "https://stableemail.dev/api/inbox/buy",
+          "provider": "StableEmail",
+          "cost": "1 USDC",
+          "category": "Communication and action",
+          "capability": "Buy an inbox on stableemail.dev ($1, 30 days). forwardTo is optional — omit it to use as a programmatic mailbox via the messages API (retainMessages enabled automatically). Message content and attachments are retained for 90 days.",
+          "source": "https://www.x402scan.com/server/7c37fc42-c725-4232-9e4e-106db4872375"
+        },
+        {
+          "route": "https://stableemail.dev/api/inbox/topup",
+          "provider": "StableEmail",
+          "cost": "1 USDC",
+          "category": "Communication and action",
+          "capability": "Top up a forwarding inbox for 30 days ($1)",
+          "source": "https://www.x402scan.com/server/7c37fc42-c725-4232-9e4e-106db4872375"
+        }
+      ]
+    },
+    {
+      "title": "Evidence-to-media agent",
+      "thesis": "Buy fresh facts, enrich them, then generate a grounded media asset.",
+      "category_ids": [
+        "search_scrape",
+        "data_enrichment",
+        "media_generation"
+      ],
+      "route_samples": [
+        {
+          "route": "https://databr.api.br/v1/empresas/00000000000191/duediligence",
+          "provider": "DataBR — API de Dados Públicos Brasileiros",
+          "cost": "0.075 USDC",
+          "category": "Search, crawl, scrape",
+          "capability": "Due diligence empresarial completa — CNPJ + CEIS/CNEP + processos judiciais + licitações + ambiental (multi-fonte)",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://databr.api.br/v1/ambiental/embargos",
+          "provider": "DataBR — API de Dados Públicos Brasileiros",
+          "cost": "0.005 USDC",
+          "category": "Search, crawl, scrape",
+          "capability": "Áreas embargadas por desmatamento ilegal — localização, data e infração (IBAMA - Instituto Brasileiro do Meio Ambiente)",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://databr.api.br/v1/rede/00000000000191/influencia",
+          "provider": "DataBR — API de Dados Públicos Brasileiros",
+          "cost": "0.05 USDC",
+          "category": "Search, crawl, scrape",
+          "capability": "Rede de influência societária — grafo de sócios, empresas conectadas e participações cruzadas",
+          "source": "https://www.x402scan.com/server/c7a4f82a-0041-41b4-888e-a09ca32a38b6"
+        },
+        {
+          "route": "https://mpp.hyreagent.fun/base/lp/meteora/pools",
+          "provider": "HYRE Agent — AI-Enhanced DeFi Data API",
+          "cost": "0.01 USDC",
+          "category": "Data enrichment",
+          "capability": "Pay-per-call DeFi intelligence for autonomous agents. 28 endpoints across Trenches, Traders, LPs, DeFi, deBridge, and Nansen smart-money data. Multi-chain x402 on Solana, Base, SKALE + MPP on Tempo. No API keys — payment is the only gate.",
+          "source": "https://www.x402scan.com/server/eee5895d-af89-4a03-9fa0-cbb476eb962d"
+        },
+        {
+          "route": "https://mpp.hyreagent.fun/defi/tvl",
+          "provider": "HYRE Agent — AI-Enhanced DeFi Data API",
+          "cost": "0.001 USDC",
+          "category": "Data enrichment",
+          "capability": "Pay-per-call DeFi intelligence for autonomous agents. 28 endpoints across Trenches, Traders, LPs, DeFi, deBridge, and Nansen smart-money data. Multi-chain x402 on Solana, Base, SKALE + MPP on Tempo. No API keys — payment is the only gate.",
+          "source": "https://www.x402scan.com/server/eee5895d-af89-4a03-9fa0-cbb476eb962d"
+        },
+        {
+          "route": "https://mpp.hyreagent.fun/trenches/graduating",
+          "provider": "HYRE Agent — AI-Enhanced DeFi Data API",
+          "cost": "0.003 USDC",
+          "category": "Data enrichment",
+          "capability": "Pay-per-call DeFi intelligence for autonomous agents. 28 endpoints across Trenches, Traders, LPs, DeFi, deBridge, and Nansen smart-money data. Multi-chain x402 on Solana, Base, SKALE + MPP on Tempo. No API keys — payment is the only gate.",
+          "source": "https://www.x402scan.com/server/eee5895d-af89-4a03-9fa0-cbb476eb962d"
+        },
+        {
+          "route": "https://blockrun.ai/api/v1/audio/generations",
+          "provider": "BlockRun — Pay-per-call AI gateway",
+          "cost": "0.105 USDC",
+          "category": "Media generation",
+          "capability": "AI music generation API - pay per track with USDC on Base",
+          "source": "https://www.x402scan.com/server/b85dcf0f-d4a9-47ce-9d0b-6ec70e2844e0"
+        },
+        {
+          "route": "https://sol.blockrun.ai/api/v1/images/generations",
+          "provider": "https://sol.blockrun.ai",
+          "cost": "40000 atomic units token",
+          "category": "Media generation",
+          "capability": "AI image generation API - pay per image with USDC on Solana",
+          "source": "https://www.x402scan.com/server/239470e8-8384-4783-8448-b7365d80fc43"
+        },
+        {
+          "route": "https://sol.blockrun.ai/api/v1/images/image2image",
+          "provider": "https://sol.blockrun.ai",
+          "cost": "20000 atomic units token",
+          "category": "Media generation",
+          "capability": "AI image editing API - edit images with USDC on Solana",
+          "source": "https://www.x402scan.com/server/239470e8-8384-4783-8448-b7365d80fc43"
+        }
+      ]
+    },
+    {
+      "title": "Tool-routing agent",
+      "thesis": "Choose tools by metadata, quality notes, and spend policy before calling.",
+      "category_ids": [
+        "agent_runtime",
+        "data_enrichment",
+        "trust_risk"
+      ],
+      "route_samples": [
+        {
+          "route": "https://ai.verifik.co/api/usa/ssn",
+          "provider": "Verifik AI",
+          "cost": "140000000000000 atomic units token",
+          "category": "Agent runtime primitives",
+          "capability": "Validate a U.S. Social Security Number (SSN). Pass the SSN as the documentNumber query parameter (formatted as on the document).",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://ai.verifik.co/api/fbi",
+          "provider": "Verifik AI",
+          "cost": "140000000000000 atomic units token",
+          "category": "Agent runtime primitives",
+          "capability": "Comprehensive background check using FBI (Federal Bureau of Investigation) databases. Search by full name OR document number with document type. Verify individuals against federal criminal records.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://ai.verifik.co/api/interpol",
+          "provider": "Verifik AI",
+          "cost": "140000000000000 atomic units token",
+          "category": "Agent runtime primitives",
+          "capability": "International background check using Interpol databases. Search by full name OR document number with document type. Verify individuals against international criminal records and wanted lists.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://mpp.hyreagent.fun/base/lp/meteora/pools",
+          "provider": "HYRE Agent — AI-Enhanced DeFi Data API",
+          "cost": "0.01 USDC",
+          "category": "Data enrichment",
+          "capability": "Pay-per-call DeFi intelligence for autonomous agents. 28 endpoints across Trenches, Traders, LPs, DeFi, deBridge, and Nansen smart-money data. Multi-chain x402 on Solana, Base, SKALE + MPP on Tempo. No API keys — payment is the only gate.",
+          "source": "https://www.x402scan.com/server/eee5895d-af89-4a03-9fa0-cbb476eb962d"
+        },
+        {
+          "route": "https://mpp.hyreagent.fun/defi/tvl",
+          "provider": "HYRE Agent — AI-Enhanced DeFi Data API",
+          "cost": "0.001 USDC",
+          "category": "Data enrichment",
+          "capability": "Pay-per-call DeFi intelligence for autonomous agents. 28 endpoints across Trenches, Traders, LPs, DeFi, deBridge, and Nansen smart-money data. Multi-chain x402 on Solana, Base, SKALE + MPP on Tempo. No API keys — payment is the only gate.",
+          "source": "https://www.x402scan.com/server/eee5895d-af89-4a03-9fa0-cbb476eb962d"
+        },
+        {
+          "route": "https://mpp.hyreagent.fun/trenches/graduating",
+          "provider": "HYRE Agent — AI-Enhanced DeFi Data API",
+          "cost": "0.003 USDC",
+          "category": "Data enrichment",
+          "capability": "Pay-per-call DeFi intelligence for autonomous agents. 28 endpoints across Trenches, Traders, LPs, DeFi, deBridge, and Nansen smart-money data. Multi-chain x402 on Solana, Base, SKALE + MPP on Tempo. No API keys — payment is the only gate.",
+          "source": "https://www.x402scan.com/server/eee5895d-af89-4a03-9fa0-cbb476eb962d"
+        },
+        {
+          "route": "https://ai.verifik.co/api/br/background-check",
+          "provider": "Verifik AI",
+          "cost": "90000000000000 atomic units token",
+          "category": "Trust, risk, verification",
+          "capability": "Brazil individual background screening using CPF and date of birth. A successful response includes identity-related fields and, when the data provider supplies it, a base64-encoded PDF report. Intended for employment screening, due diligence, and compliance; handle the PDF and metadata under your own legal and retention rules.",
+          "source": "https://www.x402scan.com/server/18ba7680-c6bc-4120-8a35-120a5ac00228"
+        },
+        {
+          "route": "https://property-risk-passport-api.lifebite-app.workers.dev/v1/property-risk-full",
+          "provider": "Property Risk Passport API | Address due diligence for agents",
+          "cost": "0.001 USDC",
+          "category": "Trust, risk, verification",
+          "capability": "Evaluate a US property address for parcel match, FEMA flood zone, flood proximity, taxing entities, school district, permit history, zoning/land-use context, insurance red flags, due-diligence risk score, quality score, recommended next steps, and official source links.",
+          "source": "https://www.x402scan.com/server/fc38c2ef-dde7-4a4f-9da6-e13b103fc944"
+        },
+        {
+          "route": "https://x402-cybercentry-erc-8004-agent-verification.up.railway.app/verify",
+          "provider": "Cybercentry ERC-8004 Agent Verification - x402",
+          "cost": "0.1 USDC",
+          "category": "Trust, risk, verification",
+          "capability": "Verify AI agent identity, authenticity and risk using the Cybercentry ERC-8004 Agent Verification (CEAV) API. Returns on-chain verification results for AI agents using the ERC-8004 standard",
+          "source": "https://www.x402scan.com/server/6cda042c-aad2-41fb-a6af-cd6934af6cf4"
+        }
+      ]
+    }
+  ],
+  "warnings": [
+    {
+      "title": "One provider can dominate the apparent market",
+      "detail": "The top providers contribute hundreds to thousands of rows. Count rows, providers, and distinct route patterns separately."
+    },
+    {
+      "title": "Listed payable route is not quality proof",
+      "detail": "The database proves public payment metadata. It does not prove successful delivery, refund behavior, latency, or output quality."
+    },
+    {
+      "title": "accept_verified=false is common",
+      "detail": "Treat many records as marketplace intelligence until a paid-call harness verifies payment and response behavior."
+    },
+    {
+      "title": "Long-tail routes can be synthetic",
+      "detail": "Large route farms are still useful as market signal, but should not be mistaken for organic demand."
+    },
+    {
+      "title": "Capability text is uneven",
+      "detail": "Route descriptions vary from specific service catalogs to generic generated text, so clusters should be reviewed with examples."
+    }
+  ]
+}

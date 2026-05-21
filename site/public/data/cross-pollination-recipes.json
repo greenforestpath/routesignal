@@ -1,0 +1,1213 @@
+{
+  "generated_at": "2026-05-21T02:33:00Z",
+  "thesis": "The strongest hackathon demo is not a fake wallet buying random APIs. It is a catalog of agent procurement recipes: a human asks for a useful outcome, the agent buys the cheapest evidence first, stops when confidence or budget fails, and leaves a receipt trail. All recipes below are designed for fake-money or shadow-mode evaluation first; none claims that a live paid x402 call has been completed.",
+  "recipes": [
+    {
+      "id": "pay_per_contradiction_founder_diligence",
+      "title": "Pay-Per-Contradiction Founder Diligence",
+      "task": "Find the cheapest source-backed contradiction in a founder, company, or vendor claim before a meeting.",
+      "human_hook": "A tiny agent that says: 'I spent 31 cents and found the one claim you should challenge in the room.'",
+      "budget_usd": {
+        "target": 0.75,
+        "hard_cap": 1.5,
+        "currency": "SIM_USDC for demo; real USDC only after shadow-mode approval"
+      },
+      "rail_assumption": "x402 is used as a per-call purchase rail where listed providers support it or are represented in the local x402scan atlas. Normal API calls are treated as simulated ingredients when no paid endpoint was verified.",
+      "ingredients": [
+        {
+          "name": "Exa or Serper search",
+          "role": "Find the public claim surface and alternative sources.",
+          "evidence_status": "simulated provider in fake-money evals; search class appears in local atlas"
+        },
+        {
+          "name": "Firecrawl or Zyte",
+          "role": "Turn company pages, docs, and announcements into clean evidence.",
+          "evidence_status": "listed in RouteSignal routes database; Firecrawl had strong simulated utility"
+        },
+        {
+          "name": "GlobalAPI registry and sanctions",
+          "role": "Check entity existence, jurisdiction, and sanctions risk.",
+          "evidence_status": "listed in atlas; simulated as registry and sanctions providers"
+        },
+        {
+          "name": "Clado/Apollo-style people enrichment",
+          "role": "Verify operators, prior companies, and contact graph.",
+          "evidence_status": "simulated people-provider class via Clado"
+        },
+        {
+          "name": "twit.sh, StableSocial, or Cascade Surf",
+          "role": "Check recency, claims, launches, and public traction.",
+          "evidence_status": "listed or simulated social providers"
+        },
+        {
+          "name": "Pinata or 402104",
+          "role": "Store the contradiction bundle and source hashes.",
+          "evidence_status": "listed storage/provenance ingredients; strong simulated ROI"
+        }
+      ],
+      "call_chain": [
+        "discover:serper.search",
+        "scrape:firecrawl.scrape",
+        "registry:globalapi.registry",
+        "operators:clado.people",
+        "social:twitsh.twitter",
+        "synthesize:amalgix.docs",
+        "receipt:pinata.storage"
+      ],
+      "why_impossible_before": "A human could do this with five accounts and a spreadsheet, but an agent could not cheaply decide which paid lookup was worth buying next without pre-funded vendor accounts and manual receipt stitching.",
+      "why_agent_payments_matter": "The value is in conditional spend: buy registry only if search finds a real entity, buy people data only if the entity matters, and stop once one high-confidence contradiction is found.",
+      "first_dollar_call": "A search or scrape call under $0.01 to establish whether the claim has enough public surface to justify enrichment.",
+      "stop_rule": "Stop immediately if two independent discovery calls cannot identify the same entity, if total spend reaches $0.75 without a contradiction, or if sanctions/operator data changes the recommendation to 'do not meet'.",
+      "receipt_trail": [
+        "input claim and target company",
+        "provider, endpoint class, quoted/simulated price, timestamp, and latency per call",
+        "source URLs and output summaries",
+        "contradiction found or explicit 'no contradiction under budget'",
+        "storage URI or hash for the evidence bundle"
+      ],
+      "failure_modes": [
+        "False contradiction from stale scraped pages.",
+        "People enrichment confuses two operators with the same name.",
+        "Registry data is jurisdictionally incomplete.",
+        "Agent overspends because every weak signal feels worth one more lookup."
+      ],
+      "protocols": [
+        "x402",
+        "MCP",
+        "API",
+        "SIM_USDC"
+      ],
+      "evidence_refs": [
+        "site/public/data/task-briefs.json#company_diligence",
+        "scrapers/x402scan/artifacts/COMBINATORIAL_OPPORTUNITY_MAP.md#autonomous-diligence-engine",
+        "scrapers/x402scan/artifacts/FAKE_MONEY_FLOW_EVALS.md#autonomous-diligence-engine",
+        "site/public/data/routesdb.json#StableEnrich",
+        "site/public/data/routesdb.json#GlobalAPI-x402"
+      ],
+      "feasibility": {
+        "level": "high for fake-money demo; medium for live paid execution",
+        "demo_status": "simulate now with existing provider names, budgets, and receipts",
+        "honesty_note": "No live paid calls or endpoint truth checks are claimed.",
+        "next_real_check": "Run one shadow job on a real company and compare the proposed paid chain to free public evidence before authorizing any spend."
+      }
+    },
+    {
+      "id": "thin_liquidity_thesis_ladder",
+      "title": "Thin-Liquidity Thesis Ladder",
+      "task": "Build a research-only alert for a new token or fee-market event without letting the agent trade.",
+      "human_hook": "The agent can say: 'This token is interesting enough for a human to inspect, but I refused to buy alpha after the safety gate failed.'",
+      "budget_usd": {
+        "target": 0.35,
+        "hard_cap": 1.0,
+        "currency": "SIM_USDC for demo; real trades are out of scope"
+      },
+      "rail_assumption": "x402 or API calls buy research ingredients only. Execution, swaps, transfers, and trade placement require explicit human approval and are not part of this recipe.",
+      "ingredients": [
+        {
+          "name": "StableCrypto",
+          "role": "Cheap market, token, DefiLlama, CoinGecko, Alchemy, or Etherscan context.",
+          "evidence_status": "listed in atlas and simulated in fake-money evals"
+        },
+        {
+          "name": "Deepnets.ai",
+          "role": "Token safety, holder graph, funding-network detection, social research.",
+          "evidence_status": "listed in atlas; simulated as safety provider"
+        },
+        {
+          "name": "Nansen AI",
+          "role": "Smart-money labels and wallet intelligence.",
+          "evidence_status": "listed in atlas; simulated labels provider"
+        },
+        {
+          "name": "SniperX and Kerdos",
+          "role": "Alpha/new-pair flow plus sentiment and risk analytics.",
+          "evidence_status": "listed in atlas; simulated alpha and risk providers"
+        },
+        {
+          "name": "OneSource RPC and Satoshi API fees",
+          "role": "Mainnet state and transaction-cost context before any human-approved action.",
+          "evidence_status": "listed or simulated; very cheap in fake-money evals"
+        }
+      ],
+      "call_chain": [
+        "market:stablecrypto.market",
+        "safety:deepnets.safety",
+        "labels:nansen.labels",
+        "alpha:sniperx.alpha",
+        "risk:kerdos.risk",
+        "state:onesource.rpc",
+        "fees:satoshi.fees",
+        "receipt:402104.storage"
+      ],
+      "why_impossible_before": "An occasional crypto researcher needed subscriptions, API keys, and custom scripts across market, label, social, and RPC vendors. The payment rail turns this into a budgeted ladder.",
+      "why_agent_payments_matter": "The agent can buy only the next rung when the previous rung clears a threshold. That matters because most token ideas should die after cheap safety checks.",
+      "first_dollar_call": "StableCrypto market context or Satoshi fee context, because a cheap market/fee check can invalidate the whole task.",
+      "stop_rule": "Stop if safety score fails, holder concentration is extreme, labels indicate obvious wash/rug risk, confidence remains below 0.7 after $0.35, or the user asks for execution.",
+      "receipt_trail": [
+        "token/event identifier",
+        "per-rung decision and reason for continuing or stopping",
+        "provider outputs summarized as research evidence",
+        "human-approval gate showing no autonomous trade was made",
+        "stored research receipt"
+      ],
+      "failure_modes": [
+        "API outputs are stale relative to fast markets.",
+        "The recipe gets mistaken for financial advice.",
+        "A social/alpha provider amplifies manipulation.",
+        "Human sees a high-confidence alert and over-trusts simulated quality."
+      ],
+      "protocols": [
+        "x402",
+        "API",
+        "Base",
+        "Solana",
+        "SIM_USDC"
+      ],
+      "evidence_refs": [
+        "site/public/data/task-briefs.json#onchain_research",
+        "scrapers/x402scan/artifacts/FAKE_MONEY_FLOW_EVALS.md#crypto-trading-thesis-ladder",
+        "site/public/data/routesdb.json#StableCrypto",
+        "site/public/data/routesdb.json#Nansen-AI",
+        "site/public/data/routesdb.json#SniperX"
+      ],
+      "feasibility": {
+        "level": "medium",
+        "demo_status": "fake-money ladder is already represented by existing eval traces",
+        "honesty_note": "The safe demo is research-only. No autonomous trading or live paid-call quality is proven.",
+        "next_real_check": "Run a no-money shadow ladder on one historical token and compare the stop decision to known later outcomes."
+      }
+    },
+    {
+      "id": "conference_hallway_radar",
+      "title": "Conference Hallway Radar",
+      "task": "Rank who to talk to at a conference and generate one pointed question per target.",
+      "human_hook": "A practical party trick: give it the sponsor list, it returns 'talk to this person, ask this, skip that booth'.",
+      "budget_usd": {
+        "target": 0.5,
+        "hard_cap": 1.25,
+        "currency": "SIM_USDC for demo"
+      },
+      "rail_assumption": "Use x402-listed search, scrape, social, company, and people ingredients where available; treat outreach as optional and disabled by default.",
+      "ingredients": [
+        {
+          "name": "x402scan ecosystem/resources",
+          "role": "Seed targets from the agent-payment ecosystem.",
+          "evidence_status": "local crawl normalized 87 resources"
+        },
+        {
+          "name": "Serper, Exa, Firecrawl",
+          "role": "Find and scrape company surfaces.",
+          "evidence_status": "simulated search/scrape providers with strong fake-money utility"
+        },
+        {
+          "name": "twit.sh, StableSocial, Cascade Surf, Neynar",
+          "role": "Score social recency and visible builder momentum.",
+          "evidence_status": "listed or simulated social providers"
+        },
+        {
+          "name": "GlobalAPI and Clado",
+          "role": "Verify company/operator and find the likely person to approach.",
+          "evidence_status": "listed/simulated company and people ingredients"
+        },
+        {
+          "name": "Amalgix or Heurist Deep Research",
+          "role": "Condense evidence into a two-minute conversation brief.",
+          "evidence_status": "listed in atlas; Amalgix simulated"
+        }
+      ],
+      "call_chain": [
+        "seed:x402scan.resources",
+        "discover:serper.search",
+        "scrape:firecrawl.scrape",
+        "registry:globalapi.registry",
+        "social:cascade.surf",
+        "people:clado.people",
+        "synthesize:amalgix.docs",
+        "receipt:402104.storage"
+      ],
+      "why_impossible_before": "The human version is browser-tab chaos. Agents could search, but paying for one-off people/social/registry calls across vendors was too much setup for a 30-minute conference sprint.",
+      "why_agent_payments_matter": "The agent buys just enough context for the next human conversation. The spend is justified by time saved and by avoiding low-signal meetings.",
+      "first_dollar_call": "Search/scrape the target's current site or x402scan listing to decide whether deeper company or people enrichment is warranted.",
+      "stop_rule": "Stop if public surface is stale, no real operator can be identified, target is not relevant to the current conference question, or the target falls below top-10 after cheap social/search checks.",
+      "receipt_trail": [
+        "target list and ranking reason",
+        "source snippets used for each target",
+        "spend per target",
+        "one recommended question and one skip reason",
+        "receipt bundle for post-conference follow-up"
+      ],
+      "failure_modes": [
+        "The social signal favors loud projects over serious ones.",
+        "Person lookup is wrong or invasive.",
+        "Conference data is stale.",
+        "Agent sends outreach when it should only draft."
+      ],
+      "protocols": [
+        "x402",
+        "MCP",
+        "API",
+        "SIM_USDC"
+      ],
+      "evidence_refs": [
+        "scrapers/x402scan/artifacts/COMBINATORIAL_OPPORTUNITY_MAP.md#conference-scout-agent",
+        "scrapers/x402scan/artifacts/FAKE_MONEY_FLOW_EVALS.md#conference-scout-agent",
+        "site/public/data/routesdb.json#ATXP",
+        "site/public/data/routesdb.json#Cascade-Surf",
+        "scrapers/reddit_x402/artifacts/R_X402_ONBOARDING_AND_DELTA.md#practical-examples"
+      ],
+      "feasibility": {
+        "level": "medium",
+        "demo_status": "shadow demo works well as a ranking and receipt page; simulated pass rate was weak enough to keep gates tight",
+        "honesty_note": "Conference Scout was not the strongest fake-money flow, so the demo should show stop rules and humility.",
+        "next_real_check": "Run it on a public conference sponsor page without paid calls and ask whether its top five targets are actually useful."
+      }
+    },
+    {
+      "id": "seller_near_miss_autopsy",
+      "title": "Seller Near-Miss Autopsy",
+      "task": "Explain why agents inspect an x402 endpoint and still do not pay.",
+      "human_hook": "A seller paste-in report: 'You got crawled. Here are the four missing facts that likely killed conversion.'",
+      "budget_usd": {
+        "target": 0.2,
+        "hard_cap": 0.75,
+        "currency": "SIM_USDC for demo"
+      },
+      "rail_assumption": "The agent does not pay the seller endpoint first. It buys or simulates discovery, schema, telemetry, and social trust checks before recommending a paid canary.",
+      "ingredients": [
+        {
+          "name": "x402scan schema and telemetry",
+          "role": "Check whether the endpoint is discoverable and shows activity-like signals.",
+          "evidence_status": "simulated x402scan providers; local atlas from crawl"
+        },
+        {
+          "name": "Seller Clinic checks",
+          "role": "Score discovery, schema, sample, price, receipt, failure semantics, trust, and runtime fit.",
+          "evidence_status": "local checklist"
+        },
+        {
+          "name": "Firecrawl scrape",
+          "role": "Inspect docs, examples, pricing copy, and support surface.",
+          "evidence_status": "listed/simulated scrape ingredient"
+        },
+        {
+          "name": "twit.sh or Cascade Surf",
+          "role": "Check whether builders mention failures, confusion, or usage.",
+          "evidence_status": "listed/simulated social ingredients"
+        },
+        {
+          "name": "402104 storage",
+          "role": "Store the autopsy and before/after metadata example.",
+          "evidence_status": "listed/simulated storage ingredient"
+        }
+      ],
+      "call_chain": [
+        "discover:x402scan.schema",
+        "telemetry:x402scan.telemetry",
+        "docs:firecrawl.scrape",
+        "social:cascade.surf",
+        "clinic:seller_readiness.checks",
+        "receipt:402104.storage"
+      ],
+      "why_impossible_before": "Sellers could see hits or wallet attempts, but not whether the buyer abandoned because of missing schema, unclear price, low trust, or broken failure semantics.",
+      "why_agent_payments_matter": "If agents are the buyers, sellers need machine-readable conversion analytics: what the agent wanted to know before payment and which missing field blocked spend.",
+      "first_dollar_call": "x402scan schema/telemetry probe or docs scrape, not a paid call to the seller endpoint itself.",
+      "stop_rule": "Stop before any live endpoint payment if schema, sample output, price quote, or receipt semantics are absent.",
+      "receipt_trail": [
+        "endpoint URL and discovery source",
+        "readiness score across the eight seller-clinic dimensions",
+        "missing proof fields",
+        "suggested metadata patch",
+        "recommended canary call only if readiness clears threshold"
+      ],
+      "failure_modes": [
+        "Endpoint has private docs not visible to the agent.",
+        "Marketplace telemetry numbers are unlabeled and overinterpreted.",
+        "Seller treats a simulated autopsy as conversion truth.",
+        "The agent flags a missing sample where the seller intentionally withholds one."
+      ],
+      "protocols": [
+        "x402",
+        "MCP",
+        "API",
+        "SIM_USDC"
+      ],
+      "evidence_refs": [
+        "site/public/data/seller-clinic.json",
+        "scrapers/reddit_x402/artifacts/R_X402_ONBOARDING_AND_DELTA.md#seller-side-near-miss-analytics",
+        "DIAGNOSIS_LIST_OF_CONCRETE_IMPROVEMENTS.md#priority-3-turn-seller-clinic-into-a-real-diagnostic",
+        "site/public/data/task-briefs.json#seller_readiness"
+      ],
+      "feasibility": {
+        "level": "high",
+        "demo_status": "can be rendered from local checklist plus atlas records without claiming endpoint quality",
+        "honesty_note": "This diagnoses public machine-buyability, not true seller conversion unless sellers share logs.",
+        "next_real_check": "Ask one endpoint owner for anonymized probe/payment logs and compare them to the autopsy prediction."
+      }
+    },
+    {
+      "id": "bangkok_route_reality_desk",
+      "title": "Bangkok Route Reality Desk",
+      "task": "Test whether a claimed stablecoin-to-local-commerce route is actually usable and reconcilable.",
+      "human_hook": "Not 'crypto payments are coming to SEA' - the agent returns a timestamped route card with fees, limits, KYC, local rail out, and a receipt gap.",
+      "budget_usd": {
+        "target": 1.0,
+        "hard_cap": 2.0,
+        "currency": "SIM_USDC for demo; local paid attestations are future work"
+      },
+      "rail_assumption": "x402 can pay for evidence, not magically make a local route real. AEON-style claims remain WARN until route proof exists.",
+      "ingredients": [
+        {
+          "name": "AEON or local commerce payment listing",
+          "role": "Candidate route claim to inspect.",
+          "evidence_status": "listed in atlas as omnichain settlement for real-world merchants"
+        },
+        {
+          "name": "GlobalAPI economic/regulatory context",
+          "role": "Pull country, sanctions, or economic context relevant to route risk.",
+          "evidence_status": "listed/simulated"
+        },
+        {
+          "name": "Firecrawl and search",
+          "role": "Collect official provider, regulator, fee, and support pages.",
+          "evidence_status": "listed/simulated"
+        },
+        {
+          "name": "StableTravel or Maps/places via StableEnrich",
+          "role": "Identify a concrete merchant category or location to verify.",
+          "evidence_status": "listed in atlas"
+        },
+        {
+          "name": "StableEmail or human attestation placeholder",
+          "role": "Ask for route confirmation, merchant acceptance, or fee quote.",
+          "evidence_status": "listed/simulated; outreach disabled by default"
+        },
+        {
+          "name": "Pinata or 402104",
+          "role": "Store screenshots, quotes, route steps, and caveats.",
+          "evidence_status": "listed/simulated"
+        }
+      ],
+      "call_chain": [
+        "claim:aeon.route",
+        "official_search:serper.search",
+        "docs:firecrawl.scrape",
+        "jurisdiction:globalapi.registry",
+        "merchant_probe:stabletravel.local",
+        "quote_request:stableemail.draft",
+        "receipt:pinata.storage"
+      ],
+      "why_impossible_before": "Stablecoin route claims were easy to repeat and hard to operationalize. The missing object is a route receipt with asset-in, provider, KYC, limits, fee/spread, local rail out, merchant proof, and failure point.",
+      "why_agent_payments_matter": "The agent can buy tiny evidence fragments and local attestations one at a time, only escalating when the official-source check survives.",
+      "first_dollar_call": "Search/scrape official provider and regulator pages before contacting any merchant or paying for local proof.",
+      "stop_rule": "Stop if the route lacks official provider docs, conflicts with current local rules, cannot name a local rail out, or needs unverifiable human claims before any public proof.",
+      "receipt_trail": [
+        "route hypothesis",
+        "official-source links and capture timestamps",
+        "asset, chain, provider, KYC, limits, fee/spread, and local rail out fields",
+        "merchant/category proof status",
+        "explicit UNKNOWN fields"
+      ],
+      "failure_modes": [
+        "Regulatory sources change faster than the dataset.",
+        "Provider marketing overstates merchant acceptance.",
+        "Human attestation is fabricated or not reusable.",
+        "The agent confuses settlement availability with spendability."
+      ],
+      "protocols": [
+        "x402",
+        "API",
+        "local_rail_unknown",
+        "SIM_USDC"
+      ],
+      "evidence_refs": [
+        "site/public/data/task-briefs.json#sea_route_reality",
+        "site/public/data/routesdb.json#AEON",
+        "scrapers/x402scan/artifacts/COMBINATORIAL_OPPORTUNITY_MAP.md#travel-local-action-agent",
+        "DIAGNOSIS_LIST_OF_CONCRETE_IMPROVEMENTS.md#ranked-findings"
+      ],
+      "feasibility": {
+        "level": "medium for a shadow route card; low for live route validation inside the hackathon window",
+        "demo_status": "renderable as a route-proof checklist with one AEON-style example",
+        "honesty_note": "This should be framed as proof-of-route diligence, not a claim that local commerce works today.",
+        "next_real_check": "Pick one city and one merchant category, then require official docs plus a timestamped quote before upgrading from WARN."
+      }
+    },
+    {
+      "id": "provider_collision_bakeoff",
+      "title": "Provider Collision Bakeoff",
+      "task": "Ask the same question to multiple paid providers and compare cost, latency, freshness, and decision impact.",
+      "human_hook": "A judge can watch the agent say: 'Serper found it, Exa added context, Firecrawl gave proof, social disagreed, so I will not buy the expensive provider.'",
+      "budget_usd": {
+        "target": 0.3,
+        "hard_cap": 1.0,
+        "currency": "SIM_USDC for demo"
+      },
+      "rail_assumption": "Each provider call is simulated or shadowed first. Live paid calls should start with tiny canary budgets after route logic is proven.",
+      "ingredients": [
+        {
+          "name": "Exa, Serper, Firecrawl",
+          "role": "Search/scrape collision across public web evidence.",
+          "evidence_status": "simulated providers; Firecrawl and search APIs listed in atlas"
+        },
+        {
+          "name": "twit.sh, Cascade Surf, StableSocial",
+          "role": "Social collision across X, Reddit, and broader social sources.",
+          "evidence_status": "listed/simulated"
+        },
+        {
+          "name": "x402scan schema and telemetry",
+          "role": "Provider metadata, activity-like signal, and listing evidence.",
+          "evidence_status": "local crawl; simulated provider"
+        },
+        {
+          "name": "402104 storage",
+          "role": "Store the bakeoff report and winning-route receipt.",
+          "evidence_status": "listed/simulated"
+        }
+      ],
+      "call_chain": [
+        "search_collision:exa.search",
+        "search_collision:serper.search",
+        "search_collision:firecrawl.scrape",
+        "social_collision:twitsh.twitter",
+        "social_collision:cascade.surf",
+        "social_collision:stablesocial.social",
+        "schema_probe:x402scan.schema",
+        "telemetry:x402scan.telemetry",
+        "receipt:402104.storage"
+      ],
+      "why_impossible_before": "Agents could call one tool, but had no cheap habit of comparing providers as procurement vendors with receipts, stop rules, and outcome scoring.",
+      "why_agent_payments_matter": "When each call has a price, provider choice becomes an economic decision. The receipt trail lets future agents route to providers that changed the answer, not just providers that returned data.",
+      "first_dollar_call": "Two cheapest search providers in parallel, then stop if they agree and the confidence threshold is met.",
+      "stop_rule": "Stop after two independent providers agree above threshold, or after three providers disagree in a way that requires human review, or after $0.30 without a decision delta.",
+      "receipt_trail": [
+        "same input sent to each provider",
+        "price, latency, success, freshness, and quality score",
+        "whether the call changed the decision",
+        "winner and loser rationale",
+        "stored provider comparison report"
+      ],
+      "failure_modes": [
+        "Providers share upstream sources, creating false independence.",
+        "Latency and cost are simulated, not observed live.",
+        "Quality scores reward verbose outputs rather than correct ones.",
+        "The agent overfits to one benchmark question."
+      ],
+      "protocols": [
+        "x402",
+        "API",
+        "MCP",
+        "SIM_USDC"
+      ],
+      "evidence_refs": [
+        "scrapers/x402scan/artifacts/FAKE_MONEY_FLOW_EVALS.md#provider-collision-benchmark",
+        "scrapers/x402scan/artifacts/COMBINATORIAL_OPPORTUNITY_MAP.md#x402-api-router-procurement-layer",
+        "HACKATHON_OPENCODE_DUELING_COUNCIL_SYNTHESIS_2026-05-21.md#score-matrix",
+        "site/public/data/task-briefs.json#web_social_research"
+      ],
+      "feasibility": {
+        "level": "high for demo and strongest simulated flow",
+        "demo_status": "fake-money eval reported 98 percent pass rate and highest product score among tested flows",
+        "honesty_note": "Provider quality was mocked; the live truthfulness claim is unproven.",
+        "next_real_check": "Run one real no-payment provider collision on public docs, then one sub-$0.25 paid canary only if schemas and receipts are clear."
+      }
+    },
+    {
+      "id": "counterparty_risk_preflight",
+      "title": "Counterparty Risk Preflight Before Agent Spend",
+      "task": "Screen a seller, wallet, domain, or company before an agent is allowed to pay it.",
+      "human_hook": "The agent pauses at the cash register and says: 'I can pay, but this seller has no operator identity and no failure policy.'",
+      "budget_usd": {
+        "target": 0.25,
+        "hard_cap": 1.0,
+        "currency": "SIM_USDC for demo"
+      },
+      "rail_assumption": "x402 payment intent triggers screening before the paid call proceeds. x402 is the payment challenge; policy, KYA/KYT, and failure rules live around it.",
+      "ingredients": [
+        {
+          "name": "GlobalAPI registry and sanctions",
+          "role": "Check company, jurisdiction, and sanctions surface.",
+          "evidence_status": "listed/simulated"
+        },
+        {
+          "name": "Vishwa, AgentLux, AgentRanking-style trust layers",
+          "role": "Represent identity/reputation/KYA surfaces for future scoring.",
+          "evidence_status": "listed in atlas or Reddit pain-signal watchlist"
+        },
+        {
+          "name": "x402scan and marketplace metadata",
+          "role": "Check listing, interfaces, and public activity-like signals.",
+          "evidence_status": "local crawl"
+        },
+        {
+          "name": "Firecrawl",
+          "role": "Inspect docs for operator identity, privacy, support, and refund/failure semantics.",
+          "evidence_status": "listed/simulated"
+        },
+        {
+          "name": "Pinata or 402104",
+          "role": "Store policy decision and audit receipt.",
+          "evidence_status": "listed/simulated"
+        }
+      ],
+      "call_chain": [
+        "intent:x402.challenge_detected",
+        "seller:x402scan.schema",
+        "docs:firecrawl.scrape",
+        "entity:globalapi.registry",
+        "sanctions:globalapi.sanctions",
+        "trust:vishwa_or_agentranking.signal",
+        "policy:allow_warn_block",
+        "receipt:pinata.storage"
+      ],
+      "why_impossible_before": "Payment happened through human accounts and platform trust. Agent payments need a programmable preflight because the buyer may be an unattended runtime.",
+      "why_agent_payments_matter": "The moment an agent can pay an unknown endpoint, every call becomes a procurement and compliance decision. Cheap preflight can block expensive or unsafe spend.",
+      "first_dollar_call": "A free or near-free metadata/schema scrape. Do not pay the target endpoint until the policy preflight returns PROBE or PAY.",
+      "stop_rule": "Block if seller identity is absent for high-risk tasks, sanctions risk is present, failure semantics are missing for nontrivial spend, or endpoint asks for more than the task cap.",
+      "receipt_trail": [
+        "payment intent and target endpoint",
+        "policy checks run",
+        "allow/warn/block verdict",
+        "which missing fields caused block",
+        "audit receipt stored before any payment"
+      ],
+      "failure_modes": [
+        "Trust signals are gameable.",
+        "False positives block small benign endpoints.",
+        "Jurisdictional data is incomplete.",
+        "Developers misread a preflight as legal advice."
+      ],
+      "protocols": [
+        "x402",
+        "MPP",
+        "API",
+        "Base",
+        "SIM_USDC"
+      ],
+      "evidence_refs": [
+        "scrapers/reddit_x402/artifacts/R_X402_ONBOARDING_AND_DELTA.md#trust-kya-counterparty-assurance",
+        "scrapers/x402scan/artifacts/COMBINATORIAL_OPPORTUNITY_MAP.md#compliance-sanctions-counterparty-screening",
+        "site/public/data/seller-clinic.json#Trust",
+        "site/public/data/routesdb.json#Vishwa",
+        "site/public/data/routesdb.json#AgentLux"
+      ],
+      "feasibility": {
+        "level": "medium",
+        "demo_status": "strong as a policy decision card; live compliance validity is out of scope",
+        "honesty_note": "This is risk triage and audit logging, not legal or sanctions compliance certification.",
+        "next_real_check": "Run against three public x402 listings: one strong identity, one weak identity, one no-description endpoint."
+      }
+    },
+    {
+      "id": "meme_to_merch_microstore",
+      "title": "Meme-to-Merch Microstore",
+      "task": "Detect a niche social trend, produce one merch idea, and prepare an agent-buyable checkout without running a full storefront.",
+      "human_hook": "A weird but legible demo: the agent finds a micro-community joke and turns it into one pay-per-agent shirt with receipts.",
+      "budget_usd": {
+        "target": 0.6,
+        "hard_cap": 1.5,
+        "currency": "SIM_USDC for demo"
+      },
+      "rail_assumption": "x402 is used for pay-per-call social data, generation or merch checkout where listed. Real product purchase is disabled unless the user approves.",
+      "ingredients": [
+        {
+          "name": "twit.sh, StableSocial, Cascade Surf, or Neynar",
+          "role": "Find trend phrases, community jokes, and recency signal.",
+          "evidence_status": "listed or simulated social providers"
+        },
+        {
+          "name": "StableMerch",
+          "role": "Agent-purchasable custom shirt endpoint.",
+          "evidence_status": "listed in atlas"
+        },
+        {
+          "name": "Bonsai or model gateway",
+          "role": "Generate/remix a design or content concept.",
+          "evidence_status": "listed in atlas; design generation simulated"
+        },
+        {
+          "name": "StableEmail",
+          "role": "Draft launch note or notify a small opt-in list.",
+          "evidence_status": "listed/simulated; send disabled by default"
+        },
+        {
+          "name": "LoyalSpark or tip.md",
+          "role": "Represent loyalty/tip/reward loop after purchase.",
+          "evidence_status": "listed in atlas"
+        },
+        {
+          "name": "Pinata",
+          "role": "Store trend evidence, design prompt, and checkout receipt.",
+          "evidence_status": "listed/simulated"
+        }
+      ],
+      "call_chain": [
+        "trend:twitsh.twitter",
+        "trend_crosscheck:stablesocial.social",
+        "design:bondsai_or_model_gateway.generate",
+        "checkout:stablemerch.quote",
+        "launch_note:stableemail.draft",
+        "reward:loyalspark.plan",
+        "receipt:pinata.storage"
+      ],
+      "why_impossible_before": "A one-off merch experiment required social scraping, design tooling, checkout setup, email, loyalty, and storage accounts. That is too much overhead for a micro-trend.",
+      "why_agent_payments_matter": "Per-call access makes silly experiments economically rational: the agent buys just enough trend evidence and checkout setup to test one product, then stops.",
+      "first_dollar_call": "Social pulse call to prove the phrase is current and not a hallucinated joke.",
+      "stop_rule": "Stop if fewer than two sources show current social signal, if merch quote exceeds cap, if copyright/trademark risk appears, or if the user has not approved real checkout.",
+      "receipt_trail": [
+        "trend phrase and source timestamps",
+        "design prompt and generated asset hash",
+        "checkout quote but no purchase unless approved",
+        "launch draft",
+        "receipt bundle"
+      ],
+      "failure_modes": [
+        "Trend signal is too thin or platform-specific.",
+        "Generated design violates rights or taste boundaries.",
+        "Agent buys merch nobody wants.",
+        "Social APIs return noisy engagement bait."
+      ],
+      "protocols": [
+        "x402",
+        "MCP",
+        "API",
+        "Base",
+        "SIM_USDC"
+      ],
+      "evidence_refs": [
+        "site/public/data/routesdb.json#StableMerch",
+        "site/public/data/routesdb.json#StableSocial",
+        "site/public/data/routesdb.json#twit.sh",
+        "scrapers/x402scan/artifacts/COMBINATORIAL_OPPORTUNITY_MAP.md#agent-commerce-storefront",
+        "scrapers/reddit_x402/artifacts/R_X402_ONBOARDING_AND_DELTA.md#reals-examples-are-mostly-boring-apis"
+      ],
+      "feasibility": {
+        "level": "medium",
+        "demo_status": "fun visual/product recipe; should remain a quote-and-plan demo unless real checkout is verified",
+        "honesty_note": "This is more speculative than diligence or provider benchmarking, but useful for showing non-boring commerce loops.",
+        "next_real_check": "Verify StableMerch schema, sample output, price quote, receipt, and cancellation behavior before any purchase."
+      }
+    },
+    {
+      "id": "receipt_quilt_for_agent_research",
+      "title": "Receipt Quilt for Agent Research",
+      "task": "Turn a multi-provider research answer into a durable bundle of paid-call receipts and source evidence.",
+      "human_hook": "Instead of trusting the answer, the human opens the receipt quilt: every tile is a call, price, source, and reason it mattered.",
+      "budget_usd": {
+        "target": 0.4,
+        "hard_cap": 1.25,
+        "currency": "SIM_USDC for demo"
+      },
+      "rail_assumption": "Every paid or simulated call emits a receipt object even when the provider does not. x402 transaction proof is not treated as proof of output quality.",
+      "ingredients": [
+        {
+          "name": "Pinata and 402104",
+          "role": "Store raw and summarized evidence bundles.",
+          "evidence_status": "listed/simulated; strongest fake-money provider signals"
+        },
+        {
+          "name": "Prove API / Polymer",
+          "role": "Represent proof generation and query for claims needing stronger attestations.",
+          "evidence_status": "listed in atlas"
+        },
+        {
+          "name": "x402scan telemetry",
+          "role": "Link endpoint/payment observations to the receipt ledger.",
+          "evidence_status": "local crawl and simulated provider"
+        },
+        {
+          "name": "Amalgix or Heurist",
+          "role": "Summarize evidence without losing source references.",
+          "evidence_status": "listed/simulated"
+        },
+        {
+          "name": "AgentLux or Vishwa",
+          "role": "Attach identity/trust context to who bought or sold the call.",
+          "evidence_status": "listed in atlas"
+        }
+      ],
+      "call_chain": [
+        "answer_source:firecrawl.scrape",
+        "answer_source:globalapi.registry",
+        "synthesize:amalgix.docs",
+        "proof:polymer.prove_api",
+        "archive:pinata.storage",
+        "archive_copy:402104.storage",
+        "telemetry:x402scan.telemetry"
+      ],
+      "why_impossible_before": "Receipts were scattered across API dashboards, wallet transactions, and local notes. Agents need portable memory of what was bought and whether it changed the answer.",
+      "why_agent_payments_matter": "Payment creates a natural audit event. If captured well, each paid call becomes reusable provenance for future agents instead of disposable spend.",
+      "first_dollar_call": "A storage/provenance call after the first meaningful evidence source, not after the whole task is over.",
+      "stop_rule": "Stop storing raw output that includes secrets or personal data, stop proof escalation if source confidence is low, and cap storage/proof spend below 20 percent of task budget.",
+      "receipt_trail": [
+        "receipt schema version",
+        "provider and endpoint class",
+        "input hash and output summary hash",
+        "price, latency, success, and decision delta",
+        "storage URI and optional proof/job id"
+      ],
+      "failure_modes": [
+        "Receipts leak sensitive inputs.",
+        "Storage proves existence, not truth.",
+        "Proof calls are overkill for cheap research.",
+        "Provider receipts use incompatible formats."
+      ],
+      "protocols": [
+        "x402",
+        "API",
+        "Base",
+        "IPFS",
+        "Arweave",
+        "SIM_USDC"
+      ],
+      "evidence_refs": [
+        "scrapers/x402scan/artifacts/COMBINATORIAL_OPPORTUNITY_MAP.md#paid-evidence-and-proof-layer",
+        "scrapers/x402scan/artifacts/FAKE_MONEY_FLOW_EVALS.md#best-fake-money-provider-signals",
+        "site/public/data/routesdb.json#Pinata",
+        "site/public/data/routesdb.json#402104",
+        "site/public/data/routesdb.json#Prove-API"
+      ],
+      "feasibility": {
+        "level": "high as a local schema and demo object",
+        "demo_status": "can be rendered from fake receipts immediately",
+        "honesty_note": "Storage/proof receipts do not prove endpoint correctness or customer demand.",
+        "next_real_check": "Define one receipt schema and attach it to a single shadow provider collision run."
+      }
+    },
+    {
+      "id": "node_package_security_microaudit",
+      "title": "Node Package Security Microaudit",
+      "task": "Before an agent installs a package or MCP server, buy a tiny security and provenance audit.",
+      "human_hook": "The agent refuses to install a package until it has bought one cheap scan and stored the risk receipt.",
+      "budget_usd": {
+        "target": 0.2,
+        "hard_cap": 0.75,
+        "currency": "SIM_USDC for demo"
+      },
+      "rail_assumption": "Use x402-style pay-per-scan where available; otherwise simulate the paid scanner and require human approval before install.",
+      "ingredients": [
+        {
+          "name": "security.togoder.click-style scanner",
+          "role": "Paid Node package security scan referenced in r/x402 corpus.",
+          "evidence_status": "Reddit lead, not present as verified local endpoint"
+        },
+        {
+          "name": "Firecrawl",
+          "role": "Fetch package docs, repo page, install notes, and warnings.",
+          "evidence_status": "listed/simulated"
+        },
+        {
+          "name": "GlobalAPI or sanctions/company check",
+          "role": "Optional operator/domain context for higher-risk packages.",
+          "evidence_status": "listed/simulated"
+        },
+        {
+          "name": "x402scan or MCP registry metadata",
+          "role": "Check whether a paid MCP/tool endpoint is discoverable and runtime-fit.",
+          "evidence_status": "local x402scan; MCP registry mentioned in Reddit pain signals"
+        },
+        {
+          "name": "402104 storage",
+          "role": "Store audit receipt and install decision.",
+          "evidence_status": "listed/simulated"
+        }
+      ],
+      "call_chain": [
+        "package_docs:firecrawl.scrape",
+        "scanner:node_security_scan.paid",
+        "runtime_fit:x402scan.schema",
+        "operator_context:globalapi.registry",
+        "decision:install_warn_block",
+        "receipt:402104.storage"
+      ],
+      "why_impossible_before": "Package installs were either manual trust or broad platform scanners. Agent runtimes need tiny just-in-time checks before tool installation.",
+      "why_agent_payments_matter": "A one-off security check can be worth pennies when the alternative is granting an agent runtime access to a malicious dependency or MCP server.",
+      "first_dollar_call": "Paid package scan only after free docs/repo scrape confirms the package is actually under consideration.",
+      "stop_rule": "Block install if scanner flags high severity, package has no clear source, endpoint lacks runtime fit, or audit cannot be stored.",
+      "receipt_trail": [
+        "package/tool identifier",
+        "free docs evidence",
+        "paid scan summary",
+        "install decision and human approval status",
+        "stored audit receipt"
+      ],
+      "failure_modes": [
+        "Scanner has shallow coverage.",
+        "Package risk changes after the scan.",
+        "Agent grants permissions beyond what the audit considered.",
+        "Reddit lead is not a live reliable provider."
+      ],
+      "protocols": [
+        "x402",
+        "MCP",
+        "API",
+        "SIM_USDC"
+      ],
+      "evidence_refs": [
+        "scrapers/reddit_x402/artifacts/R_X402_ONBOARDING_AND_DELTA.md#full-visible-post-catalog",
+        "scrapers/reddit_x402/artifacts/R_X402_ONBOARDING_AND_DELTA.md#mcp-registry-as-a-practical-distribution-source",
+        "site/public/data/seller-clinic.json#Runtime-Fit",
+        "site/public/data/routesdb.json#MCP-Server-Example"
+      ],
+      "feasibility": {
+        "level": "medium",
+        "demo_status": "can be a simulated install gate with a placeholder paid scanner",
+        "honesty_note": "The named scanner is a Reddit lead, not a locally verified paid endpoint.",
+        "next_real_check": "Find or build one real scanner endpoint with schema, sample, price quote, and deterministic output on a known package."
+      }
+    },
+    {
+      "id": "no_account_data_room_for_long_stay_asset",
+      "title": "No-Account Data Room for a Long-Stay Asset",
+      "task": "Create a small diligence data room for an obscure hotel, guesthouse, coliving, or retreat property.",
+      "human_hook": "The agent turns 'could this place be interesting?' into a source-backed memo with owner, demand, route, complaints, and missing proof.",
+      "budget_usd": {
+        "target": 1.25,
+        "hard_cap": 2.5,
+        "currency": "SIM_USDC for demo"
+      },
+      "rail_assumption": "Per-call paid ingredients replace signing up for many travel, maps, registry, social, scrape, and storage APIs. Outreach and payments are draft-only.",
+      "ingredients": [
+        {
+          "name": "StableTravel",
+          "role": "Travel, hotel, activity, or transfer search ingredient.",
+          "evidence_status": "listed in atlas"
+        },
+        {
+          "name": "StableEnrich / Google Maps-style places",
+          "role": "Place details, public footprint, and local business context.",
+          "evidence_status": "listed in atlas as access to Google Maps and enrichment APIs"
+        },
+        {
+          "name": "Firecrawl and search",
+          "role": "Scrape website, reviews, booking pages, and local articles.",
+          "evidence_status": "listed/simulated"
+        },
+        {
+          "name": "GlobalAPI registry/sanctions",
+          "role": "Check operator, country, company, and risk context.",
+          "evidence_status": "listed/simulated"
+        },
+        {
+          "name": "StableSocial / Cascade Surf",
+          "role": "Find recent guest complaints or hidden local signal.",
+          "evidence_status": "listed/simulated"
+        },
+        {
+          "name": "StableEmail",
+          "role": "Draft owner/operator questions without sending by default.",
+          "evidence_status": "listed/simulated"
+        },
+        {
+          "name": "Pinata / 402104",
+          "role": "Archive the data room and proof ledger.",
+          "evidence_status": "listed/simulated"
+        }
+      ],
+      "call_chain": [
+        "travel:stabletravel.search",
+        "place:stableenrich.maps",
+        "web:firecrawl.scrape",
+        "operator:globalapi.registry",
+        "social:stablesocial.social",
+        "questions:stableemail.draft",
+        "memo:amalgix.docs",
+        "receipt:pinata.storage"
+      ],
+      "why_impossible_before": "The asset is too small for a formal data vendor and too weird for one subscription. The useful workflow needs many tiny facts from many providers.",
+      "why_agent_payments_matter": "The agent can buy only the missing fact needed to move from curiosity to 'visit', 'email', 'avoid', or 'needs local proof'.",
+      "first_dollar_call": "Place/search lookup to decide whether the asset has enough public evidence to justify operator and social checks.",
+      "stop_rule": "Stop if the property cannot be uniquely identified, if owner/operator cannot be separated from public-web reachability, or if complaint/safety signal exceeds threshold.",
+      "receipt_trail": [
+        "asset identifier and candidate URLs",
+        "public-web evidence versus owner/diligence verified fields",
+        "complaint and route notes",
+        "draft owner questions",
+        "data room storage hash"
+      ],
+      "failure_modes": [
+        "The agent mistakes OTA listings for owner evidence.",
+        "Reviews are stale or manipulated.",
+        "Local legal/property facts require human due diligence.",
+        "Outreach draft implies readiness that the data does not support."
+      ],
+      "protocols": [
+        "x402",
+        "API",
+        "MCP",
+        "SIM_USDC"
+      ],
+      "evidence_refs": [
+        "site/public/data/task-briefs.json#sea_route_reality",
+        "site/public/data/routesdb.json#StableTravel",
+        "site/public/data/routesdb.json#StableEnrich",
+        "scrapers/x402scan/artifacts/COMBINATORIAL_OPPORTUNITY_MAP.md#travel-local-action-agent",
+        "scrapers/x402scan/artifacts/COMBINATORIAL_OPPORTUNITY_MAP.md#no-account-data-room"
+      ],
+      "feasibility": {
+        "level": "medium",
+        "demo_status": "good long-tail recipe for showing human-enjoyable use beyond pure crypto",
+        "honesty_note": "This is public-evidence assembly. It must not imply owner verification or deal readiness.",
+        "next_real_check": "Run a shadow data room for one known property and mark every field as public-web, inferred, or verified."
+      }
+    },
+    {
+      "id": "agent_ad_cell_market_test",
+      "title": "Agent-Bought Ad Cell Market Test",
+      "task": "Let an agent evaluate, buy, or decline one tiny local/content ad cell based on audience and receipt quality.",
+      "human_hook": "A delightfully odd demo: the agent can buy one pixel/square/ad cell only if it can explain why the audience is real.",
+      "budget_usd": {
+        "target": 0.5,
+        "hard_cap": 2.0,
+        "currency": "SIM_USDC for demo; real purchase disabled by default"
+      },
+      "rail_assumption": "LocalSquare-style ad cells are a Reddit-observed non-API commerce pattern. Treat it as speculative until endpoint schema, audience proof, price, and receipt semantics are verified.",
+      "ingredients": [
+        {
+          "name": "LocalSquare-style ad cell",
+          "role": "Candidate agent-purchasable media slot.",
+          "evidence_status": "Reddit lead, not locally verified as a live endpoint"
+        },
+        {
+          "name": "StableSocial, twit.sh, Neynar",
+          "role": "Check audience, topic fit, and social recency around the cell/community.",
+          "evidence_status": "listed or simulated social providers"
+        },
+        {
+          "name": "Firecrawl",
+          "role": "Scrape the ad page, terms, pricing, and display proof.",
+          "evidence_status": "listed/simulated"
+        },
+        {
+          "name": "GlobalAPI or domain/operator lookup",
+          "role": "Check operator surface for higher spend.",
+          "evidence_status": "listed/simulated"
+        },
+        {
+          "name": "Pinata",
+          "role": "Store creative, quote, purchase decision, and screenshot/receipt.",
+          "evidence_status": "listed/simulated"
+        }
+      ],
+      "call_chain": [
+        "surface:firecrawl.scrape",
+        "audience:stablesocial.social",
+        "audience_crosscheck:neynar.social",
+        "operator:globalapi.registry",
+        "creative:bondsai_or_template.generate",
+        "quote:local_ad_cell.price",
+        "approval:human_gate",
+        "receipt:pinata.storage"
+      ],
+      "why_impossible_before": "Tiny ad buys were not worth human setup, cards, accounts, and reconciliation. Agent payments make the buy technically possible, but audience proof is still the bottleneck.",
+      "why_agent_payments_matter": "The agent can buy attention in tiny increments if it can prove the slot, audience, and receipt before spend.",
+      "first_dollar_call": "Scrape and social audience check. Do not buy the ad cell as the first dollar.",
+      "stop_rule": "Stop if audience evidence is not independently visible, operator identity is unclear, quote lacks display/receipt terms, or user has not approved real purchase.",
+      "receipt_trail": [
+        "ad cell URL and quote",
+        "audience evidence and confidence",
+        "creative hash",
+        "approval state",
+        "purchase or decline reason",
+        "stored receipt/screenshot if bought"
+      ],
+      "failure_modes": [
+        "Audience numbers are fake or unlabeled.",
+        "The ad cell exists but has no meaningful distribution.",
+        "Agent buys novelty instead of value.",
+        "Receipt proves purchase, not attention."
+      ],
+      "protocols": [
+        "x402",
+        "API",
+        "SIM_USDC"
+      ],
+      "evidence_refs": [
+        "scrapers/reddit_x402/artifacts/R_X402_ONBOARDING_AND_DELTA.md#full-visible-post-catalog",
+        "scrapers/reddit_x402/artifacts/R_X402_ONBOARDING_AND_DELTA.md#real-examples-are-mostly-boring-apis",
+        "site/public/data/routesdb.json#StableSocial",
+        "site/public/data/routesdb.json#Pinata"
+      ],
+      "feasibility": {
+        "level": "low to medium",
+        "demo_status": "interesting edge-case recipe; should be marked speculative",
+        "honesty_note": "LocalSquare is a pain-signal/example lead, not verified local endpoint evidence.",
+        "next_real_check": "Verify one actual ad-cell endpoint with schema, price, audience evidence, and receipt before showing a purchase button."
+      }
+    },
+    {
+      "id": "long_running_job_escrow_router",
+      "title": "Long-Running Job Escrow Router",
+      "task": "Decide whether a paid task should use instant x402, quote-first negotiation, or an escrow/state protocol.",
+      "human_hook": "The agent refuses to pay upfront for 'hours-long research' through a one-shot 402 call and asks for a job id or escrow instead.",
+      "budget_usd": {
+        "target": 0.15,
+        "hard_cap": 0.5,
+        "currency": "SIM_USDC for demo"
+      },
+      "rail_assumption": "x402 is appropriate for immediate request-response calls. Long-running jobs need a second layer for job id, delivery verification, escrow, refund, dispute, or result token.",
+      "ingredients": [
+        {
+          "name": "Seller Clinic failure semantics",
+          "role": "Check whether paid output can fail after settlement.",
+          "evidence_status": "local checklist"
+        },
+        {
+          "name": "ACTP / Agirails-style escrow boundary",
+          "role": "Represent stateful paid work above x402.",
+          "evidence_status": "Reddit pain-signal lead"
+        },
+        {
+          "name": "Prove API / Polymer",
+          "role": "Example of async proof request and status query pattern.",
+          "evidence_status": "listed in atlas"
+        },
+        {
+          "name": "x402scan schema",
+          "role": "Inspect whether endpoint appears request-response or job-based.",
+          "evidence_status": "local crawl and simulated provider"
+        },
+        {
+          "name": "Pinata / 402104",
+          "role": "Store the routing decision and lifecycle receipt.",
+          "evidence_status": "listed/simulated"
+        }
+      ],
+      "call_chain": [
+        "task_classify:instant_or_delayed",
+        "schema:x402scan.schema",
+        "failure_policy:seller_clinic.check",
+        "quote:provider.quote_or_sample",
+        "route:x402_or_escrow",
+        "receipt:402104.storage"
+      ],
+      "why_impossible_before": "The protocol conversation often collapsed all payments into one rail. Agents need to distinguish a data lookup from delayed work with delivery risk.",
+      "why_agent_payments_matter": "The agent can pay instantly for small verified outputs while refusing to misuse x402 for tasks that need state, escrow, or proof of delivery.",
+      "first_dollar_call": "Schema or sample probe. The first dollar should classify lifecycle risk, not buy the long job.",
+      "stop_rule": "Do not pay one-shot x402 if the result is delayed, ambiguous, subjective, or not recoverable after provider failure.",
+      "receipt_trail": [
+        "task class",
+        "instant/delayed decision",
+        "quote and failure policy",
+        "chosen rail and why",
+        "job id, result token, or block reason"
+      ],
+      "failure_modes": [
+        "Seller hides delayed work behind an instant endpoint.",
+        "Escrow layer is unavailable or experimental.",
+        "Agent blocks useful async jobs too aggressively.",
+        "Receipt captures process but not deliverable quality."
+      ],
+      "protocols": [
+        "x402",
+        "MPP",
+        "escrow_or_state_protocol",
+        "API",
+        "SIM_USDC"
+      ],
+      "evidence_refs": [
+        "scrapers/reddit_x402/artifacts/R_X402_ONBOARDING_AND_DELTA.md#long-running-paid-work-needs-a-second-protocol-layer",
+        "site/public/data/seller-clinic.json#Failure-Semantics",
+        "site/public/data/routesdb.json#Prove-API",
+        "scrapers/x402scan/artifacts/AGENT_PAYMENT_PROTOCOLS_FREE_TRIAL_NEGOTIATION.md"
+      ],
+      "feasibility": {
+        "level": "high as a policy/router card; medium as a live integration",
+        "demo_status": "works as a decision recipe without needing live endpoint payments",
+        "honesty_note": "Escrow/state rails are referenced as adjacent protocol needs, not implemented here.",
+        "next_real_check": "Classify 10 atlas endpoints by instant versus delayed deliverable and inspect docs for job_id/result-token patterns."
+      }
+    },
+    {
+      "id": "subgraph_discovery_paid_query_loop",
+      "title": "Free Subgraph Discovery to Paid Query Loop",
+      "task": "Use free discovery to choose a subgraph or onchain dataset, then pay only for the query that matters.",
+      "human_hook": "The agent browses for free, pays only when it knows the exact query, then stores the query receipt for repeatability.",
+      "budget_usd": {
+        "target": 0.25,
+        "hard_cap": 0.75,
+        "currency": "SIM_USDC for demo"
+      },
+      "rail_assumption": "This follows the free-discovery/paid-execution pattern surfaced in the r/x402 corpus. Local recipe is a shadow-mode model until The Graph gateway details are verified in current docs.",
+      "ingredients": [
+        {
+          "name": "subgraph-registry-mcp-style discovery",
+          "role": "Find candidate subgraphs or datasets without payment.",
+          "evidence_status": "Reddit lead; not normalized as a local atlas record"
+        },
+        {
+          "name": "The Graph x402 gateway-style paid query",
+          "role": "Pay per query after target dataset is selected.",
+          "evidence_status": "Reddit lead; requires live verification before paid demo"
+        },
+        {
+          "name": "StableCrypto or OneSource RPC",
+          "role": "Cross-check onchain context or live state.",
+          "evidence_status": "listed/simulated"
+        },
+        {
+          "name": "Satoshi API fees",
+          "role": "Estimate execution/network timing where relevant.",
+          "evidence_status": "listed/simulated"
+        },
+        {
+          "name": "Pinata / 402104",
+          "role": "Store query, result hash, and repeatability receipt.",
+          "evidence_status": "listed/simulated"
+        }
+      ],
+      "call_chain": [
+        "discover:subgraph_registry_mcp.free",
+        "select:query_need",
+        "crosscheck:stablecrypto.market",
+        "paid_query:the_graph_x402.query",
+        "state:onesource.rpc",
+        "receipt:pinata.storage"
+      ],
+      "why_impossible_before": "Discovery and execution were bundled into subscriptions or developer accounts. The cleaner pattern is free inventory, then a precise paid query.",
+      "why_agent_payments_matter": "Agents should not pay to browse. They should pay when the query is known, bounded, and likely to change the decision.",
+      "first_dollar_call": "The first paid call is the selected query, after free discovery has identified dataset, fields, and expected value.",
+      "stop_rule": "Stop if free discovery cannot identify the right subgraph, if query cost is unclear, if result schema is unknown, or if a cached prior receipt already answers the question.",
+      "receipt_trail": [
+        "free discovery path",
+        "selected subgraph/dataset",
+        "paid query text and parameters",
+        "result summary hash",
+        "cache key for future reuse"
+      ],
+      "failure_modes": [
+        "Discovery registry is stale.",
+        "Paid query returns a schema mismatch.",
+        "Agent pays for duplicate queries that should have been cached.",
+        "Live gateway differs from Reddit-described pattern."
+      ],
+      "protocols": [
+        "MCP",
+        "x402",
+        "API",
+        "SIM_USDC"
+      ],
+      "evidence_refs": [
+        "scrapers/reddit_x402/artifacts/R_X402_ONBOARDING_AND_DELTA.md#the-graph-gateway-is-a-concrete-production-ish-data-use-case",
+        "scrapers/reddit_x402/artifacts/R_X402_ONBOARDING_AND_DELTA.md#free-discovery-paid-execution-pattern",
+        "site/public/data/task-briefs.json#onchain_research",
+        "site/public/data/routesdb.json#OneSource",
+        "site/public/data/routesdb.json#StableCrypto"
+      ],
+      "feasibility": {
+        "level": "medium",
+        "demo_status": "strong conceptual recipe; should be labeled Reddit-derived until gateway is checked",
+        "honesty_note": "No live The Graph paid query was performed in this artifact.",
+        "next_real_check": "Verify current gateway endpoint, discovery MCP, price challenge, sample query, and receipt semantics before any paid run."
+      }
+    }
+  ],
+  "generation_notes": [
+    "Recipe count: 14.",
+    "All budgets are demo budgets and default to SIM_USDC fake-money or shadow-mode execution.",
+    "The dataset intentionally mixes practical recipes with weird long-tail commerce and provenance examples.",
+    "Coverage includes diligence, onchain trading research, conference scouting, seller audit, route/local commerce reality, provider collision benchmark, compliance/risk, content/social intelligence, storage/provenance, package security, ad-cell commerce, long-running job routing, and free-discovery/paid-query loops.",
+    "Evidence refs point to local artifacts and atlas records; they are not proof of live endpoint quality.",
+    "No recipe claims live paid x402 calls, real transaction completion, legal compliance certification, or financial advice."
+  ]
+}

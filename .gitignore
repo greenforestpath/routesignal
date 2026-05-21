@@ -1,0 +1,11 @@
+.DS_Store
+node_modules/
+.wrangler/
+.env
+.env.*
+data/x402scan-routes-raw.json
+data/*.sqlite
+site/verification-*.png
+dist/
+tmp/
+

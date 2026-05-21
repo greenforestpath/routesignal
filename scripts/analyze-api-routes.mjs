@@ -652,10 +652,10 @@ const routesDb = {
   apis: diversifyByProvider(enriched),
 };
 
-fs.writeFileSync(routesDbJsonPath, JSON.stringify(routesDb, null, 2));
+fs.writeFileSync(routesDbJsonPath, JSON.stringify(routesDb));
 writeCsv(routesDb.apis, routesDbCsvPath);
 fs.writeFileSync(routesDbJsonlPath, `${routesDb.apis.map((row) => JSON.stringify(row)).join("\n")}\n`);
-fs.writeFileSync(outputPath, JSON.stringify(insights, null, 2));
+fs.writeFileSync(outputPath, JSON.stringify(insights));
 console.log(`Wrote ${path.relative(root, outputPath)}`);
 console.log(`Wrote ${path.relative(root, routesDbJsonPath)}`);
 console.log(`${interesting_routes.length} interesting routes, ${categories.length} categories, ${provider_shapes.length} provider shapes`);

@@ -982,6 +982,57 @@ function diversifyByProvider(records) {
   return result.map((row, index) => ({ ...row, default_sort_rank: index + 1 }));
 }
 
+const publicRouteFields = [
+  "route",
+  "provider",
+  "cost",
+  "capability",
+  "notes",
+  "source",
+  "network",
+  "route_id",
+  "route_name",
+  "category_id",
+  "category_label",
+  "amount_usd",
+  "price_band",
+  "tags",
+  "risk_flags",
+  "activity_signal",
+  "observed_txns_30d",
+  "observed_volume_usd_30d",
+  "observed_buyers_30d",
+  "latest_activity",
+  "latest_tx_count_in_scrape",
+  "latest_tx_seen",
+  "activity_source",
+  "evidence_grade",
+  "evidence_stage",
+  "evidence_stage_label",
+  "market_signal",
+  "metadata_score",
+  "metadata_complete_count",
+  "metadata_total_count",
+  "cluster_id",
+  "cluster_label",
+  "provider_shape_type",
+  "provider_route_count",
+  "provider_share_pct",
+  "interest_score",
+  "signal_score",
+];
+
+function publicRouteRow(row) {
+  return Object.fromEntries(
+    publicRouteFields
+      .filter((field) => {
+        const value = row[field];
+        return value != null && value !== "" && !(Array.isArray(value) && value.length === 0);
+      })
+      .map((field) => [field, row[field]])
+  );
+}
+
 const insights = {
   generated_at: new Date().toISOString(),
   summary: {
@@ -1002,6 +1053,9 @@ const insights = {
   bundles,
   warnings,
 };
+
+const displayApis = diversifyByProvider(enriched);
+const publicApis = displayApis.map(publicRouteRow);
 
 const routesDb = {
   generated_at: insights.generated_at,
@@ -1039,12 +1093,12 @@ const routesDb = {
     signal_score: "Default sort score based on activity, metadata completeness, price clarity, and freshness.",
     default_sort_rank: "Provider-diversified display rank used by the RoutesDB UI.",
   },
-  apis: diversifyByProvider(enriched),
+  apis: publicApis,
 };
 
 fs.writeFileSync(routesDbJsonPath, JSON.stringify(routesDb));
-writeCsv(routesDb.apis, routesDbCsvPath);
-fs.writeFileSync(routesDbJsonlPath, `${routesDb.apis.map((row) => JSON.stringify(row)).join("\n")}\n`);
+writeCsv(displayApis, routesDbCsvPath);
+fs.writeFileSync(routesDbJsonlPath, `${publicApis.map((row) => JSON.stringify(row)).join("\n")}\n`);
 fs.writeFileSync(outputPath, JSON.stringify(insights));
 console.log(`Wrote ${path.relative(root, outputPath)}`);
 console.log(`Wrote ${path.relative(root, routesDbJsonPath)}`);
